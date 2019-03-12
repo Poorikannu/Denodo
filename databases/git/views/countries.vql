@@ -13,7 +13,7 @@ CREATE OR REPLACE WRAPPER JDBC countries
     REFERENCES 'HR'.'REGIONS'( 'REGION_ID' )  ON DELETE RESTRICT NOT DEFERRABLE 
     INDEX 'COUNTRY_C_ID_PK' CLUSTER UNIQUE PRIMARY ( 'COUNTRY_ID' );
 
-CREATE OR REPLACE TABLE countrie I18N au_cst (
+CREATE OR REPLACE TABLE countries I18N au_cst (
         country_id:text (sourcetyperadix = '10', sourcetypesize = '2', sourcetypeid = '1'), 
         country_name:text (sourcetyperadix = '10', sourcetypesize = '40', sourcetypeid = '12'), 
         region_id:decimal (sourcetyperadix = '10', sourcetypeid = '3')
