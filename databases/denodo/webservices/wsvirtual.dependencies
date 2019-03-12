@@ -10,7 +10,7 @@
 /databases/denodo/maps/requesttype_monitor_vdp_queries.vql
 /maps/i18n/monitor_vdp_queries_v2.vql
 /databases/denodo/datasources/custom/base_vdp_queries_pattern.vql
-/databases/denodo/views/base_vdp_queries_pattern.vql
+/databases/denodo/views/base_vdp_queries_patter.vql
 /databases/denodo/views/p_base_vdp_queries_pattern.vql
 /databases/denodo/views/p_base_vdp_queries_pattern_2.vql
 /databases/denodo/views/final_query_by_vdpview_and_hour_vdp_queries.vql
