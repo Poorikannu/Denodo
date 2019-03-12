@@ -22,7 +22,7 @@ CREATE OR REPLACE WRAPPER JDBC emp_details_view
         region_name = 'REGION_NAME' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='25', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE
     );
 
-CREATE OR REPLACE TABLE emp_details_view I18N au_cst (
+CREATE OR REPLACE TABLE emp_details_vie I18N au_cst (
         employee_id:int (sourcetypedecimals = '0', sourcetyperadix = '10', sourcetypesize = '6', sourcetypeid = '4'), 
         job_id:text (sourcetyperadix = '10', sourcetypesize = '10', sourcetypeid = '12'), 
         manager_id:int (sourcetypedecimals = '0', sourcetyperadix = '10', sourcetypesize = '6', sourcetypeid = '4'), 
