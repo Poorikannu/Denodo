@@ -1,0 +1,94 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER CUSTOM base_vdp_queries_pattern_1479
+    DATASOURCENAME=base_vdp_queries_pattern
+    PARAMETERS (
+      'Date Pattern' = 'yyyy-MM-dd''T''HH:mm:ss.SSS',
+      'Date Extractor Pattern' = '(?:\\S*\\t+\\S*\\t+\\S*\\t+)?(?:[\^\\t]+)\\t(?:[\^\\t]+)\\t(?:[\^\\t]+)\\t(?:endRequest|startRequest)\\t(?:[0-9]+)\\t(\\d\{{4\}}-\\d\{{2\}}-\\d\{{2\}}T\\d\{{2\}}:\\d\{{2\}}:\\d\{{2\}}.\\d\{{3\}})(?:.*?)',
+      'Log timezone' = 'PST',
+      'Content Extractor Pattern' = '(?:\\S*\\t+\\S*\\t+\\S*\\t+)?([\^\\t]+)\\t([\^\\t]+)\\t([\^\\t]+)\\t(endRequest)\\t([0-9]+)\\t(\\d\{{4\}}-\\d\{{2\}}-\\d\{{2\}}T\\d\{{2\}}:\\d\{{2\}}:\\d\{{2\}}.\\d\{{3\}})\\t(\\d\{{4\}}-\\d\{{2\}}-\\d\{{2\}}T\\d\{{2\}}:\\d\{{2\}}:\\d\{{2\}}.\\d\{{3\}}|\\-)\\t([0-9\\-]+)\\t([0-9\\-]+)\\t(\\-?[0-9]+)\\t([\^\\t]+)\\t([\^\\t]+)\\t([\^\\t]+)\\t([\^\\t]+)\\t(SELECT VIEW|INSERT|CREATE|DELETE|UPDATE|CALL PROCEDURE|QUERY WRAPPER|SELECT BASE VIEW)\\t([\^\\t]+)\\t([\^\\t]+)\\t([\^\\t]+)\\t([\^\\t]+)(?:\\t?.*?)',
+      'Filepath' = ROUTE LOCAL 'LocalConnection' '${databases.denodo.views.custom.base_vdp_queries_pattern_1479.Filepath.ROUTE.LOCAL.PATH}',
+      'Sequential Search Interval' = 100,
+      'Rolling Implementation Class Name' = 'com.denodo.connect.log.rollingpolicy.ByDayLogRollingPolicy'
+    )
+    OUTPUTSCHEMA (
+        id = 'out0' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        database_0 = 'out1' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        username = 'out2' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        notificationtype = 'out3' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        sessionid = 'out4' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        starttime = 'out5' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        endtime = 'out6' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        duration = 'out7' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        waitingtime = 'out8' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        numrows = 'out9' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        state = 'out10' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        completed = 'out11' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        cache = 'out12' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        query = 'out13' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        requesttype = 'out14' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        elements = 'out15' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        useragent = 'out16' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        accessinterface = 'out17' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        clientip = 'out18' : 'java.lang.String' NOT SORTABLE NOT UPDATEABLE,
+        extracteddate_0 = 'Extracted Date' : 'java.util.Date' (OPT) NOT NULL NOT SORTABLE NOT UPDATEABLE,
+        searchstartdate_0 = 'Search Start Date' : 'java.util.Date' (OBL) NOT NULL NOT SORTABLE NOT UPDATEABLE,
+        searchenddate_0 = 'Search End Date' : 'java.util.Date' (OPT) NOT SORTABLE NOT UPDATEABLE
+    );
+
+CREATE OR REPLACE TABLE base_vdp_queries_patter I18N monitor_vdp_queries_v2 (
+        id:text, 
+        database_0:text, 
+        username:text, 
+        notificationtype:text, 
+        sessionid:text, 
+        starttime:date, 
+        endtime:date, 
+        duration:long, 
+        waitingtime:long, 
+        numrows:long, 
+        state:text, 
+        completed:boolean, 
+        cache:boolean, 
+        query:text, 
+        requesttype:text, 
+        elements:text, 
+        useragent:text, 
+        accessinterface:text, 
+        clientip:text, 
+        extracteddate_0:date, 
+        searchstartdate_0:date, 
+        searchenddate_0:date
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD base_vdp_queries_pattern(
+        I18N monitor_vdp_queries_v2
+        CONSTRAINTS (
+             ADD id NOS ZERO ()
+             ADD database_0 NOS ZERO ()
+             ADD username NOS ZERO ()
+             ADD notificationtype NOS ZERO ()
+             ADD sessionid NOS ZERO ()
+             ADD starttime NOS ZERO ()
+             ADD endtime NOS ZERO ()
+             ADD duration NOS ZERO ()
+             ADD waitingtime NOS ZERO ()
+             ADD numrows NOS ZERO ()
+             ADD state NOS ZERO ()
+             ADD completed NOS ZERO ()
+             ADD cache NOS ZERO ()
+             ADD query NOS ZERO ()
+             ADD requesttype NOS ZERO ()
+             ADD elements NOS ZERO ()
+             ADD useragent NOS ZERO ()
+             ADD accessinterface NOS ZERO ()
+             ADD clientip NOS ZERO ()
+             ADD extracteddate_0 (any) OPT ANY
+             ADD searchstartdate_0 (any) OBL ONE
+             ADD searchenddate_0 (any) OPT ANY
+        )
+        OUTPUTLIST (accessinterface, cache, clientip, completed, database_0, duration, elements, endtime, extracteddate_0, id, notificationtype, numrows, query, requesttype, searchenddate_0, searchstartdate_0, sessionid, starttime, state, useragent, username, waitingtime
+        )
+        WRAPPER (custom base_vdp_queries_pattern_1479)
+    );
+

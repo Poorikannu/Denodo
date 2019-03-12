@@ -1,0 +1,6 @@
+﻿/databases/denodo/maps/requesttype_monitor_vdp_queries.vql
+/maps/i18n/monitor_vdp_queries_v2.vql
+/extensions/jars/denodo-log-customwrapper-dmr.vql
+/databases/denodo/datasources/custom/base_vdp_queries_pattern.vql
+/databases/denodo/views/base_vdp_queries_patter.vql
+/databases/denodo/views/p_base_vdp_queries_pattern.vql
