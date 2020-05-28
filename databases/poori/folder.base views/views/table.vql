@@ -13,7 +13,7 @@ CREATE OR REPLACE WRAPPER JDBC "TABLE1"
         datainorderfieldslist = ()
     );
 
-CREATE OR REPLACE TABLE "TABLE1" I18N us_pst (
+CREATE OR REPLACE TABLE "TABLE" I18N us_pst (
         "C1":decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'), 
         "C2":text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '50')
     )

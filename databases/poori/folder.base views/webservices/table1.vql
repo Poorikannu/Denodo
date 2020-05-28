@@ -10,7 +10,7 @@
     DEFAULTREPRESENTATION = HTML
     SUPPORTEDREPRESENTATIONS (HTML, XML, JSON)
     RESOURCES (
-        VIEW "TABLE1" FIELDS (
+        VIEW "TABLE" FIELDS (
             "C1" : 'decimal', 
             "C2" : 'text'
         )
