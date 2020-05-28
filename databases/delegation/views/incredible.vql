@@ -1,0 +1,39 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC incredible
+    DATASOURCENAME=ds_oracle
+    SCHEMANAME='${databases.delegation.views.jdbc.incredible.SCHEMANAME}' ESCAPE
+    RELATIONNAME='INCREDIBLE' 
+    OUTPUTSCHEMA (
+        id = 'ID' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        name = 'NAME' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='500', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        column3 = 'COLUMN3' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        column4 = 'COLUMN4' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        co = 'CO' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        test = 'TEST' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE incredible I18N at_euro (
+        id:decimal (sourcetypedecimals = '0', sourcetyperadix = '10', sourcetypesize = '38', sourcetypeid = '3'), 
+        name:text (sourcetyperadix = '10', sourcetypesize = '500', sourcetypeid = '12'), 
+        column3:decimal (sourcetypedecimals = '0', sourcetyperadix = '10', sourcetypesize = '38', sourcetypeid = '3'), 
+        column4:decimal (sourcetypedecimals = '0', sourcetyperadix = '10', sourcetypesize = '38', sourcetypeid = '3'), 
+        co:decimal (sourcetypedecimals = '0', sourcetyperadix = '10', sourcetypesize = '38', sourcetypeid = '3'), 
+        test:decimal (sourcetypedecimals = '0', sourcetyperadix = '10', sourcetypesize = '38', sourcetypeid = '3')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD incredible(
+        I18N at_euro
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD name (any) OPT ANY
+             ADD column3 (any) OPT ANY
+             ADD column4 (any) OPT ANY
+             ADD co (any) OPT ANY
+             ADD test (any) OPT ANY
+        )
+        OUTPUTLIST (co, column3, column4, id, name, test
+        )
+        WRAPPER (jdbc incredible)
+    );
+
