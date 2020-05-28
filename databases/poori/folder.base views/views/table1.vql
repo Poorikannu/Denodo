@@ -1,0 +1,34 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC "TABLE1"
+    FOLDER = '/base views'
+    DATASOURCENAME=ds_oracle
+    SCHEMANAME='${databases.poori.folder.base views.views.jdbc.table1.SCHEMANAME}' ESCAPE
+    RELATIONNAME='TABLE1' 
+    OUTPUTSCHEMA (
+        "C1" = 'C1' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='38', sourcetypeid='3', sourcetypename='NUMBER')  SORTABLE,
+        "C2" = 'C2' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='50', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE
+    )
+    SOURCECONFIGURATION (
+        delegatesqlsentenceassubquery = false,
+        datainorderfieldslist = ()
+    );
+
+CREATE OR REPLACE TABLE "TABLE1" I18N us_pst (
+        "C1":decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '38'), 
+        "C2":text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '50')
+    )
+    FOLDER = '/base views'
+    CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD "TABLE1"(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD "C1" (any) OPT ANY
+             ADD "C2" (any) OPT ANY
+        )
+        OUTPUTLIST ("C1", "C2"
+        )
+        WRAPPER (jdbc "TABLE1")
+    );
+
