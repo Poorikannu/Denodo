@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW p_current_timestamp_demos_j_p_current_timestamp_demos1 AS SELECT p_current_timestamp_demos.id AS id, p_current_timestamp_demos.msg AS msg, p_current_timestamp_demos.created_at AS created_at FROM p_current_timestamp_demos AS p_current_timestamp_demos, p_current_timestamp_demos AS p_current_timestamp_demos1 CONTEXT ('I18N' = 'gic');
+
+ALTER VIEW p_current_timestamp_demos_j_p_current_timestamp_demos1
+ LAYOUT (p_current_timestamp_demos = [20, 20, 200, 200], p_current_timestamp_demos = [431, 187, 200, 200]);
+

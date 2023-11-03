@@ -1,0 +1,33 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC current_timestamp_demos_1
+    DATASOURCENAME=denodo_ssl
+    CATALOGNAME='${databases.admin.views.jdbc.current_timestamp_demos_1.CATALOGNAME}' 
+    RELATIONNAME='current_timestamp_demos' 
+    OUTPUTSCHEMA (
+        id = 'id' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  NOT NULL SORTABLE IS_AUTOINCREMENT,
+        msg = 'msg' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='255', sourcetypeid='12', sourcetypename='VARCHAR')  NOT NULL SORTABLE,
+        created_at = 'created_at' :'java.time.LocalDateTime' (OPT) (sourcetypedecimals='3', sourcetyperadix='10', sourcetypesize='23', sourcetypeid='93', sourcetypename='TIMESTAMP')  NOT NULL SORTABLE
+    )
+    CONSTRAINT 'PK__current___3213E83FC3E72DF6' PRIMARY KEY ( 'id' );
+
+CREATE OR REPLACE TABLE current_timestamp_demos_1 I18N gic (
+        id:int (notnull, autoincrement, sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        msg:text (notnull, sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '255'),
+        created_at:timestamp (notnull, sourcetypeid = '93', sourcetyperadix = '10', sourcetypedecimals = '3', sourcetypesize = '23')
+    )
+    CONSTRAINT 'PK__current___3213E83FC3E72DF6' PRIMARY KEY ( 'id' )
+    CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD current_timestamp_demos_1(
+        I18N gic
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD msg (any) OPT ANY
+             ADD created_at (any) OPT ANY
+        )
+        OUTPUTLIST (created_at, id, msg
+        )
+        WRAPPER (jdbc current_timestamp_demos_1)
+    );
+

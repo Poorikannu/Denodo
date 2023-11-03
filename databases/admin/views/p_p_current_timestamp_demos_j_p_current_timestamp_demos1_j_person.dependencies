@@ -1,0 +1,9 @@
+﻿/maps/i18n/gic.vql
+/tags/nso.vql
+/databases/admin/datasources/jdbc/ds_sql_server_local.vql
+/databases/admin/views/current_timestamp_demos.vql
+/databases/admin/views/p_current_timestamp_demos.vql
+/databases/admin/views/p_current_timestamp_demos_j_p_current_timestamp_demos1.vql
+/databases/admin/views/p_p_current_timestamp_demos_j_p_current_timestamp_demos1.vql
+/databases/admin/datasources/jdbc/oracle19c.vql
+/databases/admin/views/person.vql

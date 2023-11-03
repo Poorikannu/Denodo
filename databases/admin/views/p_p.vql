@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW p_p AS SELECT p.base_0 AS base_0 FROM p CONTEXT ('I18N' = 'hkt');
+

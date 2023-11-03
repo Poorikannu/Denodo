@@ -1,0 +1,49 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JSON mfu_page
+    DATASOURCENAME=mfu_page
+    TUPLEROOT '/JSONFile/elements'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.admin.views.json.mfu_page.ROUTE.HTTP.URL}'
+    OUTPUTSCHEMA ("JSONFile" = 'JSONFile' : REGISTER OF (
+        name_0 = 'name' : 'java.lang.String',
+        id = 'JSONFile.elements.id' : 'java.lang.Integer',
+        number = 'JSONFile.elements.number' : 'java.lang.Integer',
+        name = 'JSONFile.elements.name' : 'java.lang.String',
+        links = 'JSONFile.elements.links' : ARRAY OF (
+            links = 'links' : REGISTER OF (
+                rel = 'rel' : 'java.lang.String',
+                href = 'href' : 'java.lang.String'
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE mfu_page_links_links AS REGISTER OF (rel:text, href:text);
+
+CREATE OR REPLACE TYPE mfu_page_links AS ARRAY OF mfu_page_links_links;
+
+CREATE OR REPLACE TABLE mfu_page I18N gic (
+        name_0:text,
+        id:int,
+        number:int,
+        name:text,
+        links:mfu_page_links
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD mfu_page(
+        I18N gic
+        CONSTRAINTS (
+             ADD name_0 NOS ZERO ()
+             ADD id NOS ZERO ()
+             ADD number NOS ZERO ()
+             ADD name NOS ZERO ()
+             ADD links NOS ZERO ()
+             ADD links NOS ZERO ()
+             ADD links.rel NOS ZERO ()
+             ADD links.href NOS ZERO ()
+        )
+        OUTPUTLIST (id, links, name, name_0, number
+        )
+        WRAPPER (json mfu_page)
+    );
+

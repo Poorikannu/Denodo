@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW "person_1_j_rt_PERSON" AS SELECT person_1.personid AS personid, cast(person_1.firstname AS DECIMAL(10,2)) AS firstname, cast('timestamp', person_1.company) AS company, "rt_PERSON"."PERSONID" AS "PERSONID1", "rt_PERSON"."FIRSTNAME" AS "FIRSTNAME1", "rt_PERSON"."COMPANY" AS "COMPANY1" FROM person_1 AS person_1, "rt_PERSON" AS "rt_PERSON";
+
+ALTER VIEW "person_1_j_rt_PERSON"
+ LAYOUT (person_1 = [20, 20, 200, 85], "rt_PERSON" = [20, 135, 200, 85]);
+

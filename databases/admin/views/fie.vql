@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW fie AS SELECT now() FROM dual() CONTEXT ('I18N' = 'hkt');
+

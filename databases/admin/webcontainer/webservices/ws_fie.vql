@@ -1,0 +1,5 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+UNDEPLOY IF EXISTS WEBSERVICE ws_fie;
+
+DEPLOY WEBSERVICE ws_fie LOGIN = '${databases.admin.webcontainer.webservices.ws_fie.LOGIN}' PASSWORD = '${databases.admin.webcontainer.webservices.ws_fie.PASSWORD}' ${databases.admin.webcontainer.webservices.ws_fie.PASSWORD.ENCRYPTED};
+

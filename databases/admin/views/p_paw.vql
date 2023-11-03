@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW p_paw AS SELECT paw.da AS da FROM paw CONTEXT ('I18N' = 'hkt');
+

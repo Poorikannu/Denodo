@@ -1,0 +1,32 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC test_sfy
+    DATASOURCENAME=oracle19c
+    SCHEMANAME='${databases.admin.views.jdbc.test_sfy.SCHEMANAME}' ESCAPE
+    RELATIONNAME='TEST_SFY' 
+    OUTPUTSCHEMA (
+        id = 'ID' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        msg = 'MSG' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='255', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        created_at = 'CREATED_AT' :'java.time.LocalDateTime' (OPT) (sourcetypedecimals='3', sourcetyperadix='10', sourcetypesize='11', sourcetypeid='93', sourcetypename='TIMESTAMP(3)')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE test_sfy I18N gic (
+        id:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10', description = '以下のようなデータが格納されている。'),
+        msg:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '255'),
+        created_at:localdate (sourcetypeid = '91', sourcetyperadix = '10', sourcetypedecimals = '3', sourcetypesize = '11')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD test_sfy(
+        I18N gic
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD msg (any) OPT ANY
+             ADD created_at (any) OPT ANY
+        )
+        OUTPUTLIST (created_at, id, msg
+        )
+        WRAPPER (jdbc test_sfy)
+    )
+    DATA_LOAD_QUERY = 'SELECT id, msg, created_at
+FROM admin.current_timestamp_demos';
+

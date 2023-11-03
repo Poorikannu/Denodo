@@ -1,0 +1,24 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE DF ds_api_ranking_copy
+    FOLDER = '/tama'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' POST '${databases.admin.folder.tama.datasources.df.ds_api_ranking_copy.ROUTE.HTTP.URL}'
+    POSTBODY '\{{
+  "keyword": "@{{input_keyword}}",
+  "period": "@{{input_period}}",
+  "date": "@{{input_date}}",
+  ^ExecuteIfIsNotNull(" \"prefecture\": \"",@input_prefecture,"\", ")
+  ^ExecuteIfIsNotNull(" \"gender\": \"",@input_gender,"\", ")
+  ^ExecuteIfIsNotNull(" \"generation\": \"",@input_generation,"\", ")
+  "format":"csv"
+\}}'
+    MIME 'application/json'
+    HEADERS (
+        'x-z-appid'='3a8274c8-ad2f-4e87-84f1-fc25b48a4ee9', 
+        'Content-Type'='application/json'
+    )
+    AUTHENTICATION OFF
+    PROXY OFF
+    COLUMNDELIMITER = ','
+    ENDOFLINEDELIMITER = '\n'
+    HEADER = TRUE;
+

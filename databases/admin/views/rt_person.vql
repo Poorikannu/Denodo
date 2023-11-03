@@ -1,0 +1,32 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC "rt_PERSON"
+    DATASOURCENAME=postgres
+    SCHEMANAME='${databases.admin.views.jdbc.rt_person.SCHEMANAME}' ESCAPE
+    RELATIONNAME='person' 
+    OUTPUTSCHEMA (
+        "PERSONID" = 'personid' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='5', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        "FIRSTNAME" = 'firstname' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        "COMPANY" = 'company' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='15', sourcetypeid='12', sourcetypename='varchar')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE "rt_PERSON" I18N gic (
+        "PERSONID":text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '2000'),
+        "FIRSTNAME":text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "COMPANY":text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '15')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD "rt_PERSON"(
+        I18N gic
+        CONSTRAINTS (
+             ADD "PERSONID" (any) OPT ANY
+             ADD "FIRSTNAME" (any) OPT ANY
+             ADD "COMPANY" (any) OPT ANY
+        )
+        OUTPUTLIST ("COMPANY", "FIRSTNAME", "PERSONID"
+        )
+        WRAPPER (jdbc "rt_PERSON")
+    )
+    DATA_LOAD_QUERY = 'SELECT "PERSONID", "FIRSTNAME", "COMPANY"
+FROM admin."PERSON"';
+

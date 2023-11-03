@@ -1,0 +1,9 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE CUSTOM kafka_wrapper
+    CLASSNAME='com.denodo.connect.kafka.wrapper.KafkaDateRangeConsumerWrapper'
+    JARS 'denodo-kafka-customwrapper'
+    PARAMETERS (
+      'Connection String *' = '${databases.admin.datasources.custom.kafka_wrapper.Connection String *}',
+      'SSL Enabled' = ${databases.admin.datasources.custom.kafka_wrapper.SSL Enabled}
+    );
+

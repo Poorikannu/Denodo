@@ -1,0 +1,31 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC poori_kcr
+    DATASOURCENAME=ds_sql_server_local
+    CATALOGNAME='${databases.admin.views.jdbc.poori_kcr.CATALOGNAME}' 
+    SCHEMANAME='${databases.admin.views.jdbc.poori_kcr.SCHEMANAME}' 
+    RELATIONNAME='poori_kcr' 
+    OUTPUTSCHEMA (
+        name = 'name' :'java.lang.String' (OPT) (sourcetypesize='50', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        date = 'date' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetypesize='10', sourcetypeid='91', sourcetypename='date')  ESCAPE SORTABLE,
+        sleep_time = 'sleep_time' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE poori_kcr I18N gic (
+        name:text (sourcetypeid = '12', sourcetypesize = '50'),
+        date:localdate (sourcetypeid = '91', sourcetypedecimals = '0', sourcetypesize = '10'),
+        sleep_time:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD poori_kcr(
+        I18N gic
+        CONSTRAINTS (
+             ADD name (any) OPT ANY
+             ADD date (any) OPT ANY
+             ADD sleep_time (any) OPT ANY
+        )
+        OUTPUTLIST (date, name, sleep_time
+        )
+        WRAPPER (jdbc poori_kcr)
+    );
+

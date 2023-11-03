@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW "Initial Report-Reporter" AS SELECT 1 FROM dual();
+

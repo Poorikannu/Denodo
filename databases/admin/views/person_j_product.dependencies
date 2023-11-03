@@ -1,0 +1,6 @@
+﻿/maps/i18n/gic.vql
+/databases/admin/datasources/jdbc/oracle19c.vql
+/databases/admin/views/person.vql
+/maps/i18n/hkt.vql
+/databases/admin/datasources/jdbc/azure_sql.vql
+/databases/admin/views/product.vql

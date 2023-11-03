@@ -1,0 +1,25 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC pp
+    DATASOURCENAME=ds_sql_server
+    CATALOGNAME='${databases.admin.views.jdbc.pp.CATALOGNAME}' 
+    SCHEMANAME='${databases.admin.views.jdbc.pp.SCHEMANAME}' 
+    RELATIONNAME='pp' 
+    OUTPUTSCHEMA (
+        cancel = 'cancel' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE pp I18N hkt (
+        cancel:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD pp(
+        I18N hkt
+        CONSTRAINTS (
+             ADD cancel (any) OPT ANY
+        )
+        OUTPUTLIST (cancel
+        )
+        WRAPPER (jdbc pp)
+    );
+

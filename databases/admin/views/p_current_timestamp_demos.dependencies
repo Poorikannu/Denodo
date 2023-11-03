@@ -1,0 +1,4 @@
+﻿/maps/i18n/gic.vql
+/tags/nso.vql
+/databases/admin/datasources/jdbc/ds_sql_server_local.vql
+/databases/admin/views/current_timestamp_demos.vql

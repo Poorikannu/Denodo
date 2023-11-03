@@ -1,0 +1,26 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC paw
+    DATASOURCENAME=ds_sql_server_local
+    CATALOGNAME='${databases.admin.views.jdbc.paw.CATALOGNAME}' 
+    SCHEMANAME='${databases.admin.views.jdbc.paw.SCHEMANAME}' 
+    RELATIONNAME='paw' 
+    OUTPUTSCHEMA (
+        da = 'da' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetypesize='10', sourcetypeid='91', sourcetypename='date')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE paw I18N gic (
+        da:localdate (sourcetypeid = '91', sourcetypedecimals = '0', sourcetypesize = '10', description = 't')
+    )
+    CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD paw(
+        I18N gic
+        CONSTRAINTS (
+             ADD da (any) OPT ANY
+        )
+        OUTPUTLIST (da
+        )
+        WRAPPER (jdbc paw)
+    );
+

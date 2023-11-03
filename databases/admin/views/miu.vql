@@ -1,0 +1,27 @@
+﻿CREATE OR REPLACE WRAPPER DF miu
+    DATASOURCENAME=miu
+    OUTPUTSCHEMA (
+        "アクターイッド" = 'アクターイッド' (OPT),
+        "ファーストネーム" = 'ファーストネーム' (OPT),
+        "最終更新日" = '最終更新日' (OPT)
+    );
+
+CREATE OR REPLACE TABLE miu I18N jp (
+        "アクターイッド":text,
+        "ファーストネーム":text,
+        "最終更新日":text
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD miu(
+        I18N jp
+        CONSTRAINTS (
+             ADD "アクターイッド" (any) OPT ANY
+             ADD "ファーストネーム" (any) OPT ANY
+             ADD "最終更新日" (any) OPT ANY
+        )
+        OUTPUTLIST ("アクターイッド", "ファーストネーム", "最終更新日"
+        )
+        WRAPPER (df miu)
+    );
+

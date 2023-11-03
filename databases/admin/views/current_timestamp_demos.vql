@@ -1,0 +1,37 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC current_timestamp_demos
+    DATASOURCENAME=ds_sql_server_local
+    CATALOGNAME='${databases.admin.views.jdbc.current_timestamp_demos.CATALOGNAME}' 
+    SCHEMANAME='${databases.admin.views.jdbc.current_timestamp_demos.SCHEMANAME}' 
+    RELATIONNAME='current_timestamp_demos' 
+    OUTPUTSCHEMA (
+        id = 'id' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int identity')  NOT NULL SORTABLE IS_AUTOINCREMENT,
+        msg = 'msg' :'java.lang.String' (OPT) (sourcetypesize='255', sourcetypeid='12', sourcetypename='varchar')  NOT NULL SORTABLE,
+        created_at = 'created_at' :'java.time.LocalDateTime' (OPT) (sourcetypedecimals='3', sourcetypesize='23', sourcetypeid='93', sourcetypename='datetime')  NOT NULL SORTABLE
+    )
+    CONSTRAINT 'PK__current___3213E83FC3E72DF6' PRIMARY KEY ( 'id' )
+    INDEX 'PK__current___3213E83FC3E72DF6' CLUSTER UNIQUE PRIMARY ( 'id' );
+
+CREATE OR REPLACE TABLE current_timestamp_demos I18N gic (
+        id:int (notnull, autoincrement, sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        msg:text (notnull, sourcetypeid = '12', sourcetypesize = '2550'),
+        created_at:timestamp (notnull, sourcetypeid = '93', sourcetypedecimals = '3', sourcetypesize = '23') TAGS (nso)
+    )
+    CONSTRAINT 'PK__current___3213E83FC3E72DF6' PRIMARY KEY ( 'id' )
+    TAGS (nso)
+    CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD current_timestamp_demos(
+        I18N gic
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD msg (any) OPT ANY
+             ADD created_at (any) OPT ANY
+        )
+        OUTPUTLIST (created_at, id, msg
+        )
+        WRAPPER (jdbc current_timestamp_demos)
+    )
+    ATCACHE_THROUGH_VDP_ONLY;
+

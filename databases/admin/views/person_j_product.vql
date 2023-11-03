@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW "PERSON_j_product" AS SELECT "PERSON"."PERSONID" AS "PERSONID", "PERSON"."FIRSTNAME" AS "FIRSTNAME", "PERSON"."COMPANY" AS "COMPANY", product.productid AS productid, product.name AS name, product.productnumber AS productnumber, product.color AS color, product.standardcost AS standardcost, product.listprice AS listprice, product.size AS size, product.weight AS weight, product.productcategoryid AS productcategoryid, product.productmodelid AS productmodelid, product.sellstartdate AS sellstartdate, product.sellenddate AS sellenddate, product.discontinueddate AS discontinueddate, product.thumbnailphoto AS thumbnailphoto, product.thumbnailphotofilename AS thumbnailphotofilename, product.rowguid AS rowguid, product.modifieddate AS modifieddate FROM "PERSON" AS "PERSON", product AS product CONTEXT ('I18N' = 'gic');
+
+ALTER VIEW "PERSON_j_product"
+ LAYOUT ("PERSON" = [20, 20, 200, 200], product = [61, 174, 200, 200]);
+

@@ -1,0 +1,48 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC "LOGMNR_TS$$"
+    DATASOURCENAME=oracle19c
+    SCHEMANAME='${databases.admin.views.jdbc.logmnr_ts$$.SCHEMANAME}' ESCAPE
+    RELATIONNAME='LOGMNR_TS$' 
+    OUTPUTSCHEMA (
+        "TS#" = 'TS#' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='22', sourcetypeid='2', sourcetypename='NUMBER')  NOT NULL SORTABLE,
+        "NAME" = 'NAME' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='90', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        "OWNER#" = 'OWNER#' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='22', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        "BLOCKSIZE" = 'BLOCKSIZE' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='22', sourcetypeid='2', sourcetypename='NUMBER')  NOT NULL SORTABLE,
+        "LOGMNR_UID" = 'LOGMNR_UID' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='22', sourcetypeid='2', sourcetypename='NUMBER')  NOT NULL SORTABLE,
+        "LOGMNR_FLAGS" = 'LOGMNR_FLAGS' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='22', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        "START_SCNBAS" = 'START_SCNBAS' :'java.math.BigDecimal' (OPT) (sourcetyperadix='10', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        "START_SCNWRP" = 'START_SCNWRP' :'java.math.BigDecimal' (OPT) (sourcetyperadix='10', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE
+    )
+    CONSTRAINT 'LOGMNR_TS$_PK' PRIMARY KEY ( 'LOGMNR_UID' , 'TS#' )
+    INDEX 'LOGMNR_I1TS$' CLUSTER PRIMARY ( 'LOGMNR_UID' , 'TS#' );
+
+CREATE OR REPLACE TABLE "LOGMNR_TS$$" I18N gic (
+        "TS#":decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '22'),
+        "NAME":text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '90'),
+        "OWNER#":decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '22'),
+        "BLOCKSIZE":decimal (notnull, sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '22'),
+        "LOGMNR_UID":decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '22'),
+        "LOGMNR_FLAGS":decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '22'),
+        "START_SCNBAS":decimal (sourcetypeid = '3', sourcetyperadix = '10'),
+        "START_SCNWRP":decimal (sourcetypeid = '3', sourcetyperadix = '10')
+    )
+    CONSTRAINT 'LOGMNR_TS$_PK' PRIMARY KEY ( 'LOGMNR_UID' , 'TS#' )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD "LOGMNR_TS$$"(
+        I18N gic
+        CONSTRAINTS (
+             ADD "TS#" (any) OPT ANY
+             ADD "NAME" (any) OPT ANY
+             ADD "OWNER#" (any) OPT ANY
+             ADD "BLOCKSIZE" (any) OPT ANY
+             ADD "LOGMNR_UID" (any) OPT ANY
+             ADD "LOGMNR_FLAGS" (any) OPT ANY
+             ADD "START_SCNBAS" (any) OPT ANY
+             ADD "START_SCNWRP" (any) OPT ANY
+        )
+        OUTPUTLIST ("BLOCKSIZE", "LOGMNR_FLAGS", "LOGMNR_UID", "NAME", "OWNER#", "START_SCNBAS", "START_SCNWRP", "TS#"
+        )
+        WRAPPER (jdbc "LOGMNR_TS$$")
+    );
+

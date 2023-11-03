@@ -1,0 +1,87 @@
+﻿CREATE OR REPLACE SOAP WEBSERVICE ws_fie
+    CONNECTION (
+        CHUNKSIZE = 1000
+        CHUNKTIMEOUT = 90000
+        QUERYTIMEOUT = 900000
+        POOLENABLED = true
+        POOLINITSIZE = 0
+        POOLMAXACTIVE = 30
+    )
+    I18N  = au_cst
+    DATETYPEMAPPING DATE
+    NOWRAPARRAYS
+    RAISEFAULTONIDU
+    DONOTAPPLYOUTPUTXSLTTOERRORS
+    OUTPUT 
+        ( STYLE DOCUMENT )
+    OPERATION 'getFIEByNOW' (
+        TYPE SELECT
+        SCHEMA VIEW fie
+        VQL = 'SELECT now FROM fie ^ExecuteIfIsNotNull("WHERE ",@WHEREEXPRESSION,"") CONTEXT (''i18n'' = ''au_cst''^ExecuteIfIsNotNull(", ",@VERBOSEERRORS,"")^ExecuteIfIsNotNull(", ",@CONTEXTEXPRESSION,""))'
+        INPUTS 'GetFIEByNOW' (
+            'NOW' now:'timestamptz' '=' 
+        )
+        OUTPUT 
+            'FIEReturn': Array of ( 'FIEReturnRow': Register of (
+                now : 'timestamptz'
+            ) ('/now'='NOW'))
+    )    OPERATION 'getAREASByIDAndCOUNTRYAndAREAAndDESCRIPTION' (
+        TYPE SELECT
+        SCHEMA VIEW afo.areas
+        VQL = 'SELECT id, country, area, description FROM afo.areas ^ExecuteIfIsNotNull("WHERE ",@WHEREEXPRESSION,"") CONTEXT (''i18n'' = ''au_cst''^ExecuteIfIsNotNull(", ",@VERBOSEERRORS,"")^ExecuteIfIsNotNull(", ",@CONTEXTEXPRESSION,""))'
+        INPUTS 'GetAREASByIDAndCOUNTRYAndAREAAndDESCRIPTION' (
+            'ID' id:'int' '=' 
+            'COUNTRY' country:'text' '=' 
+            'AREA' area:'text' '=' 
+            'DESCRIPTION' description:'text' '=' 
+        )
+        OUTPUT 
+            'AREASReturn': Array of ( 'AREASReturnRow': Register of (
+                id : 'int',
+                country : 'text',
+                area : 'text',
+                description : 'text'
+            ) (
+                    '/area'='AREA',
+                    '/country'='COUNTRY',
+                    '/description'='DESCRIPTION',
+                    '/id'='ID'))
+    )    OPERATION 'insertAREAS' (
+        TYPE INSERT
+        SCHEMA VIEW afo.areas
+        VQL = 'INSERT INTO afo.areas (id, country, area, description) VALUES (@ID, @COUNTRY, @AREA, @DESCRIPTION) CONTEXT (''i18n'' = ''au_cst''^ExecuteIfIsNotNull(", ",@CONTEXTEXPRESSION,""))'
+        INPUTS 'InsertAREAS' (
+            'ID' id:'int' '=' OBL 
+            'COUNTRY' country:'text' '=' 
+            'AREA' area:'text' '=' 
+            'DESCRIPTION' description:'text' '=' 
+        )
+        OUTPUT 'long'
+    )    OPERATION 'deleteAREAS' (
+        TYPE DELETE
+        SCHEMA VIEW afo.areas
+        VQL = 'DELETE FROM afo.areas ^ExecuteIfIsNotNull("WHERE ",@WHEREEXPRESSION,"") CONTEXT (''i18n'' = ''au_cst''^ExecuteIfIsNotNull(", ",@CONTEXTEXPRESSION,""))'
+        INPUTS 'DeleteAREAS' (
+            'ID' id:'int' '=' 
+            'COUNTRY' country:'text' '=' 
+            'AREA' area:'text' '=' 
+            'DESCRIPTION' description:'text' '=' 
+        )
+        OUTPUT 'long'
+    )    OPERATION 'updateAREAS' (
+        TYPE UPDATE
+        SCHEMA VIEW afo.areas
+        VQL = 'UPDATE afo.areas SET id=@newID, country=@newCOUNTRY, area=@newAREA, description=@newDESCRIPTION ^ExecuteIfIsNotNull("WHERE ",@WHEREEXPRESSION,"") CONTEXT (''i18n'' = ''au_cst''^ExecuteIfIsNotNull(", ",@CONTEXTEXPRESSION,""))'
+        INPUTS 'UpdateAREAS' (
+            'ID' id:'int' '=' 
+            'COUNTRY' country:'text' '=' 
+            'AREA' area:'text' '=' 
+            'DESCRIPTION' description:'text' '=' 
+            SET 'newID' id:'int' '=' OBL 
+            SET 'newCOUNTRY' country:'text' '=' 
+            SET 'newAREA' area:'text' '=' 
+            SET 'newDESCRIPTION' description:'text' '=' 
+        )
+        OUTPUT 'long'
+    );
+

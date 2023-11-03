@@ -1,0 +1,38 @@
+﻿CREATE OR REPLACE WRAPPER CUSTOM kafka_wrapper
+    DATASOURCENAME=kafka_wrapper
+    PARAMETERS (
+      'Group Id *' = '1',
+      'Topic *' = 'input',
+      'Message Format *' = 'String'
+    )
+    OUTPUTSCHEMA (
+        key = 'key' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        partition = 'partition' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        position = 'position' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        message = 'message' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        timestamp = 'timestamp' : 'java.time.LocalDateTime' (sourcetypeid='93')  NOT SORTABLE NOT UPDATEABLE
+    );
+
+CREATE OR REPLACE TABLE kafka_wrapper I18N hkt (
+        key:text (sourcetypeid = '12'),
+        partition:text (sourcetypeid = '12'),
+        position:text (sourcetypeid = '12'),
+        message:text (sourcetypeid = '12'),
+        timestamp:timestamp (sourcetypeid = '93')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD kafka_wrapper(
+        I18N hkt
+        CONSTRAINTS (
+             ADD key NOS ZERO ()
+             ADD partition NOS ZERO ()
+             ADD position NOS ZERO ()
+             ADD message NOS ZERO ()
+             ADD timestamp NOS ZERO ()
+        )
+        OUTPUTLIST (key, message, partition, position, timestamp
+        )
+        WRAPPER (custom kafka_wrapper)
+    );
+

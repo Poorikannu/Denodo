@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW "p_Initial Report-Reporter" AS SELECT "Initial Report-Reporter".field1 AS "[Initial Report-Occurrence situation]" FROM "Initial Report-Reporter";
+

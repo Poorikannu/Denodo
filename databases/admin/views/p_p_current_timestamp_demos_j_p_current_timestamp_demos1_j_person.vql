@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW "p_p_current_timestamp_demos_j_p_current_timestamp_demos1_j_PERSON" AS SELECT p_p_current_timestamp_demos_j_p_current_timestamp_demos1.id AS id, p_p_current_timestamp_demos_j_p_current_timestamp_demos1.msg AS msg, p_p_current_timestamp_demos_j_p_current_timestamp_demos1.created_at AS created_at, "PERSON"."PERSONID" AS "PERSONID", "PERSON"."FIRSTNAME" AS "FIRSTNAME", "PERSON"."COMPANY" AS "COMPANY" FROM p_p_current_timestamp_demos_j_p_current_timestamp_demos1 AS p_p_current_timestamp_demos_j_p_current_timestamp_demos1, "PERSON" AS "PERSON" CONTEXT ('I18N' = 'gic');
+
+ALTER VIEW "p_p_current_timestamp_demos_j_p_current_timestamp_demos1_j_PERSON"
+ LAYOUT (p_p_current_timestamp_demos_j_p_current_timestamp_demos1 = [20, 20, 200, 200], "PERSON" = [165, 250, 200, 200]);
+

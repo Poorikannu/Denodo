@@ -1,0 +1,38 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC "bv_Product"
+    DATASOURCENAME=ds_sql_server_local
+    CATALOGNAME='${databases.admin.views.jdbc.bv_product.CATALOGNAME}' 
+    SCHEMANAME='${databases.admin.views.jdbc.bv_product.SCHEMANAME}' 
+    RELATIONNAME='Product' 
+    OUTPUTSCHEMA (
+        "Product_id" = 'Product_id' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int')  NOT NULL SORTABLE,
+        "Product_name" = 'Product_name' :'java.lang.String' (OPT) (sourcetypesize='40', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        "Price" = 'Price' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int')  SORTABLE,
+        "Quantity" = 'Quantity' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int')  SORTABLE
+    )
+    CONSTRAINT 'PK__Product__9833FF92E6F927D2' PRIMARY KEY ( 'Product_id' )
+    INDEX 'PK__Product__9833FF92E6F927D2' CLUSTER UNIQUE PRIMARY ( 'Product_id' );
+
+CREATE OR REPLACE TABLE "bv_Product" I18N gic (
+        "Product_id":int (notnull, sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "Product_name":text (sourcetypeid = '-9', sourcetypesize = '4'),
+        "Price":int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "Quantity":int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10')
+    )
+    CONSTRAINT 'PK__Product__9833FF92E6F927D2' PRIMARY KEY ( 'Product_id' )
+    CACHE FULL
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD "bv_Product"(
+        I18N gic
+        CONSTRAINTS (
+             ADD "Product_id" (any) OPT ANY
+             ADD "Product_name" (any) OPT ANY
+             ADD "Price" (any) OPT ANY
+             ADD "Quantity" (any) OPT ANY
+        )
+        OUTPUTLIST ("Price", "Product_id", "Product_name", "Quantity"
+        )
+        WRAPPER (jdbc "bv_Product")
+    );
+

@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW current_timestamp_demos_u_table AS SELECT id, msg, created_at, input_database_name, input_view_name, database_name, view_name, view_type, view_wrapper_name, source_catalog_name, source_schema_name, source_table_name, sqlsentence, is_procedure, source_package_name, specific_name FROM (SELECT * FROM current_timestamp_demos EXTENDED UNION ALL SELECT * FROM "table") CONTEXT ('I18N' = 'gic');
+
+ALTER VIEW current_timestamp_demos_u_table
+ LAYOUT (current_timestamp_demos = [20, 20, 200, 200], "table" = [271, 324, 200, 200]);
+

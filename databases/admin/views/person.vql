@@ -1,0 +1,31 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC "PERSON"
+    DATASOURCENAME=oracle19c
+    SCHEMANAME='${databases.admin.views.jdbc.person.SCHEMANAME}' ESCAPE
+    RELATIONNAME='PERSON' 
+    OUTPUTSCHEMA (
+        "PERSONID" = 'PERSONID' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='5', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        "FIRSTNAME" = 'FIRSTNAME' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='10', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        "COMPANY" = 'COMPANY' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='15', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE
+    )
+    INDEX 'INDEX_NAME' CLUSTER ( 'PERSONID' , 'FIRSTNAME' );
+
+CREATE OR REPLACE TABLE "PERSON" I18N gic (
+        "PERSONID":text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '5', description = 'BU ID'),
+        "FIRSTNAME":text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '10'),
+        "COMPANY":text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '15')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD "PERSON"(
+        I18N gic
+        CONSTRAINTS (
+             ADD "PERSONID" (any) OPT ANY
+             ADD "FIRSTNAME" (any) OPT ANY
+             ADD "COMPANY" (any) OPT ANY
+        )
+        OUTPUTLIST ("COMPANY", "FIRSTNAME", "PERSONID"
+        )
+        WRAPPER (jdbc "PERSON")
+    );
+

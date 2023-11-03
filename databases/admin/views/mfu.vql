@@ -1,0 +1,921 @@
+﻿CREATE OR REPLACE WRAPPER JSON mfu
+    DATASOURCENAME=mfu
+    TUPLEROOT '/JSONFile'
+    OUTPUTSCHEMA ("JSONFile" = 'JSONFile' : REGISTER OF (
+        expand = 'expand' : 'java.lang.String',
+        "startAt" = 'startAt' : 'java.lang.Integer',
+        "maxResults" = 'maxResults' : 'java.lang.Integer',
+        total = 'total' : 'java.lang.Integer',
+        issues = 'issues' : ARRAY OF (
+            issues = 'issues' : REGISTER OF (
+                expand = 'expand' : 'java.lang.String',
+                id = 'id' : 'java.lang.String',
+                self = 'self' : 'java.lang.String',
+                key = 'key' : 'java.lang.String',
+                fields = 'fields' : REGISTER OF (
+                    customfield_12011 = 'customfield_12011' : 'java.lang.String',
+                    customfield_12010 = 'customfield_12010' : 'java.lang.String',
+                    customfield_10351 = 'customfield_10351' : 'java.lang.String',
+                    "fixVersions" = 'fixVersions' : ARRAY OF (
+                        "fixVersions" = 'fixVersions' : REGISTER OF (
+                            field_0 = 'field_0' : 'java.lang.String'
+                        )
+                    ),
+                    customfield_11200 = 'customfield_11200' : 'java.lang.String',
+                    customfield_10354 = 'customfield_10354' : 'java.lang.String',
+                    customfield_11201 = 'customfield_11201' : 'java.lang.String',
+                    customfield_10355 = 'customfield_10355' : 'java.lang.String',
+                    customfield_10467 = 'customfield_10467' : 'java.lang.String',
+                    customfield_10500 = 'customfield_10500' : 'java.lang.String',
+                    customfield_10105 = 'customfield_10105' : 'java.lang.String',
+                    customfield_10347 = 'customfield_10347' : 'java.lang.String',
+                    customfield_10106 = 'customfield_10106' : 'java.lang.String',
+                    customfield_12009 = 'customfield_12009' : 'java.lang.String',
+                    customfield_10900 = 'customfield_10900' : 'java.lang.String',
+                    customfield_10901 = 'customfield_10901' : 'java.lang.String',
+                    customfield_10902 = 'customfield_10902' : 'java.lang.String',
+                    customfield_10903 = 'customfield_10903' : 'java.lang.String',
+                    customfield_10904 = 'customfield_10904' : 'java.lang.String',
+                    customfield_10905 = 'customfield_10905' : 'java.lang.String',
+                    "lastViewed" = 'lastViewed' : 'java.lang.String',
+                    customfield_10340 = 'customfield_10340' : 'java.lang.String',
+                    customfield_12001 = 'customfield_12001' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        value = 'value' : 'java.lang.String',
+                        id = 'id' : 'java.lang.String'
+                    ),
+                    priority = 'priority' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        "iconUrl" = 'iconUrl' : 'java.lang.String',
+                        name = 'name' : 'java.lang.String',
+                        id = 'id' : 'java.lang.String'
+                    ),
+                    customfield_10100 = 'customfield_10100' : 'java.lang.String',
+                    customfield_10463 = 'customfield_10463' : 'java.lang.String',
+                    customfield_12004 = 'customfield_12004' : ARRAY OF (
+                        customfield_12004 = 'customfield_12004' : REGISTER OF (
+                            self = 'self' : 'java.lang.String',
+                            value = 'value' : 'java.lang.String',
+                            id = 'id' : 'java.lang.String'
+                        )
+                    ),
+                    customfield_10101 = 'customfield_10101' : 'java.lang.String',
+                    customfield_10465 = 'customfield_10465' : 'java.lang.String',
+                    labels = 'labels' : ARRAY OF (
+                        labels = 'labels' : REGISTER OF (
+                            field_0 = 'field_0' : 'java.lang.String'
+                        )
+                    ),
+                    customfield_10466 = 'customfield_10466' : 'java.lang.String',
+                    customfield_10456 = 'customfield_10456' : 'java.lang.String',
+                    customfield_11700 = 'customfield_11700' : 'java.lang.String',
+                    customfield_10457 = 'customfield_10457' : 'java.lang.String',
+                    customfield_11702 = 'customfield_11702' : 'java.lang.String',
+                    customfield_11701 = 'customfield_11701' : 'java.lang.String',
+                    customfield_11704 = 'customfield_11704' : 'java.lang.String',
+                    aggregatetimeoriginalestimate = 'aggregatetimeoriginalestimate' : 'java.lang.String',
+                    timeestimate = 'timeestimate' : 'java.lang.String',
+                    versions = 'versions' : ARRAY OF (
+                        versions = 'versions' : REGISTER OF (
+                            field_0 = 'field_0' : 'java.lang.String'
+                        )
+                    ),
+                    customfield_11703 = 'customfield_11703' : 'java.lang.String',
+                    issuelinks = 'issuelinks' : ARRAY OF (
+                        issuelinks = 'issuelinks' : REGISTER OF (
+                            id = 'id' : 'java.lang.String',
+                            self = 'self' : 'java.lang.String',
+                            type = 'type' : REGISTER OF (
+                                id = 'id' : 'java.lang.String',
+                                name = 'name' : 'java.lang.String',
+                                inward = 'inward' : 'java.lang.String',
+                                outward = 'outward' : 'java.lang.String',
+                                self = 'self' : 'java.lang.String'
+                            ),
+                            "outwardIssue" = 'outwardIssue' : REGISTER OF (
+                                id = 'id' : 'java.lang.String',
+                                key = 'key' : 'java.lang.String',
+                                self = 'self' : 'java.lang.String',
+                                fields = 'fields' : REGISTER OF (
+                                    summary = 'summary' : 'java.lang.String',
+                                    status = 'status' : REGISTER OF (
+                                        self = 'self' : 'java.lang.String',
+                                        "iconUrl" = 'iconUrl' : 'java.lang.String',
+                                        name = 'name' : 'java.lang.String',
+                                        id = 'id' : 'java.lang.String',
+                                        "statusCategory" = 'statusCategory' : REGISTER OF (
+                                            self = 'self' : 'java.lang.String',
+                                            id = 'id' : 'java.lang.Integer',
+                                            key = 'key' : 'java.lang.String',
+                                            "colorName" = 'colorName' : 'java.lang.String',
+                                            name = 'name' : 'java.lang.String'
+                                        ),
+                                        description = 'description' : 'java.lang.String'
+                                    ),
+                                    priority = 'priority' : REGISTER OF (
+                                        self = 'self' : 'java.lang.String',
+                                        "iconUrl" = 'iconUrl' : 'java.lang.String',
+                                        name = 'name' : 'java.lang.String',
+                                        id = 'id' : 'java.lang.String'
+                                    ),
+                                    issuetype = 'issuetype' : REGISTER OF (
+                                        self = 'self' : 'java.lang.String',
+                                        id = 'id' : 'java.lang.String',
+                                        "iconUrl" = 'iconUrl' : 'java.lang.String',
+                                        name = 'name' : 'java.lang.String',
+                                        subtask = 'subtask' : 'java.lang.String',
+                                        "avatarId" = 'avatarId' : 'java.lang.Integer',
+                                        description = 'description' : 'java.lang.String'
+                                    )
+                                )
+                            ),
+                            "inwardIssue" = 'inwardIssue' : REGISTER OF (
+                                id = 'id' : 'java.lang.String',
+                                key = 'key' : 'java.lang.String',
+                                self = 'self' : 'java.lang.String',
+                                fields = 'fields' : REGISTER OF (
+                                    summary = 'summary' : 'java.lang.String',
+                                    status = 'status' : REGISTER OF (
+                                        self = 'self' : 'java.lang.String',
+                                        description = 'description' : 'java.lang.String',
+                                        "iconUrl" = 'iconUrl' : 'java.lang.String',
+                                        name = 'name' : 'java.lang.String',
+                                        id = 'id' : 'java.lang.String',
+                                        "statusCategory" = 'statusCategory' : REGISTER OF (
+                                            self = 'self' : 'java.lang.String',
+                                            id = 'id' : 'java.lang.Integer',
+                                            key = 'key' : 'java.lang.String',
+                                            "colorName" = 'colorName' : 'java.lang.String',
+                                            name = 'name' : 'java.lang.String'
+                                        )
+                                    ),
+                                    priority = 'priority' : REGISTER OF (
+                                        self = 'self' : 'java.lang.String',
+                                        "iconUrl" = 'iconUrl' : 'java.lang.String',
+                                        name = 'name' : 'java.lang.String',
+                                        id = 'id' : 'java.lang.String'
+                                    ),
+                                    issuetype = 'issuetype' : REGISTER OF (
+                                        self = 'self' : 'java.lang.String',
+                                        id = 'id' : 'java.lang.String',
+                                        description = 'description' : 'java.lang.String',
+                                        "iconUrl" = 'iconUrl' : 'java.lang.String',
+                                        name = 'name' : 'java.lang.String',
+                                        subtask = 'subtask' : 'java.lang.String',
+                                        "avatarId" = 'avatarId' : 'java.lang.Integer'
+                                    )
+                                )
+                            )
+                        )
+                    ),
+                    assignee = 'assignee' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        name = 'name' : 'java.lang.String',
+                        key = 'key' : 'java.lang.String',
+                        "emailAddress" = 'emailAddress' : 'java.lang.String',
+                        "avatarUrls" = 'avatarUrls' : REGISTER OF (
+                            "48x48" = '48x48' : 'java.lang.String',
+                            "24x24" = '24x24' : 'java.lang.String',
+                            "16x16" = '16x16' : 'java.lang.String',
+                            "32x32" = '32x32' : 'java.lang.String'
+                        ),
+                        "displayName" = 'displayName' : 'java.lang.String',
+                        active = 'active' : 'java.lang.String',
+                        "timeZone" = 'timeZone' : 'java.lang.String'
+                    ),
+                    status = 'status' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        description = 'description' : 'java.lang.String',
+                        "iconUrl" = 'iconUrl' : 'java.lang.String',
+                        name = 'name' : 'java.lang.String',
+                        id = 'id' : 'java.lang.String',
+                        "statusCategory" = 'statusCategory' : REGISTER OF (
+                            self = 'self' : 'java.lang.String',
+                            id = 'id' : 'java.lang.Integer',
+                            key = 'key' : 'java.lang.String',
+                            "colorName" = 'colorName' : 'java.lang.String',
+                            name = 'name' : 'java.lang.String'
+                        )
+                    ),
+                    components = 'components' : ARRAY OF (
+                        components = 'components' : REGISTER OF (
+                            self = 'self' : 'java.lang.String',
+                            id = 'id' : 'java.lang.String',
+                            name = 'name' : 'java.lang.String'
+                        )
+                    ),
+                    customfield_11300 = 'customfield_11300' : 'java.lang.String',
+                    customfield_10454 = 'customfield_10454' : 'java.lang.String',
+                    customfield_11301 = 'customfield_11301' : 'java.lang.String',
+                    customfield_10203 = 'customfield_10203' : 'java.lang.String',
+                    customfield_10445 = 'customfield_10445' : 'java.lang.String',
+                    customfield_10204 = 'customfield_10204' : 'java.lang.String',
+                    customfield_10325 = 'customfield_10325' : 'java.lang.String',
+                    customfield_10446 = 'customfield_10446' : 'java.lang.String',
+                    customfield_10600 = 'customfield_10600' : 'java.lang.String',
+                    customfield_10205 = 'customfield_10205' : 'java.lang.String',
+                    customfield_10601 = 'customfield_10601' : 'java.lang.String',
+                    customfield_10206 = 'customfield_10206' : 'java.lang.String',
+                    customfield_10602 = 'customfield_10602' : 'java.lang.String',
+                    customfield_10207 = 'customfield_10207' : 'java.lang.String',
+                    customfield_10603 = 'customfield_10603' : 'java.lang.String',
+                    aggregatetimeestimate = 'aggregatetimeestimate' : 'java.lang.String',
+                    customfield_10208 = 'customfield_10208' : 'java.lang.String',
+                    customfield_10329 = 'customfield_10329' : 'java.lang.String',
+                    customfield_10604 = 'customfield_10604' : 'java.lang.String',
+                    customfield_10209 = 'customfield_10209' : 'java.lang.String',
+                    customfield_10605 = 'customfield_10605' : 'java.lang.String',
+                    customfield_10606 = 'customfield_10606' : 'java.lang.String',
+                    customfield_10607 = 'customfield_10607' : 'java.lang.String',
+                    creator = 'creator' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        name = 'name' : 'java.lang.String',
+                        key = 'key' : 'java.lang.String',
+                        "emailAddress" = 'emailAddress' : 'java.lang.String',
+                        "avatarUrls" = 'avatarUrls' : REGISTER OF (
+                            "48x48" = '48x48' : 'java.lang.String',
+                            "24x24" = '24x24' : 'java.lang.String',
+                            "16x16" = '16x16' : 'java.lang.String',
+                            "32x32" = '32x32' : 'java.lang.String'
+                        ),
+                        "displayName" = 'displayName' : 'java.lang.String',
+                        active = 'active' : 'java.lang.String',
+                        "timeZone" = 'timeZone' : 'java.lang.String'
+                    ),
+                    subtasks = 'subtasks' : ARRAY OF (
+                        subtasks = 'subtasks' : REGISTER OF (
+                            field_0 = 'field_0' : 'java.lang.String'
+                        )
+                    ),
+                    reporter = 'reporter' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        name = 'name' : 'java.lang.String',
+                        key = 'key' : 'java.lang.String',
+                        "emailAddress" = 'emailAddress' : 'java.lang.String',
+                        "avatarUrls" = 'avatarUrls' : REGISTER OF (
+                            "48x48" = '48x48' : 'java.lang.String',
+                            "24x24" = '24x24' : 'java.lang.String',
+                            "16x16" = '16x16' : 'java.lang.String',
+                            "32x32" = '32x32' : 'java.lang.String'
+                        ),
+                        "displayName" = 'displayName' : 'java.lang.String',
+                        active = 'active' : 'java.lang.String',
+                        "timeZone" = 'timeZone' : 'java.lang.String'
+                    ),
+                    customfield_12101 = 'customfield_12101' : 'java.lang.String',
+                    aggregateprogress = 'aggregateprogress' : REGISTER OF (
+                        progress = 'progress' : 'java.lang.Integer',
+                        total = 'total' : 'java.lang.Integer'
+                    ),
+                    customfield_10321 = 'customfield_10321' : 'java.lang.String',
+                    customfield_10442 = 'customfield_10442' : 'java.lang.String',
+                    customfield_12102 = 'customfield_12102' : 'java.lang.String',
+                    customfield_10201 = 'customfield_10201' : 'java.lang.String',
+                    customfield_10322 = 'customfield_10322' : 'java.lang.String',
+                    customfield_10202 = 'customfield_10202' : 'java.lang.String',
+                    customfield_10434 = 'customfield_10434' : 'java.lang.String',
+                    customfield_10316 = 'customfield_10316' : 'java.lang.String',
+                    customfield_11800 = 'customfield_11800' : 'java.lang.String',
+                    customfield_10319 = 'customfield_10319' : 'java.lang.String',
+                    progress = 'progress' : REGISTER OF (
+                        progress = 'progress' : 'java.lang.Integer',
+                        total = 'total' : 'java.lang.Integer'
+                    ),
+                    votes = 'votes' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        votes = 'votes' : 'java.lang.Integer',
+                        "hasVoted" = 'hasVoted' : 'java.lang.String'
+                    ),
+                    issuetype = 'issuetype' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        id = 'id' : 'java.lang.String',
+                        "iconUrl" = 'iconUrl' : 'java.lang.String',
+                        name = 'name' : 'java.lang.String',
+                        subtask = 'subtask' : 'java.lang.String',
+                        "avatarId" = 'avatarId' : 'java.lang.Integer',
+                        description = 'description' : 'java.lang.String'
+                    ),
+                    timespent = 'timespent' : 'java.lang.String',
+                    customfield_10394 = 'customfield_10394' : 'java.lang.String',
+                    project = 'project' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        id = 'id' : 'java.lang.String',
+                        key = 'key' : 'java.lang.String',
+                        name = 'name' : 'java.lang.String',
+                        "projectTypeKey" = 'projectTypeKey' : 'java.lang.String',
+                        "avatarUrls" = 'avatarUrls' : REGISTER OF (
+                            "48x48" = '48x48' : 'java.lang.String',
+                            "24x24" = '24x24' : 'java.lang.String',
+                            "16x16" = '16x16' : 'java.lang.String',
+                            "32x32" = '32x32' : 'java.lang.String'
+                        )
+                    ),
+                    customfield_11000 = 'customfield_11000' : 'java.lang.String',
+                    customfield_10397 = 'customfield_10397' : 'java.lang.String',
+                    aggregatetimespent = 'aggregatetimespent' : 'java.lang.String',
+                    customfield_10398 = 'customfield_10398' : 'java.lang.String',
+                    customfield_10431 = 'customfield_10431' : 'java.lang.String',
+                    customfield_10311 = 'customfield_10311' : 'java.lang.String',
+                    customfield_10432 = 'customfield_10432' : 'java.lang.String',
+                    customfield_10302 = 'customfield_10302' : 'java.lang.String',
+                    customfield_10303 = 'customfield_10303' : 'java.lang.String',
+                    customfield_10700 = 'customfield_10700' : 'java.lang.String',
+                    customfield_10305 = 'customfield_10305' : 'java.lang.String',
+                    customfield_10701 = 'customfield_10701' : 'java.lang.String',
+                    customfield_10427 = 'customfield_10427' : 'java.lang.String',
+                    customfield_10702 = 'customfield_10702' : 'java.lang.String',
+                    customfield_10308 = 'customfield_10308' : 'java.lang.String',
+                    customfield_10704 = 'customfield_10704' : 'java.lang.String',
+                    workratio = 'workratio' : 'java.lang.Integer',
+                    watches = 'watches' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        "watchCount" = 'watchCount' : 'java.lang.Integer',
+                        "isWatching" = 'isWatching' : 'java.lang.String'
+                    ),
+                    created = 'created' : 'java.lang.String',
+                    customfield_10382 = 'customfield_10382' : 'java.lang.String',
+                    customfield_11110 = 'customfield_11110' : 'java.lang.String',
+                    customfield_10379 = 'customfield_10379' : 'java.lang.String',
+                    customfield_11105 = 'customfield_11105' : 'java.lang.String',
+                    customfield_10413 = 'customfield_10413' : 'java.lang.String',
+                    customfield_11106 = 'customfield_11106' : 'java.lang.String',
+                    customfield_11900 = 'customfield_11900' : 'java.lang.String',
+                    customfield_11107 = 'customfield_11107' : 'java.lang.String',
+                    customfield_11504 = 'customfield_11504' : 'java.lang.String',
+                    customfield_10415 = 'customfield_10415' : 'java.lang.String',
+                    customfield_11108 = 'customfield_11108' : 'java.lang.String',
+                    customfield_11503 = 'customfield_11503' : 'java.lang.String',
+                    customfield_11109 = 'customfield_11109' : 'java.lang.String',
+                    customfield_11506 = 'customfield_11506' : 'java.lang.String',
+                    customfield_11505 = 'customfield_11505' : 'java.lang.String',
+                    customfield_10418 = 'customfield_10418' : 'java.lang.String',
+                    updated = 'updated' : 'java.lang.String',
+                    customfield_10370 = 'customfield_10370' : 'java.lang.String',
+                    timeoriginalestimate = 'timeoriginalestimate' : 'java.lang.String',
+                    description = 'description' : 'java.lang.String',
+                    customfield_10494 = 'customfield_10494' : 'java.lang.String',
+                    customfield_11100 = 'customfield_11100' : 'java.lang.String',
+                    customfield_10496 = 'customfield_10496' : 'java.lang.String',
+                    customfield_11101 = 'customfield_11101' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        value = 'value' : 'java.lang.String',
+                        id = 'id' : 'java.lang.String'
+                    ),
+                    customfield_11102 = 'customfield_11102' : 'java.lang.String',
+                    customfield_11103 = 'customfield_11103' : 'java.lang.String',
+                    customfield_11104 = 'customfield_11104' : 'java.lang.String',
+                    customfield_10401 = 'customfield_10401' : 'java.lang.String',
+                    customfield_10404 = 'customfield_10404' : 'java.lang.String',
+                    customfield_10800 = 'customfield_10800' : 'java.lang.String',
+                    summary = 'summary' : 'java.lang.String',
+                    customfield_10361 = 'customfield_10361' : 'java.lang.String',
+                    customfield_10000 = 'customfield_10000' : 'java.lang.String',
+                    customfield_10363 = 'customfield_10363' : 'java.lang.String',
+                    customfield_10400 = 'customfield_10400' : 'java.lang.String',
+                    customfield_10478 = 'customfield_10478' : 'java.lang.String',
+                    customfield_11601 = 'customfield_11601' : 'java.lang.String',
+                    customfield_10358 = 'customfield_10358' : 'java.lang.String',
+                    customfield_11600 = 'customfield_11600' : 'java.lang.String',
+                    environment = 'environment' : 'java.lang.String',
+                    customfield_11603 = 'customfield_11603' : 'java.lang.String',
+                    customfield_11602 = 'customfield_11602' : 'java.lang.String',
+                    customfield_11605 = 'customfield_11605' : 'java.lang.String',
+                    customfield_11604 = 'customfield_11604' : 'java.lang.String',
+                    duedate = 'duedate' : 'java.lang.String',
+                    customfield_11607 = 'customfield_11607' : 'java.lang.String',
+                    customfield_11606 = 'customfield_11606' : 'java.lang.String',
+                    customfield_12002 = 'customfield_12002' : 'java.lang.String',
+                    customfield_12003 = 'customfield_12003' : 'java.lang.String',
+                    customfield_10233 = 'customfield_10233' : ARRAY OF (
+                        customfield_10233 = 'customfield_10233' : REGISTER OF (
+                            field_0 = 'field_0' : 'java.lang.String'
+                        )
+                    ),
+                    customfield_10104 = 'customfield_10104' : 'java.lang.String',
+                    customfield_10102 = 'customfield_10102' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        value = 'value' : 'java.lang.String',
+                        id = 'id' : 'java.lang.String'
+                    ),
+                    customfield_10103 = 'customfield_10103' : 'java.lang.String',
+                    resolution = 'resolution' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        id = 'id' : 'java.lang.String',
+                        description = 'description' : 'java.lang.String',
+                        name = 'name' : 'java.lang.String'
+                    ),
+                    resolutiondate = 'resolutiondate' : 'java.lang.String',
+                    customfield_10301 = 'customfield_10301' : 'java.lang.String',
+                    customfield_12008 = 'customfield_12008' : 'java.lang.String',
+                    customfield_12007 = 'customfield_12007' : 'java.lang.String',
+                    customfield_12006 = 'customfield_12006' : 'java.lang.String',
+                    customfield_12005 = 'customfield_12005' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        value = 'value' : 'java.lang.String',
+                        id = 'id' : 'java.lang.String'
+                    ),
+                    customfield_12100 = 'customfield_12100' : REGISTER OF (
+                        self = 'self' : 'java.lang.String',
+                        value = 'value' : 'java.lang.String',
+                        id = 'id' : 'java.lang.String'
+                    ),
+                    customfield_10300 = 'customfield_10300' : 'java.lang.String'
+                )
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_fixVersions_fixVersions" AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_fixVersions" AS ARRAY OF "mfu_issues_issues_fields_fixVersions_fixVersions";
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_customfield_12001 AS REGISTER OF (self:text, value:text, id:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_priority AS REGISTER OF (self:text, "iconUrl":text, name:text, id:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_customfield_12004_customfield_12004 AS REGISTER OF (self:text, value:text, id:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_customfield_12004 AS ARRAY OF mfu_issues_issues_fields_customfield_12004_customfield_12004;
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_labels_labels AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_labels AS ARRAY OF mfu_issues_issues_fields_labels_labels;
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_versions_versions AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_versions AS ARRAY OF mfu_issues_issues_fields_versions_versions;
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_issuelinks_issuelinks_type AS REGISTER OF (id:text, name:text, inward:text, outward:text, self:text);
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_issuelinks_issuelinks_outwardIssue_fields_status_statusCategory" AS REGISTER OF (self:text, id:int, key:text, "colorName":text, name:text);
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_issuelinks_issuelinks_outwardIssue_fields_status" AS REGISTER OF (self:text, "iconUrl":text, name:text, id:text, "statusCategory":"mfu_issues_issues_fields_issuelinks_issuelinks_outwardIssue_fields_status_statusCategory", description:text);
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_issuelinks_issuelinks_outwardIssue_fields_priority" AS REGISTER OF (self:text, "iconUrl":text, name:text, id:text);
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_issuelinks_issuelinks_outwardIssue_fields_issuetype" AS REGISTER OF (self:text, id:text, "iconUrl":text, name:text, subtask:text, "avatarId":int, description:text);
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_issuelinks_issuelinks_outwardIssue_fields" AS REGISTER OF (summary:text, status:"mfu_issues_issues_fields_issuelinks_issuelinks_outwardIssue_fields_status", priority:"mfu_issues_issues_fields_issuelinks_issuelinks_outwardIssue_fields_priority", issuetype:"mfu_issues_issues_fields_issuelinks_issuelinks_outwardIssue_fields_issuetype");
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_issuelinks_issuelinks_outwardIssue" AS REGISTER OF (id:text, key:text, self:text, fields:"mfu_issues_issues_fields_issuelinks_issuelinks_outwardIssue_fields");
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_issuelinks_issuelinks_inwardIssue_fields_status_statusCategory" AS REGISTER OF (self:text, id:int, key:text, "colorName":text, name:text);
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_issuelinks_issuelinks_inwardIssue_fields_status" AS REGISTER OF (self:text, description:text, "iconUrl":text, name:text, id:text, "statusCategory":"mfu_issues_issues_fields_issuelinks_issuelinks_inwardIssue_fields_status_statusCategory");
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_issuelinks_issuelinks_inwardIssue_fields_priority" AS REGISTER OF (self:text, "iconUrl":text, name:text, id:text);
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_issuelinks_issuelinks_inwardIssue_fields_issuetype" AS REGISTER OF (self:text, id:text, description:text, "iconUrl":text, name:text, subtask:text, "avatarId":int);
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_issuelinks_issuelinks_inwardIssue_fields" AS REGISTER OF (summary:text, status:"mfu_issues_issues_fields_issuelinks_issuelinks_inwardIssue_fields_status", priority:"mfu_issues_issues_fields_issuelinks_issuelinks_inwardIssue_fields_priority", issuetype:"mfu_issues_issues_fields_issuelinks_issuelinks_inwardIssue_fields_issuetype");
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_issuelinks_issuelinks_inwardIssue" AS REGISTER OF (id:text, key:text, self:text, fields:"mfu_issues_issues_fields_issuelinks_issuelinks_inwardIssue_fields");
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_issuelinks_issuelinks AS REGISTER OF (id:text, self:text, type:mfu_issues_issues_fields_issuelinks_issuelinks_type, "outwardIssue":"mfu_issues_issues_fields_issuelinks_issuelinks_outwardIssue", "inwardIssue":"mfu_issues_issues_fields_issuelinks_issuelinks_inwardIssue");
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_issuelinks AS ARRAY OF mfu_issues_issues_fields_issuelinks_issuelinks;
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_assignee_avatarUrls" AS REGISTER OF ("48x48":text, "24x24":text, "16x16":text, "32x32":text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_assignee AS REGISTER OF (self:text, name:text, key:text, "emailAddress":text, "avatarUrls":"mfu_issues_issues_fields_assignee_avatarUrls", "displayName":text, active:text, "timeZone":text);
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_status_statusCategory" AS REGISTER OF (self:text, id:int, key:text, "colorName":text, name:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_status AS REGISTER OF (self:text, description:text, "iconUrl":text, name:text, id:text, "statusCategory":"mfu_issues_issues_fields_status_statusCategory");
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_components_components AS REGISTER OF (self:text, id:text, name:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_components AS ARRAY OF mfu_issues_issues_fields_components_components;
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_creator_avatarUrls" AS REGISTER OF ("48x48":text, "24x24":text, "16x16":text, "32x32":text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_creator AS REGISTER OF (self:text, name:text, key:text, "emailAddress":text, "avatarUrls":"mfu_issues_issues_fields_creator_avatarUrls", "displayName":text, active:text, "timeZone":text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_subtasks_subtasks AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_subtasks AS ARRAY OF mfu_issues_issues_fields_subtasks_subtasks;
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_reporter_avatarUrls" AS REGISTER OF ("48x48":text, "24x24":text, "16x16":text, "32x32":text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_reporter AS REGISTER OF (self:text, name:text, key:text, "emailAddress":text, "avatarUrls":"mfu_issues_issues_fields_reporter_avatarUrls", "displayName":text, active:text, "timeZone":text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_aggregateprogress AS REGISTER OF (progress:int, total:int);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_progress AS REGISTER OF (progress:int, total:int);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_votes AS REGISTER OF (self:text, votes:int, "hasVoted":text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_issuetype AS REGISTER OF (self:text, id:text, "iconUrl":text, name:text, subtask:text, "avatarId":int, description:text);
+
+CREATE OR REPLACE TYPE "mfu_issues_issues_fields_project_avatarUrls" AS REGISTER OF ("48x48":text, "24x24":text, "16x16":text, "32x32":text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_project AS REGISTER OF (self:text, id:text, key:text, name:text, "projectTypeKey":text, "avatarUrls":"mfu_issues_issues_fields_project_avatarUrls");
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_watches AS REGISTER OF (self:text, "watchCount":int, "isWatching":text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_customfield_11101 AS REGISTER OF (self:text, value:text, id:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_customfield_10233_customfield_10233 AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_customfield_10233 AS ARRAY OF mfu_issues_issues_fields_customfield_10233_customfield_10233;
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_customfield_10102 AS REGISTER OF (self:text, value:text, id:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_resolution AS REGISTER OF (self:text, id:text, description:text, name:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_customfield_12005 AS REGISTER OF (self:text, value:text, id:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields_customfield_12100 AS REGISTER OF (self:text, value:text, id:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues_fields AS REGISTER OF (customfield_12011:text, customfield_12010:text, customfield_10351:text, "fixVersions":"mfu_issues_issues_fields_fixVersions", customfield_11200:text, customfield_10354:text, customfield_11201:text, customfield_10355:text, customfield_10467:text, customfield_10500:text, customfield_10105:text, customfield_10347:text, customfield_10106:text, customfield_12009:text, customfield_10900:text, customfield_10901:text, customfield_10902:text, customfield_10903:text, customfield_10904:text, customfield_10905:text, "lastViewed":text, customfield_10340:text, customfield_12001:mfu_issues_issues_fields_customfield_12001, priority:mfu_issues_issues_fields_priority, customfield_10100:text, customfield_10463:text, customfield_12004:mfu_issues_issues_fields_customfield_12004, customfield_10101:text, customfield_10465:text, labels:mfu_issues_issues_fields_labels, customfield_10466:text, customfield_10456:text, customfield_11700:text, customfield_10457:text, customfield_11702:text, customfield_11701:text, customfield_11704:text, aggregatetimeoriginalestimate:text, timeestimate:text, versions:mfu_issues_issues_fields_versions, customfield_11703:text, issuelinks:mfu_issues_issues_fields_issuelinks, assignee:mfu_issues_issues_fields_assignee, status:mfu_issues_issues_fields_status, components:mfu_issues_issues_fields_components, customfield_11300:text, customfield_10454:text, customfield_11301:text, customfield_10203:text, customfield_10445:text, customfield_10204:text, customfield_10325:text, customfield_10446:text, customfield_10600:text, customfield_10205:text, customfield_10601:text, customfield_10206:text, customfield_10602:text, customfield_10207:text, customfield_10603:text, aggregatetimeestimate:text, customfield_10208:text, customfield_10329:text, customfield_10604:text, customfield_10209:text, customfield_10605:text, customfield_10606:text, customfield_10607:text, creator:mfu_issues_issues_fields_creator, subtasks:mfu_issues_issues_fields_subtasks, reporter:mfu_issues_issues_fields_reporter, customfield_12101:text, aggregateprogress:mfu_issues_issues_fields_aggregateprogress, customfield_10321:text, customfield_10442:text, customfield_12102:text, customfield_10201:text, customfield_10322:text, customfield_10202:text, customfield_10434:text, customfield_10316:text, customfield_11800:text, customfield_10319:text, progress:mfu_issues_issues_fields_progress, votes:mfu_issues_issues_fields_votes, issuetype:mfu_issues_issues_fields_issuetype, timespent:text, customfield_10394:text, project:mfu_issues_issues_fields_project, customfield_11000:text, customfield_10397:text, aggregatetimespent:text, customfield_10398:text, customfield_10431:text, customfield_10311:text, customfield_10432:text, customfield_10302:text, customfield_10303:text, customfield_10700:text, customfield_10305:text, customfield_10701:text, customfield_10427:text, customfield_10702:text, customfield_10308:text, customfield_10704:text, workratio:int, watches:mfu_issues_issues_fields_watches, created:text, customfield_10382:text, customfield_11110:text, customfield_10379:text, customfield_11105:text, customfield_10413:text, customfield_11106:text, customfield_11900:text, customfield_11107:text, customfield_11504:text, customfield_10415:text, customfield_11108:text, customfield_11503:text, customfield_11109:text, customfield_11506:text, customfield_11505:text, customfield_10418:text, updated:text, customfield_10370:text, timeoriginalestimate:text, description:text, customfield_10494:text, customfield_11100:text, customfield_10496:text, customfield_11101:mfu_issues_issues_fields_customfield_11101, customfield_11102:text, customfield_11103:text, customfield_11104:text, customfield_10401:text, customfield_10404:text, customfield_10800:text, summary:text, customfield_10361:text, customfield_10000:text, customfield_10363:text, customfield_10400:text, customfield_10478:text, customfield_11601:text, customfield_10358:text, customfield_11600:text, environment:text, customfield_11603:text, customfield_11602:text, customfield_11605:text, customfield_11604:text, duedate:text, customfield_11607:text, customfield_11606:text, customfield_12002:text, customfield_12003:text, customfield_10233:mfu_issues_issues_fields_customfield_10233, customfield_10104:text, customfield_10102:mfu_issues_issues_fields_customfield_10102, customfield_10103:text, resolution:mfu_issues_issues_fields_resolution, resolutiondate:text, customfield_10301:text, customfield_12008:text, customfield_12007:text, customfield_12006:text, customfield_12005:mfu_issues_issues_fields_customfield_12005, customfield_12100:mfu_issues_issues_fields_customfield_12100, customfield_10300:text);
+
+CREATE OR REPLACE TYPE mfu_issues_issues AS REGISTER OF (expand:text, id:text, self:text, key:text, fields:mfu_issues_issues_fields);
+
+CREATE OR REPLACE TYPE mfu_issues AS ARRAY OF mfu_issues_issues;
+
+CREATE OR REPLACE TABLE mfu I18N gic (
+        expand:text,
+        "startAt":int,
+        "maxResults":int,
+        total:int,
+        issues:mfu_issues
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD mfu(
+        I18N gic
+        CONSTRAINTS (
+             ADD expand NOS ZERO ()
+             ADD "startAt" NOS ZERO ()
+             ADD "maxResults" NOS ZERO ()
+             ADD total NOS ZERO ()
+             ADD issues NOS ZERO ()
+             ADD issues NOS ZERO ()
+             ADD issues.expand NOS ZERO ()
+             ADD issues.id NOS ZERO ()
+             ADD issues.self NOS ZERO ()
+             ADD issues.key NOS ZERO ()
+             ADD issues.fields NOS ZERO ()
+             ADD issues.fields.customfield_12011 NOS ZERO ()
+             ADD issues.fields.customfield_12010 NOS ZERO ()
+             ADD issues.fields.customfield_10351 NOS ZERO ()
+             ADD issues.fields."fixVersions" NOS ZERO ()
+             ADD issues.fields."fixVersions" NOS ZERO ()
+             ADD issues.fields."fixVersions".field_0 NOS ZERO ()
+             ADD issues.fields.customfield_11200 NOS ZERO ()
+             ADD issues.fields.customfield_10354 NOS ZERO ()
+             ADD issues.fields.customfield_11201 NOS ZERO ()
+             ADD issues.fields.customfield_10355 NOS ZERO ()
+             ADD issues.fields.customfield_10467 NOS ZERO ()
+             ADD issues.fields.customfield_10500 NOS ZERO ()
+             ADD issues.fields.customfield_10105 NOS ZERO ()
+             ADD issues.fields.customfield_10347 NOS ZERO ()
+             ADD issues.fields.customfield_10106 NOS ZERO ()
+             ADD issues.fields.customfield_12009 NOS ZERO ()
+             ADD issues.fields.customfield_10900 NOS ZERO ()
+             ADD issues.fields.customfield_10901 NOS ZERO ()
+             ADD issues.fields.customfield_10902 NOS ZERO ()
+             ADD issues.fields.customfield_10903 NOS ZERO ()
+             ADD issues.fields.customfield_10904 NOS ZERO ()
+             ADD issues.fields.customfield_10905 NOS ZERO ()
+             ADD issues.fields."lastViewed" NOS ZERO ()
+             ADD issues.fields.customfield_10340 NOS ZERO ()
+             ADD issues.fields.customfield_12001 NOS ZERO ()
+             ADD issues.fields.customfield_12001.self NOS ZERO ()
+             ADD issues.fields.customfield_12001.value NOS ZERO ()
+             ADD issues.fields.customfield_12001.id NOS ZERO ()
+             ADD issues.fields.priority NOS ZERO ()
+             ADD issues.fields.priority.self NOS ZERO ()
+             ADD issues.fields.priority."iconUrl" NOS ZERO ()
+             ADD issues.fields.priority.name NOS ZERO ()
+             ADD issues.fields.priority.id NOS ZERO ()
+             ADD issues.fields.customfield_10100 NOS ZERO ()
+             ADD issues.fields.customfield_10463 NOS ZERO ()
+             ADD issues.fields.customfield_12004 NOS ZERO ()
+             ADD issues.fields.customfield_12004 NOS ZERO ()
+             ADD issues.fields.customfield_12004.self NOS ZERO ()
+             ADD issues.fields.customfield_12004.value NOS ZERO ()
+             ADD issues.fields.customfield_12004.id NOS ZERO ()
+             ADD issues.fields.customfield_10101 NOS ZERO ()
+             ADD issues.fields.customfield_10465 NOS ZERO ()
+             ADD issues.fields.labels NOS ZERO ()
+             ADD issues.fields.labels NOS ZERO ()
+             ADD issues.fields.labels.field_0 NOS ZERO ()
+             ADD issues.fields.customfield_10466 NOS ZERO ()
+             ADD issues.fields.customfield_10456 NOS ZERO ()
+             ADD issues.fields.customfield_11700 NOS ZERO ()
+             ADD issues.fields.customfield_10457 NOS ZERO ()
+             ADD issues.fields.customfield_11702 NOS ZERO ()
+             ADD issues.fields.customfield_11701 NOS ZERO ()
+             ADD issues.fields.customfield_11704 NOS ZERO ()
+             ADD issues.fields.aggregatetimeoriginalestimate NOS ZERO ()
+             ADD issues.fields.timeestimate NOS ZERO ()
+             ADD issues.fields.versions NOS ZERO ()
+             ADD issues.fields.versions NOS ZERO ()
+             ADD issues.fields.versions.field_0 NOS ZERO ()
+             ADD issues.fields.customfield_11703 NOS ZERO ()
+             ADD issues.fields.issuelinks NOS ZERO ()
+             ADD issues.fields.issuelinks NOS ZERO ()
+             ADD issues.fields.issuelinks.id NOS ZERO ()
+             ADD issues.fields.issuelinks.self NOS ZERO ()
+             ADD issues.fields.issuelinks.type NOS ZERO ()
+             ADD issues.fields.issuelinks.type.id NOS ZERO ()
+             ADD issues.fields.issuelinks.type.name NOS ZERO ()
+             ADD issues.fields.issuelinks.type.inward NOS ZERO ()
+             ADD issues.fields.issuelinks.type.outward NOS ZERO ()
+             ADD issues.fields.issuelinks.type.self NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue" NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".id NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".key NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".self NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.summary NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.status NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.status.self NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.status."iconUrl" NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.status.name NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.status.id NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.status."statusCategory" NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.status."statusCategory".self NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.status."statusCategory".id NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.status."statusCategory".key NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.status."statusCategory"."colorName" NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.status."statusCategory".name NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.status.description NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.priority NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.priority.self NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.priority."iconUrl" NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.priority.name NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.priority.id NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.issuetype NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.issuetype.self NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.issuetype.id NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.issuetype."iconUrl" NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.issuetype.name NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.issuetype.subtask NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.issuetype."avatarId" NOS ZERO ()
+             ADD issues.fields.issuelinks."outwardIssue".fields.issuetype.description NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue" NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".id NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".key NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".self NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.summary NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.status NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.status.self NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.status.description NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.status."iconUrl" NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.status.name NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.status.id NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.status."statusCategory" NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.status."statusCategory".self NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.status."statusCategory".id NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.status."statusCategory".key NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.status."statusCategory"."colorName" NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.status."statusCategory".name NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.priority NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.priority.self NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.priority."iconUrl" NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.priority.name NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.priority.id NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.issuetype NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.issuetype.self NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.issuetype.id NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.issuetype.description NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.issuetype."iconUrl" NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.issuetype.name NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.issuetype.subtask NOS ZERO ()
+             ADD issues.fields.issuelinks."inwardIssue".fields.issuetype."avatarId" NOS ZERO ()
+             ADD issues.fields.assignee NOS ZERO ()
+             ADD issues.fields.assignee.self NOS ZERO ()
+             ADD issues.fields.assignee.name NOS ZERO ()
+             ADD issues.fields.assignee.key NOS ZERO ()
+             ADD issues.fields.assignee."emailAddress" NOS ZERO ()
+             ADD issues.fields.assignee."avatarUrls" NOS ZERO ()
+             ADD issues.fields.assignee."avatarUrls"."48x48" NOS ZERO ()
+             ADD issues.fields.assignee."avatarUrls"."24x24" NOS ZERO ()
+             ADD issues.fields.assignee."avatarUrls"."16x16" NOS ZERO ()
+             ADD issues.fields.assignee."avatarUrls"."32x32" NOS ZERO ()
+             ADD issues.fields.assignee."displayName" NOS ZERO ()
+             ADD issues.fields.assignee.active NOS ZERO ()
+             ADD issues.fields.assignee."timeZone" NOS ZERO ()
+             ADD issues.fields.status NOS ZERO ()
+             ADD issues.fields.status.self NOS ZERO ()
+             ADD issues.fields.status.description NOS ZERO ()
+             ADD issues.fields.status."iconUrl" NOS ZERO ()
+             ADD issues.fields.status.name NOS ZERO ()
+             ADD issues.fields.status.id NOS ZERO ()
+             ADD issues.fields.status."statusCategory" NOS ZERO ()
+             ADD issues.fields.status."statusCategory".self NOS ZERO ()
+             ADD issues.fields.status."statusCategory".id NOS ZERO ()
+             ADD issues.fields.status."statusCategory".key NOS ZERO ()
+             ADD issues.fields.status."statusCategory"."colorName" NOS ZERO ()
+             ADD issues.fields.status."statusCategory".name NOS ZERO ()
+             ADD issues.fields.components NOS ZERO ()
+             ADD issues.fields.components NOS ZERO ()
+             ADD issues.fields.components.self NOS ZERO ()
+             ADD issues.fields.components.id NOS ZERO ()
+             ADD issues.fields.components.name NOS ZERO ()
+             ADD issues.fields.customfield_11300 NOS ZERO ()
+             ADD issues.fields.customfield_10454 NOS ZERO ()
+             ADD issues.fields.customfield_11301 NOS ZERO ()
+             ADD issues.fields.customfield_10203 NOS ZERO ()
+             ADD issues.fields.customfield_10445 NOS ZERO ()
+             ADD issues.fields.customfield_10204 NOS ZERO ()
+             ADD issues.fields.customfield_10325 NOS ZERO ()
+             ADD issues.fields.customfield_10446 NOS ZERO ()
+             ADD issues.fields.customfield_10600 NOS ZERO ()
+             ADD issues.fields.customfield_10205 NOS ZERO ()
+             ADD issues.fields.customfield_10601 NOS ZERO ()
+             ADD issues.fields.customfield_10206 NOS ZERO ()
+             ADD issues.fields.customfield_10602 NOS ZERO ()
+             ADD issues.fields.customfield_10207 NOS ZERO ()
+             ADD issues.fields.customfield_10603 NOS ZERO ()
+             ADD issues.fields.aggregatetimeestimate NOS ZERO ()
+             ADD issues.fields.customfield_10208 NOS ZERO ()
+             ADD issues.fields.customfield_10329 NOS ZERO ()
+             ADD issues.fields.customfield_10604 NOS ZERO ()
+             ADD issues.fields.customfield_10209 NOS ZERO ()
+             ADD issues.fields.customfield_10605 NOS ZERO ()
+             ADD issues.fields.customfield_10606 NOS ZERO ()
+             ADD issues.fields.customfield_10607 NOS ZERO ()
+             ADD issues.fields.creator NOS ZERO ()
+             ADD issues.fields.creator.self NOS ZERO ()
+             ADD issues.fields.creator.name NOS ZERO ()
+             ADD issues.fields.creator.key NOS ZERO ()
+             ADD issues.fields.creator."emailAddress" NOS ZERO ()
+             ADD issues.fields.creator."avatarUrls" NOS ZERO ()
+             ADD issues.fields.creator."avatarUrls"."48x48" NOS ZERO ()
+             ADD issues.fields.creator."avatarUrls"."24x24" NOS ZERO ()
+             ADD issues.fields.creator."avatarUrls"."16x16" NOS ZERO ()
+             ADD issues.fields.creator."avatarUrls"."32x32" NOS ZERO ()
+             ADD issues.fields.creator."displayName" NOS ZERO ()
+             ADD issues.fields.creator.active NOS ZERO ()
+             ADD issues.fields.creator."timeZone" NOS ZERO ()
+             ADD issues.fields.subtasks NOS ZERO ()
+             ADD issues.fields.subtasks NOS ZERO ()
+             ADD issues.fields.subtasks.field_0 NOS ZERO ()
+             ADD issues.fields.reporter NOS ZERO ()
+             ADD issues.fields.reporter.self NOS ZERO ()
+             ADD issues.fields.reporter.name NOS ZERO ()
+             ADD issues.fields.reporter.key NOS ZERO ()
+             ADD issues.fields.reporter."emailAddress" NOS ZERO ()
+             ADD issues.fields.reporter."avatarUrls" NOS ZERO ()
+             ADD issues.fields.reporter."avatarUrls"."48x48" NOS ZERO ()
+             ADD issues.fields.reporter."avatarUrls"."24x24" NOS ZERO ()
+             ADD issues.fields.reporter."avatarUrls"."16x16" NOS ZERO ()
+             ADD issues.fields.reporter."avatarUrls"."32x32" NOS ZERO ()
+             ADD issues.fields.reporter."displayName" NOS ZERO ()
+             ADD issues.fields.reporter.active NOS ZERO ()
+             ADD issues.fields.reporter."timeZone" NOS ZERO ()
+             ADD issues.fields.customfield_12101 NOS ZERO ()
+             ADD issues.fields.aggregateprogress NOS ZERO ()
+             ADD issues.fields.aggregateprogress.progress NOS ZERO ()
+             ADD issues.fields.aggregateprogress.total NOS ZERO ()
+             ADD issues.fields.customfield_10321 NOS ZERO ()
+             ADD issues.fields.customfield_10442 NOS ZERO ()
+             ADD issues.fields.customfield_12102 NOS ZERO ()
+             ADD issues.fields.customfield_10201 NOS ZERO ()
+             ADD issues.fields.customfield_10322 NOS ZERO ()
+             ADD issues.fields.customfield_10202 NOS ZERO ()
+             ADD issues.fields.customfield_10434 NOS ZERO ()
+             ADD issues.fields.customfield_10316 NOS ZERO ()
+             ADD issues.fields.customfield_11800 NOS ZERO ()
+             ADD issues.fields.customfield_10319 NOS ZERO ()
+             ADD issues.fields.progress NOS ZERO ()
+             ADD issues.fields.progress.progress NOS ZERO ()
+             ADD issues.fields.progress.total NOS ZERO ()
+             ADD issues.fields.votes NOS ZERO ()
+             ADD issues.fields.votes.self NOS ZERO ()
+             ADD issues.fields.votes.votes NOS ZERO ()
+             ADD issues.fields.votes."hasVoted" NOS ZERO ()
+             ADD issues.fields.issuetype NOS ZERO ()
+             ADD issues.fields.issuetype.self NOS ZERO ()
+             ADD issues.fields.issuetype.id NOS ZERO ()
+             ADD issues.fields.issuetype."iconUrl" NOS ZERO ()
+             ADD issues.fields.issuetype.name NOS ZERO ()
+             ADD issues.fields.issuetype.subtask NOS ZERO ()
+             ADD issues.fields.issuetype."avatarId" NOS ZERO ()
+             ADD issues.fields.issuetype.description NOS ZERO ()
+             ADD issues.fields.timespent NOS ZERO ()
+             ADD issues.fields.customfield_10394 NOS ZERO ()
+             ADD issues.fields.project NOS ZERO ()
+             ADD issues.fields.project.self NOS ZERO ()
+             ADD issues.fields.project.id NOS ZERO ()
+             ADD issues.fields.project.key NOS ZERO ()
+             ADD issues.fields.project.name NOS ZERO ()
+             ADD issues.fields.project."projectTypeKey" NOS ZERO ()
+             ADD issues.fields.project."avatarUrls" NOS ZERO ()
+             ADD issues.fields.project."avatarUrls"."48x48" NOS ZERO ()
+             ADD issues.fields.project."avatarUrls"."24x24" NOS ZERO ()
+             ADD issues.fields.project."avatarUrls"."16x16" NOS ZERO ()
+             ADD issues.fields.project."avatarUrls"."32x32" NOS ZERO ()
+             ADD issues.fields.customfield_11000 NOS ZERO ()
+             ADD issues.fields.customfield_10397 NOS ZERO ()
+             ADD issues.fields.aggregatetimespent NOS ZERO ()
+             ADD issues.fields.customfield_10398 NOS ZERO ()
+             ADD issues.fields.customfield_10431 NOS ZERO ()
+             ADD issues.fields.customfield_10311 NOS ZERO ()
+             ADD issues.fields.customfield_10432 NOS ZERO ()
+             ADD issues.fields.customfield_10302 NOS ZERO ()
+             ADD issues.fields.customfield_10303 NOS ZERO ()
+             ADD issues.fields.customfield_10700 NOS ZERO ()
+             ADD issues.fields.customfield_10305 NOS ZERO ()
+             ADD issues.fields.customfield_10701 NOS ZERO ()
+             ADD issues.fields.customfield_10427 NOS ZERO ()
+             ADD issues.fields.customfield_10702 NOS ZERO ()
+             ADD issues.fields.customfield_10308 NOS ZERO ()
+             ADD issues.fields.customfield_10704 NOS ZERO ()
+             ADD issues.fields.workratio NOS ZERO ()
+             ADD issues.fields.watches NOS ZERO ()
+             ADD issues.fields.watches.self NOS ZERO ()
+             ADD issues.fields.watches."watchCount" NOS ZERO ()
+             ADD issues.fields.watches."isWatching" NOS ZERO ()
+             ADD issues.fields.created NOS ZERO ()
+             ADD issues.fields.customfield_10382 NOS ZERO ()
+             ADD issues.fields.customfield_11110 NOS ZERO ()
+             ADD issues.fields.customfield_10379 NOS ZERO ()
+             ADD issues.fields.customfield_11105 NOS ZERO ()
+             ADD issues.fields.customfield_10413 NOS ZERO ()
+             ADD issues.fields.customfield_11106 NOS ZERO ()
+             ADD issues.fields.customfield_11900 NOS ZERO ()
+             ADD issues.fields.customfield_11107 NOS ZERO ()
+             ADD issues.fields.customfield_11504 NOS ZERO ()
+             ADD issues.fields.customfield_10415 NOS ZERO ()
+             ADD issues.fields.customfield_11108 NOS ZERO ()
+             ADD issues.fields.customfield_11503 NOS ZERO ()
+             ADD issues.fields.customfield_11109 NOS ZERO ()
+             ADD issues.fields.customfield_11506 NOS ZERO ()
+             ADD issues.fields.customfield_11505 NOS ZERO ()
+             ADD issues.fields.customfield_10418 NOS ZERO ()
+             ADD issues.fields.updated NOS ZERO ()
+             ADD issues.fields.customfield_10370 NOS ZERO ()
+             ADD issues.fields.timeoriginalestimate NOS ZERO ()
+             ADD issues.fields.description NOS ZERO ()
+             ADD issues.fields.customfield_10494 NOS ZERO ()
+             ADD issues.fields.customfield_11100 NOS ZERO ()
+             ADD issues.fields.customfield_10496 NOS ZERO ()
+             ADD issues.fields.customfield_11101 NOS ZERO ()
+             ADD issues.fields.customfield_11101.self NOS ZERO ()
+             ADD issues.fields.customfield_11101.value NOS ZERO ()
+             ADD issues.fields.customfield_11101.id NOS ZERO ()
+             ADD issues.fields.customfield_11102 NOS ZERO ()
+             ADD issues.fields.customfield_11103 NOS ZERO ()
+             ADD issues.fields.customfield_11104 NOS ZERO ()
+             ADD issues.fields.customfield_10401 NOS ZERO ()
+             ADD issues.fields.customfield_10404 NOS ZERO ()
+             ADD issues.fields.customfield_10800 NOS ZERO ()
+             ADD issues.fields.summary NOS ZERO ()
+             ADD issues.fields.customfield_10361 NOS ZERO ()
+             ADD issues.fields.customfield_10000 NOS ZERO ()
+             ADD issues.fields.customfield_10363 NOS ZERO ()
+             ADD issues.fields.customfield_10400 NOS ZERO ()
+             ADD issues.fields.customfield_10478 NOS ZERO ()
+             ADD issues.fields.customfield_11601 NOS ZERO ()
+             ADD issues.fields.customfield_10358 NOS ZERO ()
+             ADD issues.fields.customfield_11600 NOS ZERO ()
+             ADD issues.fields.environment NOS ZERO ()
+             ADD issues.fields.customfield_11603 NOS ZERO ()
+             ADD issues.fields.customfield_11602 NOS ZERO ()
+             ADD issues.fields.customfield_11605 NOS ZERO ()
+             ADD issues.fields.customfield_11604 NOS ZERO ()
+             ADD issues.fields.duedate NOS ZERO ()
+             ADD issues.fields.customfield_11607 NOS ZERO ()
+             ADD issues.fields.customfield_11606 NOS ZERO ()
+             ADD issues.fields.customfield_12002 NOS ZERO ()
+             ADD issues.fields.customfield_12003 NOS ZERO ()
+             ADD issues.fields.customfield_10233 NOS ZERO ()
+             ADD issues.fields.customfield_10233 NOS ZERO ()
+             ADD issues.fields.customfield_10233.field_0 NOS ZERO ()
+             ADD issues.fields.customfield_10104 NOS ZERO ()
+             ADD issues.fields.customfield_10102 NOS ZERO ()
+             ADD issues.fields.customfield_10102.self NOS ZERO ()
+             ADD issues.fields.customfield_10102.value NOS ZERO ()
+             ADD issues.fields.customfield_10102.id NOS ZERO ()
+             ADD issues.fields.customfield_10103 NOS ZERO ()
+             ADD issues.fields.resolution NOS ZERO ()
+             ADD issues.fields.resolution.self NOS ZERO ()
+             ADD issues.fields.resolution.id NOS ZERO ()
+             ADD issues.fields.resolution.description NOS ZERO ()
+             ADD issues.fields.resolution.name NOS ZERO ()
+             ADD issues.fields.resolutiondate NOS ZERO ()
+             ADD issues.fields.customfield_10301 NOS ZERO ()
+             ADD issues.fields.customfield_12008 NOS ZERO ()
+             ADD issues.fields.customfield_12007 NOS ZERO ()
+             ADD issues.fields.customfield_12006 NOS ZERO ()
+             ADD issues.fields.customfield_12005 NOS ZERO ()
+             ADD issues.fields.customfield_12005.self NOS ZERO ()
+             ADD issues.fields.customfield_12005.value NOS ZERO ()
+             ADD issues.fields.customfield_12005.id NOS ZERO ()
+             ADD issues.fields.customfield_12100 NOS ZERO ()
+             ADD issues.fields.customfield_12100.self NOS ZERO ()
+             ADD issues.fields.customfield_12100.value NOS ZERO ()
+             ADD issues.fields.customfield_12100.id NOS ZERO ()
+             ADD issues.fields.customfield_10300 NOS ZERO ()
+        )
+        OUTPUTLIST (expand, issues, "maxResults", "startAt", total
+        )
+        WRAPPER (json mfu)
+    );
+

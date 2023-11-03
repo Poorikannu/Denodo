@@ -1,0 +1,30 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC person_1
+    DATASOURCENAME=postgres
+    SCHEMANAME='${databases.admin.views.jdbc.person_1.SCHEMANAME}' ESCAPE
+    RELATIONNAME='person' 
+    OUTPUTSCHEMA (
+        personid = 'personid' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='5', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        firstname = 'firstname' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        company = 'company' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='15', sourcetypeid='12', sourcetypename='varchar')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE person_1 I18N jp (
+        personid:text (sourcetypeid = '1', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '2'),
+        firstname:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        company:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '15')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD person_1(
+        I18N jp
+        CONSTRAINTS (
+             ADD personid (any) OPT ANY
+             ADD firstname (any) OPT ANY
+             ADD company (any) OPT ANY
+        )
+        OUTPUTLIST (company, firstname, personid
+        )
+        WRAPPER (jdbc person_1)
+    );
+

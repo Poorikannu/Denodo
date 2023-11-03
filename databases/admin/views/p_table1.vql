@@ -1,0 +1,8 @@
+﻿CREATE OR REPLACE VIEW p_table1 (
+    id (description = '以下のようなデータが格納されている。')
+ )
+ AS SELECT table1.id AS id, table1.number AS number, table1.name AS name FROM table1 WHERE name in ('J', 'Z') CONTEXT ('I18N' = 'gic');
+
+ALTER VIEW p_table1
+ LAYOUT (table1 = [20, 20, 200, 85]);
+

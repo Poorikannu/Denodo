@@ -1,0 +1,5 @@
+﻿/maps/i18n/hkt.vql
+/maps/i18n/gic.vql
+/databases/admin/datasources/jdbc/ds_sql_server_local.vql
+/databases/admin/views/paw.vql
+/databases/admin/views/p_paw.vql

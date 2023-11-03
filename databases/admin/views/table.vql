@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW "table" AS SELECT * FROM get_source_table() WHERE (input_database_name = 'admin' AND input_view_name = 'bv_Product') CONTEXT ('I18N' = 'gic');
+

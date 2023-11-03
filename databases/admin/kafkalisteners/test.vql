@@ -1,0 +1,16 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE LISTENER KAFKA test 
+    GROUPID = 'group1'
+    INPUTTOPIC = '${databases.admin.kafkalisteners.test.INPUTTOPIC}'
+    REPLYTOPIC = '${databases.admin.kafkalisteners.test.REPLYTOPIC}'
+    INPUT = PLAIN
+    OUTPUT = XML
+    VDPUSER = '${databases.admin.kafkalisteners.test.VDPUSER}'
+    MESSAGESCONTAINVARIABLE = FALSE
+    QUERY = ''
+    ENABLED = ${databases.admin.kafkalisteners.test.ENABLED}
+    AUTHENTICATION = NONE
+    SSL = ${databases.admin.kafkalisteners.test.SSL}
+    KAFKASERVER =  'audi-cyan.denodo.com:9093'
+    PROPERTIES ();
+

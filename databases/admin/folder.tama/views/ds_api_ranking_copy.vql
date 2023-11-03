@@ -1,0 +1,87 @@
+﻿CREATE OR REPLACE WRAPPER DF ds_api_ranking_copy
+    FOLDER = '/tama'
+    DATASOURCENAME=ds_api_ranking_copy
+    OUTPUTSCHEMA (
+        input_keyword = 'input_keyword' (OBL) EXTERN,
+        input_period = 'input_period' (OBL) EXTERN,
+        input_date = 'input_date' (OBL) EXTERN,
+        input_prefecture = 'input_prefecture' (OPT) EXTERN,
+        input_generation = 'input_generation' (OPT) EXTERN,
+        input_gender = 'input_gender' (OPT) EXTERN,
+        rank = '"rank"',
+        keyword = '"keyword"',
+        volume = '"volume"',
+        "genderRatio_male" = '"genderRatio.male"',
+        "genderRatio_female" = '"genderRatio.female"',
+        "generationRatio_teensOrLess" = '"generationRatio.teensOrLess"',
+        "generationRatio_twenties" = '"generationRatio.twenties"',
+        "generationRatio_thirties" = '"generationRatio.thirties"',
+        "generationRatio_forties" = '"generationRatio.forties"',
+        "generationRatio_fifties" = '"generationRatio.fifties"',
+        "generationRatio_sixties" = '"generationRatio.sixties"',
+        "generationRatio_seventiesOrMore" = '"generationRatio.seventiesOrMore"'
+    );
+
+CREATE OR REPLACE TABLE ds_api_ranking_copy I18N jp (
+        input_keyword:text (extern),
+        input_period:text (extern),
+        input_date:text,
+        input_prefecture:text (extern),
+        input_generation:text (extern),
+        input_gender:text (extern),
+        rank:int,
+        keyword:text,
+        volume:decimal,
+        "genderRatio_male":decimal,
+        "genderRatio_female":decimal,
+        "generationRatio_teensOrLess":decimal,
+        "generationRatio_twenties":decimal,
+        "generationRatio_thirties":decimal,
+        "generationRatio_forties":decimal,
+        "generationRatio_fifties":decimal,
+        "generationRatio_sixties":decimal,
+        "generationRatio_seventiesOrMore":decimal
+    )
+    FOLDER = '/tama'
+    DESCRIPTION = 'https://datasolution.yahooapis.jp/swagger/#/SearchRankingAPI
+
+指定したキーワードに関連するキーワード情報を取得します。
+１リクエストで最大2,000キーワードを上限としたキーワードの情報がランキング形式で取得いただけ、期間や性別・年代・地域などの条件を指定することができます。
+※ただし、性別や年代と地域は同時に指定することはできません。
+
+input_keyword* 
+input_period* [ daily, weekly, monthly, yearly ]
+input_date* 
+
+input_prefecture [ hokkaido, aomori, iwate, miyagi, akita, yamagata, fukushima, ibaraki, tochigi, gunma, saitama, chiba, tokyo, kanagawa, niigata, toyama, ishikawa, fukui, yamanashi, nagano, gifu, shizuoka, aichi, mie, shiga, kyoto, osaka, hyogo, nara, wakayama, tottori, shimane, okayama, hiroshima, yamaguchi, tokushima, kagawa, ehime, kochi, fukuoka, saga, nagasaki, kumamoto, oita, miyazaki, kagoshima, okinawa ]
+input_gender [ male, female ]
+input_generation [ teensOrLess, twenties, thirties, forties, fifties, sixties, seventiesOrMore ]'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_api_ranking_copy(
+        I18N jp
+        CONSTRAINTS (
+             ADD input_keyword (=) OBL ONE
+             ADD input_period (=) OBL ONE
+             ADD input_date (=) OBL ONE
+             ADD input_prefecture (=) OPT ANY
+             ADD input_generation (=) OPT ANY
+             ADD input_gender (=) OPT ANY
+             ADD rank NOS ZERO ()
+             ADD keyword NOS ZERO ()
+             ADD volume NOS ZERO ()
+             ADD "genderRatio_male" NOS ZERO ()
+             ADD "genderRatio_female" NOS ZERO ()
+             ADD "generationRatio_teensOrLess" NOS ZERO ()
+             ADD "generationRatio_twenties" NOS ZERO ()
+             ADD "generationRatio_thirties" NOS ZERO ()
+             ADD "generationRatio_forties" NOS ZERO ()
+             ADD "generationRatio_fifties" NOS ZERO ()
+             ADD "generationRatio_sixties" NOS ZERO ()
+             ADD "generationRatio_seventiesOrMore" NOS ZERO ()
+        )
+        OUTPUTLIST ("genderRatio_female", "genderRatio_male", "generationRatio_fifties", "generationRatio_forties", "generationRatio_seventiesOrMore", "generationRatio_sixties", "generationRatio_teensOrLess", "generationRatio_thirties", "generationRatio_twenties", keyword, rank, volume
+        )
+        WRAPPER (df ds_api_ranking_copy)
+    );
+

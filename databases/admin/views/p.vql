@@ -1,0 +1,25 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC p
+    DATASOURCENAME=ds_sql_server
+    CATALOGNAME='${databases.admin.views.jdbc.p.CATALOGNAME}' 
+    SCHEMANAME='${databases.admin.views.jdbc.p.SCHEMANAME}' 
+    RELATIONNAME='p' 
+    OUTPUTSCHEMA (
+        base_0 = 'base' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE p I18N hkt (
+        base_0:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD p(
+        I18N hkt
+        CONSTRAINTS (
+             ADD base_0 (any) OPT ANY
+        )
+        OUTPUTLIST (base_0
+        )
+        WRAPPER (jdbc p)
+    );
+

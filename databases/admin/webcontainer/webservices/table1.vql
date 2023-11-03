@@ -1,0 +1,5 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+UNDEPLOY IF EXISTS WEBSERVICE table1;
+
+DEPLOY WEBSERVICE table1 LOGIN = '${databases.admin.webcontainer.webservices.table1.LOGIN}' PASSWORD = '${databases.admin.webcontainer.webservices.table1.PASSWORD}' ${databases.admin.webcontainer.webservices.table1.PASSWORD.ENCRYPTED};
+

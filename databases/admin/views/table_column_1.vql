@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW table_column_1 AS SELECT * FROM get_view_columns() WHERE (input_database_name = 'admin' AND input_view_name = 'bv_Product') CONTEXT ('I18N' = 'gic');
+

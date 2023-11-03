@@ -1,0 +1,44 @@
+﻿CREATE OR REPLACE WRAPPER CUSTOM kafka_wrapper_3
+    DATASOURCENAME=kafka_wrapper
+    PARAMETERS (
+      'Group Id Prefix *' = '1',
+      'Topic *' = 'quickstart-events',
+      'Message Format *' = 'String'
+    )
+    OUTPUTSCHEMA (
+        key = 'key' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        partition = 'partition' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        position = 'position' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        message = 'message' : 'java.lang.String' (sourcetypeid='12')  NOT SORTABLE NOT UPDATEABLE,
+        timestamp = 'timestamp' : 'java.time.LocalDateTime' (sourcetypeid='93')  NOT SORTABLE NOT UPDATEABLE,
+        begindate = 'begindate' : 'java.time.LocalDateTime' (OPT) (sourcetypeid='93')  NOT SORTABLE NOT UPDATEABLE,
+        enddate = 'enddate' : 'java.time.LocalDateTime' (OPT) (sourcetypeid='93')  NOT SORTABLE NOT UPDATEABLE
+    );
+
+CREATE OR REPLACE TABLE kafka_wrapper_3 I18N hkt (
+        key:text (sourcetypeid = '12'),
+        partition:text (sourcetypeid = '12'),
+        position:text (sourcetypeid = '12'),
+        message:text (sourcetypeid = '12'),
+        timestamp:timestamp (sourcetypeid = '93'),
+        begindate:timestamp (sourcetypeid = '93'),
+        enddate:timestamp (sourcetypeid = '93')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD kafka_wrapper_3(
+        I18N hkt
+        CONSTRAINTS (
+             ADD begindate (any) OPT ANY
+             ADD enddate (any) OPT ANY
+             ADD key NOS ZERO ()
+             ADD partition NOS ZERO ()
+             ADD position NOS ZERO ()
+             ADD message NOS ZERO ()
+             ADD timestamp NOS ZERO ()
+        )
+        OUTPUTLIST (begindate, enddate, key, message, partition, position, timestamp
+        )
+        WRAPPER (custom kafka_wrapper_3)
+    );
+

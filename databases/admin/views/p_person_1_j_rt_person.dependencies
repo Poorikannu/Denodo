@@ -1,0 +1,5 @@
+﻿/databases/admin/datasources/jdbc/postgres.vql
+/databases/admin/views/person_1.vql
+/maps/i18n/gic.vql
+/databases/admin/views/rt_person.vql
+/databases/admin/views/person_1_j_rt_person.vql

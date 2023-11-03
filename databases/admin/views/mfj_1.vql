@@ -1,0 +1,6 @@
+﻿CREATE OR REPLACE VIEW mfj_1 AS SELECT
+    "PERSONID"
+FROM
+   "PERSON"
+CONTEXT ('formatted' = 'yes');
+

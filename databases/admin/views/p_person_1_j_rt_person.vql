@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW "p_person_1_j_rt_PERSON" AS SELECT cast("person_1_j_rt_PERSON".personid AS DECIMAL(10,2)) AS personid, "person_1_j_rt_PERSON".firstname AS firstname, "person_1_j_rt_PERSON".company AS company, "person_1_j_rt_PERSON"."PERSONID1" AS "PERSONID1", "person_1_j_rt_PERSON"."FIRSTNAME1" AS "FIRSTNAME1", "person_1_j_rt_PERSON"."COMPANY1" AS "COMPANY1" FROM "person_1_j_rt_PERSON";
+
+ALTER VIEW "p_person_1_j_rt_PERSON"
+ LAYOUT ("person_1_j_rt_PERSON" = [20, 20, 200, 105]);
+
