@@ -1,0 +1,4 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE JSON "DC_json"
+    ROUTE LOCAL 'LocalConnection' '${databases.admin.datasources.json.dc_json.ROUTE.LOCAL.PATH}';
+

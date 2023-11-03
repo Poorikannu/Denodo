@@ -1,0 +1,81 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC store_returns
+    DATASOURCENAME=ds_dremio
+    SCHEMANAME='${databases.admin.views.jdbc.store_returns.SCHEMANAME}' ESCAPE
+    RELATIONNAME='store_returns' 
+    OUTPUTSCHEMA (
+        sr_returned_date_sk = 'SR_RETURNED_DATE_SK' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_return_time_sk = 'SR_RETURN_TIME_SK' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_item_sk = 'SR_ITEM_SK' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_customer_sk = 'SR_CUSTOMER_SK' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_cdemo_sk = 'SR_CDEMO_SK' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_hdemo_sk = 'SR_HDEMO_SK' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_addr_sk = 'SR_ADDR_SK' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_store_sk = 'SR_STORE_SK' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_reason_sk = 'SR_REASON_SK' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_ticket_number = 'SR_TICKET_NUMBER' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_return_quantity = 'SR_RETURN_QUANTITY' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_return_amt = 'SR_RETURN_AMT' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_return_tax = 'SR_RETURN_TAX' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_return_amt_inc_tax = 'SR_RETURN_AMT_INC_TAX' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_fee = 'SR_FEE' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_return_ship_cost = 'SR_RETURN_SHIP_COST' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_refunded_cash = 'SR_REFUNDED_CASH' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_reversed_charge = 'SR_REVERSED_CHARGE' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_store_credit = 'SR_STORE_CREDIT' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE,
+        sr_net_loss = 'SR_NET_LOSS' :'java.lang.Double' (OPT) (sourcetypedecimals='15', sourcetyperadix='2', sourcetypesize='53', sourcetypeid='8', sourcetypename='DOUBLE')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE store_returns I18N au_cst (
+        sr_returned_date_sk:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_return_time_sk:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_item_sk:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_customer_sk:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_cdemo_sk:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_hdemo_sk:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_addr_sk:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_store_sk:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_reason_sk:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_ticket_number:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_return_quantity:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_return_amt:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_return_tax:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_return_amt_inc_tax:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_fee:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_return_ship_cost:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_refunded_cash:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_reversed_charge:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_store_credit:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53'),
+        sr_net_loss:double (sourcetypeid = '8', sourcetyperadix = '2', sourcetypedecimals = '15', sourcetypesize = '53')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD store_returns(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD sr_returned_date_sk (any) OPT ANY
+             ADD sr_return_time_sk (any) OPT ANY
+             ADD sr_item_sk (any) OPT ANY
+             ADD sr_customer_sk (any) OPT ANY
+             ADD sr_cdemo_sk (any) OPT ANY
+             ADD sr_hdemo_sk (any) OPT ANY
+             ADD sr_addr_sk (any) OPT ANY
+             ADD sr_store_sk (any) OPT ANY
+             ADD sr_reason_sk (any) OPT ANY
+             ADD sr_ticket_number (any) OPT ANY
+             ADD sr_return_quantity (any) OPT ANY
+             ADD sr_return_amt (any) OPT ANY
+             ADD sr_return_tax (any) OPT ANY
+             ADD sr_return_amt_inc_tax (any) OPT ANY
+             ADD sr_fee (any) OPT ANY
+             ADD sr_return_ship_cost (any) OPT ANY
+             ADD sr_refunded_cash (any) OPT ANY
+             ADD sr_reversed_charge (any) OPT ANY
+             ADD sr_store_credit (any) OPT ANY
+             ADD sr_net_loss (any) OPT ANY
+        )
+        OUTPUTLIST (sr_addr_sk, sr_cdemo_sk, sr_customer_sk, sr_fee, sr_hdemo_sk, sr_item_sk, sr_net_loss, sr_reason_sk, sr_refunded_cash, sr_return_amt, sr_return_amt_inc_tax, sr_return_quantity, sr_return_ship_cost, sr_return_tax, sr_return_time_sk, sr_returned_date_sk, sr_reversed_charge, sr_store_credit, sr_store_sk, sr_ticket_number
+        )
+        WRAPPER (jdbc store_returns)
+    );
+

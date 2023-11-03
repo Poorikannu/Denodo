@@ -1,0 +1,12 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE CUSTOM odata
+    CLASSNAME='com.denodo.connect.odata.wrapper.ODataWrapper'
+    JARS 'denodo-odata4-wrapper'
+    PARAMETERS (
+      'Service Endpoint *' = '${databases.admin.datasources.custom.odata.Service Endpoint *}',
+      'Service Format *' = '${databases.admin.datasources.custom.odata.Service Format *}',
+      'Pass-through session credentials' = false,
+      'Use NTLM Authentication' = ${databases.admin.datasources.custom.odata.Use NTLM Authentication},
+      'Use OAuth2' = ${databases.admin.datasources.custom.odata.Use OAuth2}
+    );
+

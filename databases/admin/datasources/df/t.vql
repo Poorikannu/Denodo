@@ -1,0 +1,9 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE DF t
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.admin.datasources.df.t.ROUTE.HTTP.URL}'
+    AUTHENTICATION OFF
+    PROXY OFF
+    COLUMNDELIMITER = ','
+    ENDOFLINEDELIMITER = '\n'
+    HEADER = FALSE;
+

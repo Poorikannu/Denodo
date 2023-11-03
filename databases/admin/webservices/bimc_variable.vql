@@ -1,0 +1,54 @@
+﻿CREATE OR REPLACE REST WEBSERVICE "BIMC_VARIABLE"
+    CONNECTION (
+        CHUNKSIZE = 1000
+        CHUNKTIMEOUT = 90000
+        QUERYTIMEOUT = 900000
+        POOLENABLED = true
+        POOLINITSIZE = 0
+        POOLMAXACTIVE = 30
+    )
+    DEFAULTREPRESENTATION = HTML
+    SUPPORTEDREPRESENTATIONS (HTML, XML, JSON)
+    RESOURCES (
+        VIEW "BIMC_VARIABLE" FIELDS (
+            "CATALOG_NAME" : 'text', 
+            "CUBE_NAME" : 'text', 
+            "VARIABLE_NAME" : 'text', 
+            "COLUMN_TYPE" : 'int', 
+            "COLUMN_TYPE_D" : 'text', 
+            "COLUMN_SQL_TYPE" : 'text', 
+            "VALUE_TYPE" : 'text', 
+            "VALUE_ATTRIBUTE" : 'text', 
+            "SELECTION_TYPE" : 'text', 
+            "MULTILINE" : 'int', 
+            "MANDATORY" : 'int', 
+            "ORDER" : 'int', 
+            "DESCRIPTION" : 'text', 
+            "DEFAULT_VALUE" : 'text', 
+            "VALUE_ENTITY" : 'text', 
+            "IS_EXPRESSION" : 'int', 
+            "SEMANTIC_TYPE" : 'text', 
+            "VALUE_ENTITY_REPOSITORY_FQN" : 'text', 
+            "DESC_ATTRIBUTE" : 'text', 
+            "RANGE_DEFAULTS_EXIST" : 'int', 
+            "HIERARCHY_VIEW" : 'text', 
+            "HIERARCHY_VIEW_SQL" : 'text', 
+            "HIERARCHY_LEVEL_NUMBER" : 'int', 
+            "SCHEMA_NAME" : 'text', 
+            "QUALIFIED_NAME" : 'text', 
+            "CONVERT_TO_EXTERNAL_FUNCTION" : 'text', 
+            "CONVERT_TO_INTERNAL_FUNCTION" : 'text', 
+            "CONVERSION_ORDER_PRESERVING" : 'int', 
+            "HIERARCHY_NODE_STYLE" : 'text', 
+            "HIERARCHY_NAME" : 'text', 
+            "ORIGINAL_SCHEMA" : 'text', 
+            "IS_INPUT_ENABLED" : 'int', 
+            "HAS_DYNAMIC_DEFAULT_VALUE" : 'int', 
+            "VARIABLE_TYPE" : 'text', 
+            "VARIABLE_SUB_TYPE" : 'text'
+        )
+    )
+    OPTIONS ( NULLVALUESASEMPTYXMLELEMENTS = false
+        PROCESS_FUNCTIONS_IN_SELECT_PARAMETER = true ) 
+    OPENAPI2 ( API_VERSION = '1.0.0' ) ;
+

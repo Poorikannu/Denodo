@@ -1,0 +1,99 @@
+﻿CREATE OR REPLACE WRAPPER JSON local_views
+    DATASOURCENAME="DC_json"
+    TUPLEROOT '/JSONFile'
+    OUTPUTSCHEMA ("JSONFile" = 'JSONFile' : REGISTER OF (
+        "JSONArray" = 'JSONArray' : ARRAY OF (
+            "JSONArray" = 'JSONArray' : REGISTER OF (
+                id = 'id' : 'java.lang.Integer',
+                name = 'name' : 'java.lang.String',
+                "descriptionType" = 'descriptionType' : 'java.lang.String',
+                "synchDate" = 'synchDate' : 'java.lang.Long',
+                "lastModificationVdpData" = 'lastModificationVdpData' : 'java.lang.Long',
+                "databaseId" = 'databaseId' : 'java.lang.Integer',
+                "dbName" = 'dbName' : 'java.lang.String',
+                "databaseName" = 'databaseName' : 'java.lang.String',
+                "viewFields" = 'viewFields' : ARRAY OF (
+                    "viewFields" = 'viewFields' : REGISTER OF (
+                        id = 'id' : 'java.lang.Integer',
+                        name = 'name' : 'java.lang.String',
+                        "lastModificationIsst" = 'lastModificationIsst' : 'java.lang.String',
+                        "vdpOrder" = 'vdpOrder' : 'java.lang.Integer',
+                        "fieldProperties" = 'fieldProperties' : ARRAY OF (
+                            "fieldProperties" = 'fieldProperties' : REGISTER OF (
+                                "viewId" = 'viewId' : 'java.lang.String',
+                                "fieldName" = 'fieldName' : 'java.lang.String',
+                                "propName" = 'propName' : 'java.lang.String',
+                                "propValue" = 'propValue' : 'java.lang.String'
+                            )
+                        ),
+                        description = 'description' : 'java.lang.String'
+                    )
+                ),
+                "assignedToCategory" = 'assignedToCategory' : 'java.lang.String',
+                "assignedToTag" = 'assignedToTag' : 'java.lang.String',
+                type = 'type' : 'java.lang.String',
+                "elementType" = 'elementType' : 'java.lang.String',
+                "lastModificationIsstData" = 'lastModificationIsstData' : 'java.lang.Long',
+                description = 'description' : 'java.lang.String',
+                "searchDescription" = 'searchDescription' : 'java.lang.String'
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE "DC_json_JSONArray_JSONArray_viewFields_viewFields_fieldProperties_fieldProperties" AS REGISTER OF ("viewId":text, "fieldName":text, "propName":text, "propValue":text);
+
+CREATE OR REPLACE TYPE "DC_json_JSONArray_JSONArray_viewFields_viewFields_fieldProperties" AS ARRAY OF "DC_json_JSONArray_JSONArray_viewFields_viewFields_fieldProperties_fieldProperties";
+
+CREATE OR REPLACE TYPE "DC_json_JSONArray_JSONArray_viewFields_viewFields" AS REGISTER OF (id:int, name:text, "lastModificationIsst":text, "vdpOrder":int, "fieldProperties":"DC_json_JSONArray_JSONArray_viewFields_viewFields_fieldProperties", description:text);
+
+CREATE OR REPLACE TYPE "DC_json_JSONArray_JSONArray_viewFields" AS ARRAY OF "DC_json_JSONArray_JSONArray_viewFields_viewFields";
+
+CREATE OR REPLACE TYPE "DC_json_JSONArray_JSONArray" AS REGISTER OF (id:int, name:text, "descriptionType":text, "synchDate":long, "lastModificationVdpData":long, "databaseId":int, "dbName":text, "databaseName":text, "viewFields":"DC_json_JSONArray_JSONArray_viewFields", "assignedToCategory":text, "assignedToTag":text, type:text, "elementType":text, "lastModificationIsstData":long, description:text, "searchDescription":text);
+
+CREATE OR REPLACE TYPE "DC_json_JSONArray" AS ARRAY OF "DC_json_JSONArray_JSONArray";
+
+CREATE OR REPLACE TABLE local_views I18N au_cst (
+        "JSONArray":"DC_json_JSONArray"
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD local_views(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD "JSONArray" NOS ZERO ()
+             ADD "JSONArray" NOS ZERO ()
+             ADD "JSONArray".id NOS ZERO ()
+             ADD "JSONArray".name NOS ZERO ()
+             ADD "JSONArray"."descriptionType" NOS ZERO ()
+             ADD "JSONArray"."synchDate" NOS ZERO ()
+             ADD "JSONArray"."lastModificationVdpData" NOS ZERO ()
+             ADD "JSONArray"."databaseId" NOS ZERO ()
+             ADD "JSONArray"."dbName" NOS ZERO ()
+             ADD "JSONArray"."databaseName" NOS ZERO ()
+             ADD "JSONArray"."viewFields" NOS ZERO ()
+             ADD "JSONArray"."viewFields" NOS ZERO ()
+             ADD "JSONArray"."viewFields".id NOS ZERO ()
+             ADD "JSONArray"."viewFields".name NOS ZERO ()
+             ADD "JSONArray"."viewFields"."lastModificationIsst" NOS ZERO ()
+             ADD "JSONArray"."viewFields"."vdpOrder" NOS ZERO ()
+             ADD "JSONArray"."viewFields"."fieldProperties" NOS ZERO ()
+             ADD "JSONArray"."viewFields"."fieldProperties" NOS ZERO ()
+             ADD "JSONArray"."viewFields"."fieldProperties"."viewId" NOS ZERO ()
+             ADD "JSONArray"."viewFields"."fieldProperties"."fieldName" NOS ZERO ()
+             ADD "JSONArray"."viewFields"."fieldProperties"."propName" NOS ZERO ()
+             ADD "JSONArray"."viewFields"."fieldProperties"."propValue" NOS ZERO ()
+             ADD "JSONArray"."viewFields".description NOS ZERO ()
+             ADD "JSONArray"."assignedToCategory" NOS ZERO ()
+             ADD "JSONArray"."assignedToTag" NOS ZERO ()
+             ADD "JSONArray".type NOS ZERO ()
+             ADD "JSONArray"."elementType" NOS ZERO ()
+             ADD "JSONArray"."lastModificationIsstData" NOS ZERO ()
+             ADD "JSONArray".description NOS ZERO ()
+             ADD "JSONArray"."searchDescription" NOS ZERO ()
+        )
+        OUTPUTLIST ("JSONArray"
+        )
+        WRAPPER (json local_views)
+    );
+

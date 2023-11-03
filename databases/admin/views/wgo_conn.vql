@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW wgo_conn AS SELECT addsecond(to_timestamp('yyyyMMdd HH:mm:ss', '19700101 00:00:00'), (size/1000)) AS createdat FROM denodo_training.bv_conn_events WHERE log_date = '20160101';
+

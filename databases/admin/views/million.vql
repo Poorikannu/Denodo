@@ -1,0 +1,54 @@
+﻿CREATE OR REPLACE WRAPPER DF million
+    DATASOURCENAME=million
+    OUTPUTSCHEMA (
+        "Column0" = 'Column0' (OPT),
+        "Column1" = 'Column1' (OPT),
+        "Column2" = 'Column2' (OPT),
+        "Column3" = 'Column3' (OPT),
+        "Column4" = 'Column4' (OPT),
+        "Column5" = 'Column5' (OPT),
+        "Column6" = 'Column6' (OPT),
+        "Column7" = 'Column7' (OPT),
+        "Column8" = 'Column8' (OPT),
+        "Column9" = 'Column9' (OPT),
+        "Column10" = 'Column10' (OPT),
+        "Column11" = 'Column11' (OPT)
+    );
+
+CREATE OR REPLACE TABLE million I18N au_cst (
+        "Column0":text,
+        "Column1":text,
+        "Column2":text,
+        "Column3":text,
+        "Column4":text,
+        "Column5":text,
+        "Column6":text,
+        "Column7":text,
+        "Column8":text,
+        "Column9":text,
+        "Column10":text,
+        "Column11":text
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD million(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD "Column0" (any) OPT ANY
+             ADD "Column1" (any) OPT ANY
+             ADD "Column2" (any) OPT ANY
+             ADD "Column3" (any) OPT ANY
+             ADD "Column4" (any) OPT ANY
+             ADD "Column5" (any) OPT ANY
+             ADD "Column6" (any) OPT ANY
+             ADD "Column7" (any) OPT ANY
+             ADD "Column8" (any) OPT ANY
+             ADD "Column9" (any) OPT ANY
+             ADD "Column10" (any) OPT ANY
+             ADD "Column11" (any) OPT ANY
+        )
+        OUTPUTLIST ("Column0", "Column1", "Column10", "Column11", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9"
+        )
+        WRAPPER (df million)
+    );
+

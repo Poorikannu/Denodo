@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW bv_user AS SELECT * FROM get_sessions();
+

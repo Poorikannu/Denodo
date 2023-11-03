@@ -1,0 +1,5 @@
+﻿/databases/admin/folder.01 - data source/01 - data source.vql
+/tags/ssn.vql
+/databases/admin/datasources/jdbc/oracle.vql
+/databases/admin/views/countries.vql
+/databases/admin/folder.01 - data source/views/locations.vql

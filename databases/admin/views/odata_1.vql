@@ -1,0 +1,46 @@
+﻿CREATE OR REPLACE WRAPPER CUSTOM odata_1
+    DATASOURCENAME=odata
+    PARAMETERS (
+      'Entity Collection *' = 'Products',
+      'Custom Query Options' = 'select=filter=ID eq 1',
+      'Expand Related Entities' = false,
+      'Enable Pagination' = false,
+      'Load Streams' = false
+    )
+    OUTPUTSCHEMA (
+        id = 'ID' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  NOT NULL SORTABLE,
+        name = 'Name' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        description = 'Description' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        releasedate = 'ReleaseDate' : 'java.time.OffsetDateTime' (OPT) (sourcetypeid='2014')  NOT NULL SORTABLE,
+        discontinueddate = 'DiscontinuedDate' : 'java.time.OffsetDateTime' (OPT) (sourcetypeid='2014')  SORTABLE,
+        rating = 'Rating' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  NOT NULL SORTABLE,
+        price = 'Price' : 'java.lang.Double' (OPT) (sourcetypeid='8')  NOT NULL SORTABLE
+    );
+
+CREATE OR REPLACE TABLE odata_1 I18N au_cst (
+        id:int (notnull, sourcetypeid = '4'),
+        name:text (sourcetypeid = '12'),
+        description:text (sourcetypeid = '12'),
+        releasedate:timestamptz (notnull, sourcetypeid = '2014'),
+        discontinueddate:timestamptz (sourcetypeid = '2014'),
+        rating:int (notnull, sourcetypeid = '4'),
+        price:double (notnull, sourcetypeid = '8')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD odata_1(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD name (any) OPT ANY
+             ADD description (any) OPT ANY
+             ADD releasedate (any) OPT ANY
+             ADD discontinueddate (any) OPT ANY
+             ADD rating (any) OPT ANY
+             ADD price (any) OPT ANY
+        )
+        OUTPUTLIST (description, discontinueddate, id, name, price, rating, releasedate
+        )
+        WRAPPER (custom odata_1)
+    );
+

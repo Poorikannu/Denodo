@@ -1,0 +1,35 @@
+﻿CREATE OR REPLACE WRAPPER JSON view_cat
+    DATASOURCENAME="DC_json"
+    TUPLEROOT '/JSONFile'
+    OUTPUTSCHEMA ("JSONFile" = 'JSONFile' : REGISTER OF (
+        "JSONArray" = 'JSONArray' : ARRAY OF (
+            "JSONArray" = 'JSONArray' : REGISTER OF (
+                "viewId" = 'viewId' : 'java.lang.Integer',
+                "categoryId" = 'categoryId' : 'java.lang.Integer'
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE "DC_json_JSONArray_JSONArray_99858e74-e0f3-4546-9ff7-818e8ec325d1" AS REGISTER OF ("viewId":int, "categoryId":int);
+
+CREATE OR REPLACE TYPE "DC_json_JSONArray_2be3ae06-3f5c-48f2-877e-e247955eda33" AS ARRAY OF "DC_json_JSONArray_JSONArray_99858e74-e0f3-4546-9ff7-818e8ec325d1";
+
+CREATE OR REPLACE TABLE view_cat I18N au_cst (
+        "JSONArray":"DC_json_JSONArray_2be3ae06-3f5c-48f2-877e-e247955eda33"
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD view_cat(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD "JSONArray" NOS ZERO ()
+             ADD "JSONArray" NOS ZERO ()
+             ADD "JSONArray"."viewId" NOS ZERO ()
+             ADD "JSONArray"."categoryId" NOS ZERO ()
+        )
+        OUTPUTLIST ("JSONArray"
+        )
+        WRAPPER (json view_cat)
+    );
+

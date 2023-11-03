@@ -1,0 +1,126 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC "BIMC_VARIABLE"
+    DATASOURCENAME="ds_SAP"
+    SCHEMANAME='${databases.admin.views.jdbc.bimc_variable.SCHEMANAME}' ESCAPE
+    RELATIONNAME='BIMC_VARIABLE' 
+    OUTPUTSCHEMA (
+        "CATALOG_NAME" = 'CATALOG_NAME' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  NOT NULL SORTABLE,
+        "CUBE_NAME" = 'CUBE_NAME' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  NOT NULL SORTABLE,
+        "VARIABLE_NAME" = 'VARIABLE_NAME' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  NOT NULL SORTABLE,
+        "COLUMN_TYPE" = 'COLUMN_TYPE' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  SORTABLE,
+        "COLUMN_TYPE_D" = 'COLUMN_TYPE_D' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "COLUMN_SQL_TYPE" = 'COLUMN_SQL_TYPE' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "VALUE_TYPE" = 'VALUE_TYPE' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "VALUE_ATTRIBUTE" = 'VALUE_ATTRIBUTE' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "SELECTION_TYPE" = 'SELECTION_TYPE' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "MULTILINE" = 'MULTILINE' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  SORTABLE,
+        "MANDATORY" = 'MANDATORY' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  SORTABLE,
+        "ORDER" = 'ORDER' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  ESCAPE SORTABLE,
+        "DESCRIPTION" = 'DESCRIPTION' :'java.lang.String' (OPT) (sourcetypesize='4000', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "DEFAULT_VALUE" = 'DEFAULT_VALUE' :'java.lang.String' (OPT) (sourcetypesize='5000', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "VALUE_ENTITY" = 'VALUE_ENTITY' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "IS_EXPRESSION" = 'IS_EXPRESSION' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  SORTABLE,
+        "SEMANTIC_TYPE" = 'SEMANTIC_TYPE' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "VALUE_ENTITY_REPOSITORY_FQN" = 'VALUE_ENTITY_REPOSITORY_FQN' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "DESC_ATTRIBUTE" = 'DESC_ATTRIBUTE' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "RANGE_DEFAULTS_EXIST" = 'RANGE_DEFAULTS_EXIST' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  SORTABLE,
+        "HIERARCHY_VIEW" = 'HIERARCHY_VIEW' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "HIERARCHY_VIEW_SQL" = 'HIERARCHY_VIEW_SQL' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "HIERARCHY_LEVEL_NUMBER" = 'HIERARCHY_LEVEL_NUMBER' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  SORTABLE,
+        "SCHEMA_NAME" = 'SCHEMA_NAME' :'java.lang.String' (OPT) (sourcetypesize='512', sourcetypeid='-9', sourcetypename='NVARCHAR')  NOT NULL SORTABLE,
+        "QUALIFIED_NAME" = 'QUALIFIED_NAME' :'java.lang.String' (OPT) (sourcetypesize='256', sourcetypeid='-9', sourcetypename='NVARCHAR')  NOT NULL SORTABLE,
+        "CONVERT_TO_EXTERNAL_FUNCTION" = 'CONVERT_TO_EXTERNAL_FUNCTION' :'java.lang.String' (OPT) (sourcetypesize='256', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "CONVERT_TO_INTERNAL_FUNCTION" = 'CONVERT_TO_INTERNAL_FUNCTION' :'java.lang.String' (OPT) (sourcetypesize='256', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "CONVERSION_ORDER_PRESERVING" = 'CONVERSION_ORDER_PRESERVING' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  SORTABLE,
+        "HIERARCHY_NODE_STYLE" = 'HIERARCHY_NODE_STYLE' :'java.lang.String' (OPT) (sourcetypesize='256', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "HIERARCHY_NAME" = 'HIERARCHY_NAME' :'java.lang.String' (OPT) (sourcetypesize='256', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "ORIGINAL_SCHEMA" = 'ORIGINAL_SCHEMA' :'java.lang.String' (OPT) (sourcetypesize='256', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "IS_INPUT_ENABLED" = 'IS_INPUT_ENABLED' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  NOT NULL SORTABLE,
+        "HAS_DYNAMIC_DEFAULT_VALUE" = 'HAS_DYNAMIC_DEFAULT_VALUE' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  SORTABLE,
+        "VARIABLE_TYPE" = 'VARIABLE_TYPE' :'java.lang.String' (OPT) (sourcetypesize='10', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE,
+        "VARIABLE_SUB_TYPE" = 'VARIABLE_SUB_TYPE' :'java.lang.String' (OPT) (sourcetypesize='20', sourcetypeid='-9', sourcetypename='NVARCHAR')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE "BIMC_VARIABLE" I18N za (
+        "CATALOG_NAME":text (notnull, sourcetypeid = '-9', sourcetypesize = '512'),
+        "CUBE_NAME":text (notnull, sourcetypeid = '-9', sourcetypesize = '512'),
+        "VARIABLE_NAME":text (notnull, sourcetypeid = '-9', sourcetypesize = '512'),
+        "COLUMN_TYPE":int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "COLUMN_TYPE_D":text (sourcetypeid = '-9', sourcetypesize = '512'),
+        "COLUMN_SQL_TYPE":text (sourcetypeid = '-9', sourcetypesize = '512'),
+        "VALUE_TYPE":text (sourcetypeid = '-9', sourcetypesize = '512'),
+        "VALUE_ATTRIBUTE":text (sourcetypeid = '-9', sourcetypesize = '512'),
+        "SELECTION_TYPE":text (sourcetypeid = '-9', sourcetypesize = '512'),
+        "MULTILINE":int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "MANDATORY":int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "ORDER":int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "DESCRIPTION":text (sourcetypeid = '-9', sourcetypesize = '4000'),
+        "DEFAULT_VALUE":text (sourcetypeid = '-9', sourcetypesize = '5000'),
+        "VALUE_ENTITY":text (sourcetypeid = '-9', sourcetypesize = '512'),
+        "IS_EXPRESSION":int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "SEMANTIC_TYPE":text (sourcetypeid = '-9', sourcetypesize = '512'),
+        "VALUE_ENTITY_REPOSITORY_FQN":text (sourcetypeid = '-9', sourcetypesize = '512'),
+        "DESC_ATTRIBUTE":text (sourcetypeid = '-9', sourcetypesize = '512'),
+        "RANGE_DEFAULTS_EXIST":int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "HIERARCHY_VIEW":text (sourcetypeid = '-9', sourcetypesize = '512'),
+        "HIERARCHY_VIEW_SQL":text (sourcetypeid = '-9', sourcetypesize = '512'),
+        "HIERARCHY_LEVEL_NUMBER":int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "SCHEMA_NAME":text (notnull, sourcetypeid = '-9', sourcetypesize = '512'),
+        "QUALIFIED_NAME":text (notnull, sourcetypeid = '-9', sourcetypesize = '256'),
+        "CONVERT_TO_EXTERNAL_FUNCTION":text (sourcetypeid = '-9', sourcetypesize = '256'),
+        "CONVERT_TO_INTERNAL_FUNCTION":text (sourcetypeid = '-9', sourcetypesize = '256'),
+        "CONVERSION_ORDER_PRESERVING":int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "HIERARCHY_NODE_STYLE":text (sourcetypeid = '-9', sourcetypesize = '256'),
+        "HIERARCHY_NAME":text (sourcetypeid = '-9', sourcetypesize = '256'),
+        "ORIGINAL_SCHEMA":text (sourcetypeid = '-9', sourcetypesize = '256'),
+        "IS_INPUT_ENABLED":int (notnull, sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "HAS_DYNAMIC_DEFAULT_VALUE":int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "VARIABLE_TYPE":text (sourcetypeid = '-9', sourcetypesize = '10'),
+        "VARIABLE_SUB_TYPE":text (sourcetypeid = '-9', sourcetypesize = '20')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD "BIMC_VARIABLE"(
+        I18N za
+        CONSTRAINTS (
+             ADD "CATALOG_NAME" (any) OPT ANY
+             ADD "CUBE_NAME" (any) OPT ANY
+             ADD "VARIABLE_NAME" (any) OPT ANY
+             ADD "COLUMN_TYPE" (any) OPT ANY
+             ADD "COLUMN_TYPE_D" (any) OPT ANY
+             ADD "COLUMN_SQL_TYPE" (any) OPT ANY
+             ADD "VALUE_TYPE" (any) OPT ANY
+             ADD "VALUE_ATTRIBUTE" (any) OPT ANY
+             ADD "SELECTION_TYPE" (any) OPT ANY
+             ADD "MULTILINE" (any) OPT ANY
+             ADD "MANDATORY" (any) OPT ANY
+             ADD "ORDER" (any) OPT ANY
+             ADD "DESCRIPTION" (any) OPT ANY
+             ADD "DEFAULT_VALUE" (any) OPT ANY
+             ADD "VALUE_ENTITY" (any) OPT ANY
+             ADD "IS_EXPRESSION" (any) OPT ANY
+             ADD "SEMANTIC_TYPE" (any) OPT ANY
+             ADD "VALUE_ENTITY_REPOSITORY_FQN" (any) OPT ANY
+             ADD "DESC_ATTRIBUTE" (any) OPT ANY
+             ADD "RANGE_DEFAULTS_EXIST" (any) OPT ANY
+             ADD "HIERARCHY_VIEW" (any) OPT ANY
+             ADD "HIERARCHY_VIEW_SQL" (any) OPT ANY
+             ADD "HIERARCHY_LEVEL_NUMBER" (any) OPT ANY
+             ADD "SCHEMA_NAME" (any) OPT ANY
+             ADD "QUALIFIED_NAME" (any) OPT ANY
+             ADD "CONVERT_TO_EXTERNAL_FUNCTION" (any) OPT ANY
+             ADD "CONVERT_TO_INTERNAL_FUNCTION" (any) OPT ANY
+             ADD "CONVERSION_ORDER_PRESERVING" (any) OPT ANY
+             ADD "HIERARCHY_NODE_STYLE" (any) OPT ANY
+             ADD "HIERARCHY_NAME" (any) OPT ANY
+             ADD "ORIGINAL_SCHEMA" (any) OPT ANY
+             ADD "IS_INPUT_ENABLED" (any) OPT ANY
+             ADD "HAS_DYNAMIC_DEFAULT_VALUE" (any) OPT ANY
+             ADD "VARIABLE_TYPE" (any) OPT ANY
+             ADD "VARIABLE_SUB_TYPE" (any) OPT ANY
+        )
+        OUTPUTLIST ("CATALOG_NAME", "COLUMN_SQL_TYPE", "COLUMN_TYPE", "COLUMN_TYPE_D", "CONVERSION_ORDER_PRESERVING", "CONVERT_TO_EXTERNAL_FUNCTION", "CONVERT_TO_INTERNAL_FUNCTION", "CUBE_NAME", "DEFAULT_VALUE", "DESCRIPTION", "DESC_ATTRIBUTE", "HAS_DYNAMIC_DEFAULT_VALUE", "HIERARCHY_LEVEL_NUMBER", "HIERARCHY_NAME", "HIERARCHY_NODE_STYLE", "HIERARCHY_VIEW", "HIERARCHY_VIEW_SQL", "IS_EXPRESSION", "IS_INPUT_ENABLED", "MANDATORY", "MULTILINE", "ORDER", "ORIGINAL_SCHEMA", "QUALIFIED_NAME", "RANGE_DEFAULTS_EXIST", "SCHEMA_NAME", "SELECTION_TYPE", "SEMANTIC_TYPE", "VALUE_ATTRIBUTE", "VALUE_ENTITY", "VALUE_ENTITY_REPOSITORY_FQN", "VALUE_TYPE", "VARIABLE_NAME", "VARIABLE_SUB_TYPE", "VARIABLE_TYPE"
+        )
+        WRAPPER (jdbc "BIMC_VARIABLE")
+    );
+

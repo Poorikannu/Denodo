@@ -1,0 +1,5 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+UNDEPLOY IF EXISTS WEBSERVICE "ws_PET";
+
+DEPLOY WEBSERVICE "ws_PET" LOGIN = '${databases.admin.webcontainer.webservices.ws_pet.LOGIN}' PASSWORD = '${databases.admin.webcontainer.webservices.ws_pet.PASSWORD}' ${databases.admin.webcontainer.webservices.ws_pet.PASSWORD.ENCRYPTED};
+

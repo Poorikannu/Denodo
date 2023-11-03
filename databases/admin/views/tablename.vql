@@ -1,0 +1,28 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC "TableName"
+    DATASOURCENAME=ds_sql_server
+    CATALOGNAME='${databases.admin.views.jdbc.tablename.CATALOGNAME}' 
+    SCHEMANAME='${databases.admin.views.jdbc.tablename.SCHEMANAME}' 
+    RELATIONNAME='TableName' 
+    OUTPUTSCHEMA (
+        "ColumName" = 'ColumName' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int')  SORTABLE,
+        "ColumnDateTime" = 'ColumnDateTime' :'java.time.LocalDateTime' (OPT) (sourcetypedecimals='3', sourcetypesize='23', sourcetypeid='93', sourcetypename='datetime')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE "TableName" I18N za (
+        "ColumName":int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "ColumnDateTime":timestamp (sourcetypeid = '93', sourcetypedecimals = '3', sourcetypesize = '23')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD "TableName"(
+        I18N za
+        CONSTRAINTS (
+             ADD "ColumName" (any) OPT ANY
+             ADD "ColumnDateTime" (any) OPT ANY
+        )
+        OUTPUTLIST ("ColumName", "ColumnDateTime"
+        )
+        WRAPPER (jdbc "TableName")
+    );
+

@@ -1,0 +1,7 @@
+﻿CREATE OR REPLACE INTERFACE VIEW i_paw (
+        da:long (sourcetypedecimals = '0', sourcetypesize = '10', sourcetypeid = '91')
+    );
+
+ALTER VIEW i_paw
+ LAYOUT ("10e7738a-564d-41b0-aeca-f268d3d253d4" = [370, 155, 200, 45]);
+
