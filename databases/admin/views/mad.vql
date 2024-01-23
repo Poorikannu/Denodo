@@ -1,2 +1,0 @@
-﻿CREATE OR REPLACE VIEW mad AS SELECT now() FROM dual();
-

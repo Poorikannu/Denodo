@@ -1,8 +1,0 @@
-﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
-CREATE OR REPLACE DATASOURCE JSON ds_json_test
-    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' POST '${databases.admin.datasources.json.ds_json_test.ROUTE.HTTP.URL}'
-    POSTBODY '@input'
-    MIME 'application/json'
-    AUTHENTICATION OFF
-    PROXY OFF;
-

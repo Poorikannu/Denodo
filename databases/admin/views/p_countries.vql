@@ -1,5 +1,0 @@
-﻿CREATE OR REPLACE VIEW p_countries AS SELECT countries.country_id AS country_id, countries.country_name AS country_name, countries.region_id AS region_id FROM countries WHERE country_id = 'new';
-
-ALTER VIEW p_countries
- LAYOUT (countries = [20, 20, 236, 85]);
-

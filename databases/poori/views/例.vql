@@ -1,2 +1,0 @@
-﻿CREATE OR REPLACE VIEW "例" AS SELECT 1 FROM dual();
-

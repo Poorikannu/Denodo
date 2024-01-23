@@ -1,2 +1,0 @@
-﻿CREATE OR REPLACE VIEW fake_payment AS SELECT 1 AS payment_id, 1 AS customer_id, 1 AS staff_id, 76 AS rental_id, 2.99 AS amount FROM dual() SQL UNION ALL SELECT 2 AS payment_id, 1 AS customer_id, 1 AS staff_id, 573 AS rental_id, 0.99 AS amount FROM dual();
-

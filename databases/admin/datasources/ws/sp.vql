@@ -1,8 +1,0 @@
-﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
-CREATE OR REPLACE DATASOURCE WS sp
-    WSDLURI = '${databases.admin.datasources.ws.sp.WSDLURI}'
-    MAXCONNECTIONS 50
-    CONNECTIONPOOLTIMEOUT 0
-    AUTHENTICATION OFF
-    PROXY OFF;
-

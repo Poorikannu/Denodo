@@ -1,5 +1,0 @@
-﻿CREATE OR REPLACE VIEW f_local_views AS SELECT id, name, "descriptionType", "synchDate", "lastModificationVdpData", "databaseId", "dbName", "databaseName", "assignedToCategory", "assignedToTag", type, "elementType", "lastModificationIsstData", description, "searchDescription", "JSONArray_viewFields_id", "JSONArray_viewFields_name", "lastModificationIsst", "vdpOrder", "fieldProperties", "JSONArray_viewFields_description" FROM FLATTEN local_views AS v ( v."JSONArray"."viewFields");
-
-ALTER VIEW f_local_views
- LAYOUT (local_views = [20, 20, 613, 565]);
-

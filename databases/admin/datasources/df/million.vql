@@ -1,7 +1,0 @@
-﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
-CREATE OR REPLACE DATASOURCE DF million
-    ROUTE LOCAL 'LocalConnection' '${databases.admin.datasources.df.million.ROUTE.LOCAL.PATH}'
-    COLUMNDELIMITER = ','
-    ENDOFLINEDELIMITER = '\n'
-    HEADER = FALSE;
-

@@ -1,7 +1,0 @@
-﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
-CREATE OR REPLACE DATASOURCE DF dhan
-    ROUTE LOCAL 'LocalConnection' '${databases.admin.datasources.df.dhan.ROUTE.LOCAL.PATH}'
-    COLUMNDELIMITER = '/n'
-    ENDOFLINEDELIMITER = '\n'
-    HEADER = FALSE;
-

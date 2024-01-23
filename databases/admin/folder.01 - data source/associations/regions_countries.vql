@@ -1,6 +1,0 @@
-﻿CREATE OR REPLACE ASSOCIATION regions_countries REFERENTIAL CONSTRAINT 
-FOLDER = '/01 - data source'
-    ENDPOINT countries regions PRINCIPAL (0,1)
-    ENDPOINT regions countries (0,*)
-    ADD MAPPING region_id=region_id;
-

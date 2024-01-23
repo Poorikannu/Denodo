@@ -1,5 +1,0 @@
-﻿CREATE OR REPLACE VIEW p_table1_1 AS SELECT table1_1.id AS id, table1_1.number AS number, table1_1.name AS name, rownum() AS row_rest FROM table1_1;
-
-ALTER VIEW p_table1_1
- LAYOUT (table1_1 = [20, 20, 200, 85]);
-

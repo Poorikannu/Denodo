@@ -1,5 +1,0 @@
-﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
-UNDEPLOY IF EXISTS WEBSERVICE date_dim;
-
-DEPLOY WEBSERVICE date_dim LOGIN = '${databases.admin.webcontainer.webservices.date_dim.LOGIN}' PASSWORD = '${databases.admin.webcontainer.webservices.date_dim.PASSWORD}' ${databases.admin.webcontainer.webservices.date_dim.PASSWORD.ENCRYPTED};
-

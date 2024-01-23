@@ -1,4 +1,0 @@
-﻿UNDEPLOY IF EXISTS WEBSERVICE current_timestamp_demos;
-
-DEPLOY WEBSERVICE current_timestamp_demos;
-

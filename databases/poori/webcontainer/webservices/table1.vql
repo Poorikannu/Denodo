@@ -1,5 +1,0 @@
-﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
-UNDEPLOY IF EXISTS WEBSERVICE "TABLE1";
-
-DEPLOY WEBSERVICE "TABLE1" LOGIN = '${databases.poori.webcontainer.webservices.table1.LOGIN}' PASSWORD = '${databases.poori.webcontainer.webservices.table1.PASSWORD}' ${databases.poori.webcontainer.webservices.table1.PASSWORD.ENCRYPTED};
-

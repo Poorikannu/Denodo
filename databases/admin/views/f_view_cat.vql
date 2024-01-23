@@ -1,5 +1,0 @@
-﻿CREATE OR REPLACE VIEW f_view_cat AS SELECT "viewId", "categoryId" FROM FLATTEN view_cat AS v ( v."JSONArray");
-
-ALTER VIEW f_view_cat
- LAYOUT (view_cat = [20, 20, 492, 85]);
-
