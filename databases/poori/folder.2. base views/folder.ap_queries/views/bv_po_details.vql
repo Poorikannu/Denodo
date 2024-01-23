@@ -1,0 +1,263 @@
+﻿CREATE OR REPLACE WRAPPER JDBC bv_po_details
+    FOLDER = '/2. base views/ap_queries'
+    DATASOURCENAME=odw_dw
+    SQLSENTENCE='--******************
+--  PO Details ALL
+--******************
+select poh.vendor_key,
+       pol.line_number,
+       poh.po_number,
+       poh.po_header_id,
+       pol.po_line_id,
+       pol.POL_CREATION_DATETIME creation_date,
+       vm.segment1 Supplier_GSL,
+       vm.vendor_name,
+       pol.qty_ordered,
+       pol.unit_price_local_amount,
+       (pol.unit_price_local_amount * pol.qty_ordered) total_price,
+       poh.local_currency_code,
+       pol.order_type_lookup_code,
+       pol.item_description,
+       cc.account_segment,
+       poh.authorization_status,
+       poh.approved_flag,
+       poh.approved_date,
+       nvl(poh.buyer_id, pol.pol_created_by) buyer_id,
+       nvl(em3.FULL_NAME, em2.FULL_NAME) as Buyer,
+       pol.pol_closed_code po_line_status,
+       om.organization_name,
+       sb.sets_of_books_name,
+       sb.sets_of_books_long_name,
+       sb.description,
+       poh.vendor_id,
+       poh.vendor_site_id,
+       vm.vendor_site_code,
+       vm.address1,
+       vm.city,
+       vm.state,
+       vm.province,
+       vm.postal_code,
+       vm.country,
+       poh.vendor_contact_id,
+       vm.attribute11,
+       vm.email_address vendor_email,
+       ap.Approvers,
+       params.source_app,
+       pol.cx_direct_indirect_flag direct_indirect_flag,
+       cc.segment4_code cost_center
+--, ''***** HEADER *****'', poh.*, ''***** LINE *****'', pol.*
+--, ''***** TASK *****'', tm.*
+--, ''***** Product *****'', pm.*
+--, ''***** Project *****'', pr.*
+--, ''***** organization *****'', om.*
+--, ''***** set of books *****'', sb.*
+--, ''***** VENDOR *****'', vm.*
+  from po_lines_det         pol,
+       po_headers_det       poh,
+       po_distributions_det pod,
+       account_segment_mas  cc
+       --, task_mas tm
+       --, product_mas pm
+       --, project_mas pr
+      ,
+       organization_mas om,
+       sets_of_books_mas sb,
+       vendor_mas vm,
+       employee_mas em2,
+       employee_mas em3,
+       (SELECT object_id,
+               md_source_system,
+               LISTAGG(FULL_NAME, '', '' on overflow truncate with count) WITHIN GROUP(ORDER BY seq_no) as approvers
+          FROM (SELECT distinct r.first_NAME || '' '' || r.last_name as full_name,
+                                W.OBJECT_ID,
+                                cast(w.sequence_number as integer) seq_no,
+                                r.md_source_system
+                  FROM employee_mas R,
+                       PO_ACTIONHISTORY_DET W,
+                       (select md_source_system, source_app
+                          from (select 1 as md_source_system,
+                                       ''ERP'' as source_app
+                                  from dual
+                                union all
+                                select 55512 as md_source_system,
+                                       ''SSS'' as source_app
+                                  from dual)) params
+                 WHERE R.PERSON_ID = W.employee_id
+                   and r.MD_SOURCE_SYSTEM = w.MD_SOURCE_SYSTEM
+                   and r.MD_SOURCE_SYSTEM = params.MD_SOURCE_SYSTEM
+                   AND W.OBJECT_TYPE_CODE = ''PO'')
+         GROUP BY OBJECT_ID, md_source_system) ap,
+       (select md_source_system, source_app
+          from (select 1 as md_source_system, ''ERP'' as source_app
+                  from dual
+                union all
+                select 55512 as md_source_system, ''SSS'' as source_app
+                  from dual)) params
+ where 1 = 1
+   and pol.po_header_lkp = poh.md_lookup_value
+   and pol.md_source_system = poh.md_source_system
+   and poh.md_source_system = params.md_source_system
+   and pol.md_source_system = params.md_source_system
+   and pod.po_line_lkp = pol.md_lookup_value
+   and pod.md_source_system = pol.md_source_system
+   and pod.md_source_system = params.md_source_system
+      --and pod.account_segment_key = cc.account_segment_key
+   and pod.CODE_COMBINATION_ID = cc.md_lookup_value
+   and pod.md_source_system = cc.md_source_system
+      --and cc.segment4_code = cstctr.cost_center
+      --and pol.task_key = tm.task_key
+      --and pol.product_key = pm.product_key
+      --and pol.project_key = pr.project_key
+   and pol.ORGANIZATION_KEY = om.ORGANIZATION_KEY
+   and pol.set_of_books_key = sb.sets_of_books_key
+   and poh.vendor_key = vm.vendor_key
+   and poh.md_lookup_value = Ap.OBJECT_ID(+)
+   and poh.Md_Source_System = ap.Md_Source_System(+)
+   and to_number(pol.pol_created_by) = Em2.Person_Id(+)
+   and pol.Md_Source_System = em2.Md_Source_System(+)
+   and params.md_source_system = em2.Md_Source_System(+)
+   and to_number(poh.buyer_id) = Em3.Person_Id(+)
+   and poh.Md_Source_System = em3.Md_Source_System(+)
+   and params.md_source_system = em3.Md_Source_System(+)
+   -- and trunc(pol.pol_creation_datetime) between ''@From_Date'' and ''@To_Date''
+ order by po_number, to_number(line_number);'   
+    OUTPUTSCHEMA (
+        vendor_key = 'VENDOR_KEY' :'java.lang.Long' (sourcetypedecimals='0', sourcetypesize='15', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE NOT UPDATEABLE,
+        line_number = 'LINE_NUMBER' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='50', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        po_number = 'PO_NUMBER' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='20', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        po_header_id = 'PO_HEADER_ID' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='50', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        po_line_id = 'PO_LINE_ID' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='50', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        creation_date = 'CREATION_DATE' :'java.time.LocalDateTime' (sourcetypedecimals='0', sourcetypesize='0', sourcetypeid='93', sourcetypename='DATE')  SORTABLE NOT UPDATEABLE,
+        supplier_gsl = 'SUPPLIER_GSL' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='30', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        vendor_name = 'VENDOR_NAME' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='240', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        qty_ordered = 'QTY_ORDERED' :'java.math.BigDecimal' (sourcetypedecimals='8', sourcetypesize='22', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE NOT UPDATEABLE,
+        unit_price_local_amount = 'UNIT_PRICE_LOCAL_AMOUNT' :'java.math.BigDecimal' (sourcetypedecimals='8', sourcetypesize='22', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE NOT UPDATEABLE,
+        total_price = 'TOTAL_PRICE' :'java.math.BigDecimal' (sourcetypedecimals='0', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE NOT UPDATEABLE,
+        local_currency_code = 'LOCAL_CURRENCY_CODE' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='15', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        order_type_lookup_code = 'ORDER_TYPE_LOOKUP_CODE' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='30', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        item_description = 'ITEM_DESCRIPTION' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='240', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        account_segment = 'ACCOUNT_SEGMENT' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='150', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        authorization_status = 'AUTHORIZATION_STATUS' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='20', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        approved_flag = 'APPROVED_FLAG' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='1', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        approved_date = 'APPROVED_DATE' :'java.time.LocalDateTime' (sourcetypedecimals='0', sourcetypesize='0', sourcetypeid='93', sourcetypename='DATE')  SORTABLE NOT UPDATEABLE,
+        buyer_id = 'BUYER_ID' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='50', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        buyer = 'BUYER' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='240', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        po_line_status = 'PO_LINE_STATUS' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='25', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        organization_name = 'ORGANIZATION_NAME' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='240', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        sets_of_books_name = 'SETS_OF_BOOKS_NAME' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='20', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        sets_of_books_long_name = 'SETS_OF_BOOKS_LONG_NAME' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='30', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        description = 'DESCRIPTION' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='240', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        vendor_id = 'VENDOR_ID' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='50', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        vendor_site_id = 'VENDOR_SITE_ID' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='50', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        vendor_site_code = 'VENDOR_SITE_CODE' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='15', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        address1 = 'ADDRESS1' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='240', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        city = 'CITY' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='60', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        state = 'STATE' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='150', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        province = 'PROVINCE' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='150', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        postal_code = 'POSTAL_CODE' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='60', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        country = 'COUNTRY' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='25', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        vendor_contact_id = 'VENDOR_CONTACT_ID' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='50', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        attribute11 = 'ATTRIBUTE11' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='150', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        vendor_email = 'VENDOR_EMAIL' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='2000', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        approvers = 'APPROVERS' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='4000', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE,
+        source_app = 'SOURCE_APP' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='3', sourcetypeid='1', sourcetypename='CHAR')  SORTABLE NOT UPDATEABLE,
+        direct_indirect_flag = 'DIRECT_INDIRECT_FLAG' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='1', sourcetypeid='1', sourcetypename='CHAR')  SORTABLE NOT UPDATEABLE,
+        cost_center = 'COST_CENTER' :'java.lang.String' (sourcetypedecimals='0', sourcetypesize='25', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE NOT UPDATEABLE
+    );
+
+CREATE OR REPLACE TABLE bv_po_details I18N us_est (
+        vendor_key:long (sourcetypeid = '-5', sourcetypedecimals = '0', sourcetypesize = '15'),
+        line_number:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '50'),
+        po_number:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '20'),
+        po_header_id:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '50'),
+        po_line_id:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '50'),
+        creation_date:timestamp (sourcetypeid = '93', sourcetypedecimals = '0', sourcetypesize = '0'),
+        supplier_gsl:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '30'),
+        vendor_name:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '240'),
+        qty_ordered:decimal (sourcetypeid = '3', sourcetypedecimals = '8', sourcetypesize = '22'),
+        unit_price_local_amount:decimal (sourcetypeid = '3', sourcetypedecimals = '8', sourcetypesize = '22'),
+        total_price:decimal (sourcetypeid = '3', sourcetypedecimals = '0'),
+        local_currency_code:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '15'),
+        order_type_lookup_code:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '30'),
+        item_description:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '240'),
+        account_segment:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '150'),
+        authorization_status:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '20'),
+        approved_flag:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '1'),
+        approved_date:timestamp (sourcetypeid = '93', sourcetypedecimals = '0', sourcetypesize = '0'),
+        buyer_id:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '50'),
+        buyer:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '240'),
+        po_line_status:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '25'),
+        organization_name:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '240'),
+        sets_of_books_name:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '20'),
+        sets_of_books_long_name:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '30'),
+        description:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '240'),
+        vendor_id:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '50'),
+        vendor_site_id:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '50'),
+        vendor_site_code:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '15'),
+        address1:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '240'),
+        city:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '60'),
+        state:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '150'),
+        province:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '150'),
+        postal_code:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '60'),
+        country:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '25'),
+        vendor_contact_id:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '50'),
+        attribute11:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '150'),
+        vendor_email:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '2000'),
+        approvers:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '4000'),
+        source_app:text (sourcetypeid = '1', sourcetypedecimals = '0', sourcetypesize = '3'),
+        direct_indirect_flag:text (sourcetypeid = '1', sourcetypedecimals = '0', sourcetypesize = '1'),
+        cost_center:text (sourcetypeid = '12', sourcetypedecimals = '0', sourcetypesize = '25')
+    )
+    FOLDER = '/2. base views/ap_queries'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_po_details(
+        I18N us_est
+        CONSTRAINTS (
+             ADD vendor_key NOS ZERO ()
+             ADD line_number NOS ZERO ()
+             ADD po_number NOS ZERO ()
+             ADD po_header_id NOS ZERO ()
+             ADD po_line_id NOS ZERO ()
+             ADD creation_date NOS ZERO ()
+             ADD supplier_gsl NOS ZERO ()
+             ADD vendor_name NOS ZERO ()
+             ADD qty_ordered NOS ZERO ()
+             ADD unit_price_local_amount NOS ZERO ()
+             ADD total_price NOS ZERO ()
+             ADD local_currency_code NOS ZERO ()
+             ADD order_type_lookup_code NOS ZERO ()
+             ADD item_description NOS ZERO ()
+             ADD account_segment NOS ZERO ()
+             ADD authorization_status NOS ZERO ()
+             ADD approved_flag NOS ZERO ()
+             ADD approved_date NOS ZERO ()
+             ADD buyer_id NOS ZERO ()
+             ADD buyer NOS ZERO ()
+             ADD po_line_status NOS ZERO ()
+             ADD organization_name NOS ZERO ()
+             ADD sets_of_books_name NOS ZERO ()
+             ADD sets_of_books_long_name NOS ZERO ()
+             ADD description NOS ZERO ()
+             ADD vendor_id NOS ZERO ()
+             ADD vendor_site_id NOS ZERO ()
+             ADD vendor_site_code NOS ZERO ()
+             ADD address1 NOS ZERO ()
+             ADD city NOS ZERO ()
+             ADD state NOS ZERO ()
+             ADD province NOS ZERO ()
+             ADD postal_code NOS ZERO ()
+             ADD country NOS ZERO ()
+             ADD vendor_contact_id NOS ZERO ()
+             ADD attribute11 NOS ZERO ()
+             ADD vendor_email NOS ZERO ()
+             ADD approvers NOS ZERO ()
+             ADD source_app NOS ZERO ()
+             ADD direct_indirect_flag NOS ZERO ()
+             ADD cost_center NOS ZERO ()
+        )
+        OUTPUTLIST (account_segment, address1, approved_date, approved_flag, approvers, attribute11, authorization_status, buyer, buyer_id, city, cost_center, country, creation_date, description, direct_indirect_flag, item_description, line_number, local_currency_code, order_type_lookup_code, organization_name, po_header_id, po_line_id, po_line_status, po_number, postal_code, province, qty_ordered, sets_of_books_long_name, sets_of_books_name, source_app, state, supplier_gsl, total_price, unit_price_local_amount, vendor_contact_id, vendor_email, vendor_id, vendor_key, vendor_name, vendor_site_code, vendor_site_id
+        )
+        WRAPPER (jdbc bv_po_details)
+    );
+

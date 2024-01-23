@@ -1,0 +1,30 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC current_timestamp_demos
+    DATASOURCENAME=oracle_19
+    SCHEMANAME='${databases.poori.views.jdbc.current_timestamp_demos.SCHEMANAME}' ESCAPE
+    RELATIONNAME='CURRENT_TIMESTAMP_DEMOS' 
+    OUTPUTSCHEMA (
+        id = 'ID' :'java.lang.Long' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        msg = 'MSG' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='255', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        created_at = 'CREATED_AT' :'java.time.LocalDateTime' (OPT) (sourcetypedecimals='3', sourcetyperadix='10', sourcetypesize='11', sourcetypeid='93', sourcetypename='TIMESTAMP(3)')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE current_timestamp_demos I18N au_cst (
+        id:long (sourcetypeid = '-5', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10', description = 'test'),
+        msg:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '255', description = 'test1'),
+        created_at:timestamp (sourcetypeid = '93', sourcetyperadix = '10', sourcetypedecimals = '3', sourcetypesize = '11', description = 'test2')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD current_timestamp_demos(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD msg (any) OPT ANY
+             ADD created_at (any) OPT ANY
+        )
+        OUTPUTLIST (created_at, id, msg
+        )
+        WRAPPER (jdbc current_timestamp_demos)
+    );
+

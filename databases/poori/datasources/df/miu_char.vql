@@ -1,0 +1,7 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE DF miu_char
+    ROUTE LOCAL 'LocalConnection' '${databases.poori.datasources.df.miu_char.ROUTE.LOCAL.PATH}'
+    COLUMNDELIMITER = '\t'
+    ENDOFLINEDELIMITER = '\n'
+    HEADER = FALSE;
+

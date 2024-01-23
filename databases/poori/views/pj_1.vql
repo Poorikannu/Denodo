@@ -1,0 +1,176 @@
+﻿CREATE OR REPLACE WRAPPER JSON pj_1
+    DATASOURCENAME=pj
+    TUPLEROOT '/JSONFile/JSONArray'
+    OUTPUTSCHEMA (jsonfile = 'JSONFile' : REGISTER OF (
+        _count = 'JSONFile.JSONArray._count' : 'java.lang.Integer',
+        _links = 'JSONFile.JSONArray._links' : ARRAY OF (
+            _links = '_links' : REGISTER OF (
+                rel = 'rel' : 'java.lang.String',
+                href = 'href' : 'java.lang.String'
+            )
+        ),
+        _fields = 'JSONFile.JSONArray._fields' : REGISTER OF (
+            anniversarydate = 'AnniversaryDate' : 'java.lang.String',
+            legalentity = 'LegalEntity' : 'java.lang.String',
+            identificationnumber = 'IdentificationNumber' : 'java.lang.String',
+            directsupervisoractor = 'DirectSupervisorActor' : 'java.lang.String',
+            gender = 'Gender' : 'java.lang.String',
+            employeeworktelephoneextension = 'EmployeeWorkTelephoneExtension' : 'java.lang.String',
+            startdate = 'StartDate' : 'java.lang.String',
+            lastdateworked = 'LastDateWorked' : 'java.lang.String',
+            namefamilyname_0 = 'Name.FamilyName' : 'java.lang.String',
+            primaryorganizationunitnumber = 'PrimaryOrganizationUnitNumber' : 'java.lang.String',
+            primaryorganizationunit = 'PrimaryOrganizationUnit' : 'java.lang.String',
+            job = 'Job' : 'java.lang.String',
+            namepreferredgivenname_0 = 'Name.PreferredGivenName' : 'java.lang.String',
+            relationshiptoorganization = 'RelationshipToOrganization' : 'java.lang.String',
+            primarylocation = 'PrimaryLocation' : 'java.lang.String',
+            paymentschedule = 'PaymentSchedule' : 'java.lang.String',
+            position = 'Position' : 'java.lang.String',
+            primaryorfirstsupervisordesc = 'PrimaryOrFirstSupervisorDesc' : 'java.lang.String',
+            primarylocationcountry = 'PrimaryLocationCountry' : 'java.lang.String',
+            birthdate = 'Birthdate' : 'java.lang.String',
+            primaryworkassignmentjob = 'PrimaryWorkAssignmentJob' : 'java.lang.String',
+            deathdate = 'DeathDate' : 'java.lang.String',
+            payrollprovider = 'PayrollProvider' : 'java.lang.String',
+            maritalstatus = 'MaritalStatus' : 'java.lang.String',
+            mobilefirstphone = 'MobileFirstPhone' : 'java.lang.String',
+            firstdateworked = 'FirstDateWorked' : 'java.lang.String',
+            payratecurrency = 'PayRateCurrency' : 'java.lang.String',
+            senioritydate = 'SeniorityDate' : 'java.lang.String',
+            namemaidenname_0 = 'Name.MaidenName' : 'java.lang.String',
+            payrate = 'PayRate' : 'java.lang.String',
+            otherdate1 = 'OtherDate1' : 'java.lang.String',
+            otherdate2 = 'OtherDate2' : 'java.lang.String',
+            otherdate3 = 'OtherDate3' : 'java.lang.String',
+            otherdate4 = 'OtherDate4' : 'java.lang.String',
+            completeemployeemailingaddress = 'CompleteEmployeeMailingAddress' : 'java.lang.String',
+            otherdate5 = 'OtherDate5' : 'java.lang.String',
+            payratetype = 'PayRateType' : 'java.lang.String',
+            mobileemployeeworktelephone = 'MobileEmployeeWorkTelephone' : 'java.lang.String',
+            directsupervisoremployee = 'DirectSupervisorEmployee' : 'java.lang.String',
+            retirementdate = 'RetirementDate' : 'java.lang.String',
+            ghrfinanceenterprisegroupaccountingunit_0 = 'GHRFinanceEnterpriseGroup.AccountingUnit' : 'java.lang.String',
+            namegivenname_0 = 'Name.GivenName' : 'java.lang.String',
+            annualhoursper1fte = 'AnnualHoursPer1FTE' : 'java.lang.String',
+            ghrfinanceenterprisegroupfinancedimension2_0 = 'GHRFinanceEnterpriseGroup.FinanceDimension2' : 'java.lang.String',
+            ghrfinanceenterprisegroupfinancedimension1_0 = 'GHRFinanceEnterpriseGroup.FinanceDimension1' : 'java.lang.String',
+            ghrfinanceenterprisegroupfinancedimension4_0 = 'GHRFinanceEnterpriseGroup.FinanceDimension4' : 'java.lang.String',
+            ghrfinanceenterprisegroupfinancedimension3_0 = 'GHRFinanceEnterpriseGroup.FinanceDimension3' : 'java.lang.String',
+            employeeworkemailaddress = 'EmployeeWorkEmailAddress' : 'java.lang.String',
+            adjustedstartdate = 'AdjustedStartDate' : 'java.lang.String',
+            employeeid = 'EmployeeId' : 'java.lang.String',
+            employeeworktelephone = 'EmployeeWorkTelephone' : 'java.lang.String',
+            issupervisor = 'IsSupervisor' : 'java.lang.String',
+            homecountry = 'HomeCountry' : 'java.lang.String',
+            primarylocationofjob = 'PrimaryLocationOfJob' : 'java.lang.String',
+            lastdatepaid = 'LastDatePaid' : 'java.lang.String',
+            legalestablishment = 'LegalEstablishment' : 'java.lang.String',
+            primaryorfirstsupervisor = 'PrimaryOrFirstSupervisor' : 'java.lang.String',
+            namemiddlename_0 = 'Name.MiddleName' : 'java.lang.String',
+            relationshipstatus = 'RelationshipStatus' : 'java.lang.String',
+            nationality = 'Nationality' : 'java.lang.String',
+            namepreferredfamilyname_0 = 'Name.PreferredFamilyName' : 'java.lang.String',
+            ghrfinanceenterprisegroup = 'GHRFinanceEnterpriseGroup' : 'java.lang.String',
+            assignmenttype = 'AssignmentType' : 'java.lang.String',
+            directsupervisor = 'DirectSupervisor' : 'java.lang.String',
+            continuousemploymentdate = 'ContinuousEmploymentDate' : 'java.lang.String',
+            location = 'Location' : 'java.lang.String'
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE pj__links__links AS REGISTER OF (rel:text, href:text);
+
+CREATE OR REPLACE TYPE pj__links AS ARRAY OF pj__links__links;
+
+CREATE OR REPLACE TYPE pj__fields AS REGISTER OF (anniversarydate:text, legalentity:text, identificationnumber:text, directsupervisoractor:text, gender:text, employeeworktelephoneextension:text, startdate:text, lastdateworked:text, namefamilyname_0:text, primaryorganizationunitnumber:text, primaryorganizationunit:text, job:text, namepreferredgivenname_0:text, relationshiptoorganization:text, primarylocation:text, paymentschedule:text, position:text, primaryorfirstsupervisordesc:text, primarylocationcountry:text, birthdate:text, primaryworkassignmentjob:text, deathdate:text, payrollprovider:text, maritalstatus:text, mobilefirstphone:text, firstdateworked:text, payratecurrency:text, senioritydate:text, namemaidenname_0:text, payrate:text, otherdate1:text, otherdate2:text, otherdate3:text, otherdate4:text, completeemployeemailingaddress:text, otherdate5:text, payratetype:text, mobileemployeeworktelephone:text, directsupervisoremployee:text, retirementdate:text, ghrfinanceenterprisegroupaccountingunit_0:text, namegivenname_0:text, annualhoursper1fte:text, ghrfinanceenterprisegroupfinancedimension2_0:text, ghrfinanceenterprisegroupfinancedimension1_0:text, ghrfinanceenterprisegroupfinancedimension4_0:text, ghrfinanceenterprisegroupfinancedimension3_0:text, employeeworkemailaddress:text, adjustedstartdate:text, employeeid:text, employeeworktelephone:text, issupervisor:text, homecountry:text, primarylocationofjob:text, lastdatepaid:text, legalestablishment:text, primaryorfirstsupervisor:text, namemiddlename_0:text, relationshipstatus:text, nationality:text, namepreferredfamilyname_0:text, ghrfinanceenterprisegroup:text, assignmenttype:text, directsupervisor:text, continuousemploymentdate:text, location:text);
+
+CREATE OR REPLACE TABLE pj_1 I18N au_cst (
+        _count:int,
+        _links:pj__links,
+        _fields:pj__fields
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD pj_1(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD _count NOS ZERO ()
+             ADD _links NOS ZERO ()
+             ADD _links NOS ZERO ()
+             ADD _links.rel NOS ZERO ()
+             ADD _links.href NOS ZERO ()
+             ADD _fields NOS ZERO ()
+             ADD _fields.anniversarydate NOS ZERO ()
+             ADD _fields.legalentity NOS ZERO ()
+             ADD _fields.identificationnumber NOS ZERO ()
+             ADD _fields.directsupervisoractor NOS ZERO ()
+             ADD _fields.gender NOS ZERO ()
+             ADD _fields.employeeworktelephoneextension NOS ZERO ()
+             ADD _fields.startdate NOS ZERO ()
+             ADD _fields.lastdateworked NOS ZERO ()
+             ADD _fields.namefamilyname_0 NOS ZERO ()
+             ADD _fields.primaryorganizationunitnumber NOS ZERO ()
+             ADD _fields.primaryorganizationunit NOS ZERO ()
+             ADD _fields.job NOS ZERO ()
+             ADD _fields.namepreferredgivenname_0 NOS ZERO ()
+             ADD _fields.relationshiptoorganization NOS ZERO ()
+             ADD _fields.primarylocation NOS ZERO ()
+             ADD _fields.paymentschedule NOS ZERO ()
+             ADD _fields.position NOS ZERO ()
+             ADD _fields.primaryorfirstsupervisordesc NOS ZERO ()
+             ADD _fields.primarylocationcountry NOS ZERO ()
+             ADD _fields.birthdate NOS ZERO ()
+             ADD _fields.primaryworkassignmentjob NOS ZERO ()
+             ADD _fields.deathdate NOS ZERO ()
+             ADD _fields.payrollprovider NOS ZERO ()
+             ADD _fields.maritalstatus NOS ZERO ()
+             ADD _fields.mobilefirstphone NOS ZERO ()
+             ADD _fields.firstdateworked NOS ZERO ()
+             ADD _fields.payratecurrency NOS ZERO ()
+             ADD _fields.senioritydate NOS ZERO ()
+             ADD _fields.namemaidenname_0 NOS ZERO ()
+             ADD _fields.payrate NOS ZERO ()
+             ADD _fields.otherdate1 NOS ZERO ()
+             ADD _fields.otherdate2 NOS ZERO ()
+             ADD _fields.otherdate3 NOS ZERO ()
+             ADD _fields.otherdate4 NOS ZERO ()
+             ADD _fields.completeemployeemailingaddress NOS ZERO ()
+             ADD _fields.otherdate5 NOS ZERO ()
+             ADD _fields.payratetype NOS ZERO ()
+             ADD _fields.mobileemployeeworktelephone NOS ZERO ()
+             ADD _fields.directsupervisoremployee NOS ZERO ()
+             ADD _fields.retirementdate NOS ZERO ()
+             ADD _fields.ghrfinanceenterprisegroupaccountingunit_0 NOS ZERO ()
+             ADD _fields.namegivenname_0 NOS ZERO ()
+             ADD _fields.annualhoursper1fte NOS ZERO ()
+             ADD _fields.ghrfinanceenterprisegroupfinancedimension2_0 NOS ZERO ()
+             ADD _fields.ghrfinanceenterprisegroupfinancedimension1_0 NOS ZERO ()
+             ADD _fields.ghrfinanceenterprisegroupfinancedimension4_0 NOS ZERO ()
+             ADD _fields.ghrfinanceenterprisegroupfinancedimension3_0 NOS ZERO ()
+             ADD _fields.employeeworkemailaddress NOS ZERO ()
+             ADD _fields.adjustedstartdate NOS ZERO ()
+             ADD _fields.employeeid NOS ZERO ()
+             ADD _fields.employeeworktelephone NOS ZERO ()
+             ADD _fields.issupervisor NOS ZERO ()
+             ADD _fields.homecountry NOS ZERO ()
+             ADD _fields.primarylocationofjob NOS ZERO ()
+             ADD _fields.lastdatepaid NOS ZERO ()
+             ADD _fields.legalestablishment NOS ZERO ()
+             ADD _fields.primaryorfirstsupervisor NOS ZERO ()
+             ADD _fields.namemiddlename_0 NOS ZERO ()
+             ADD _fields.relationshipstatus NOS ZERO ()
+             ADD _fields.nationality NOS ZERO ()
+             ADD _fields.namepreferredfamilyname_0 NOS ZERO ()
+             ADD _fields.ghrfinanceenterprisegroup NOS ZERO ()
+             ADD _fields.assignmenttype NOS ZERO ()
+             ADD _fields.directsupervisor NOS ZERO ()
+             ADD _fields.continuousemploymentdate NOS ZERO ()
+             ADD _fields.location NOS ZERO ()
+        )
+        OUTPUTLIST (_count, _fields, _links
+        )
+        WRAPPER (json pj_1)
+    );
+

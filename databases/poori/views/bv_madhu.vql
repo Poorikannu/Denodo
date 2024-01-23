@@ -1,0 +1,17 @@
+﻿CREATE OR REPLACE TABLE bv_madhu I18N us_pst (
+        id:int (sourcetypeid = '4'),
+        date:text (sourcetypeid = '12')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD madhu(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD date (any) OPT ANY
+        )
+        OUTPUTLIST (date, id
+        )
+        WRAPPER (custom madhu)
+    );
+

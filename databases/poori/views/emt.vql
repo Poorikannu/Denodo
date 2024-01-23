@@ -1,0 +1,28 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC emt
+    DATASOURCENAME=sqlserver
+    CATALOGNAME='${databases.poori.views.jdbc.emt.CATALOGNAME}' 
+    SCHEMANAME='${databases.poori.views.jdbc.emt.SCHEMANAME}' 
+    RELATIONNAME='emt' 
+    OUTPUTSCHEMA (
+        "PersonID" = 'PersonID' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int')  SORTABLE,
+        "LastName" = 'LastName' :'java.lang.String' (OPT) (sourcetypesize='255', sourcetypeid='12', sourcetypename='varchar')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE emt I18N za (
+        "PersonID":int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        "LastName":text (sourcetypeid = '12', sourcetypesize = '255')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD emt(
+        I18N za
+        CONSTRAINTS (
+             ADD "PersonID" (any) OPT ANY
+             ADD "LastName" (any) OPT ANY
+        )
+        OUTPUTLIST ("LastName", "PersonID"
+        )
+        WRAPPER (jdbc emt)
+    );
+

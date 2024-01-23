@@ -1,0 +1,8 @@
+﻿CREATE OR REPLACE VIEW p_current_timestamp_demos (
+    id (description = '')
+ )
+ AS SELECT cast('text', current_timestamp_demos.id) AS id, current_timestamp_demos.msg AS msg, cast(current_timestamp_demos.created_at AS TEXT) AS created_at FROM current_timestamp_demos;
+
+ALTER VIEW p_current_timestamp_demos
+ LAYOUT (current_timestamp_demos = [20, 20, 200, 85]);
+

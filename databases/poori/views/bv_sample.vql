@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW bv_sample AS SELECT 'user1' AS name, 'email' AS type, 'xxx.xxx@gmail.com' AS info FROM dual() SQL UNION ALL SELECT 'user1' AS name, 'phone' AS type, '+91-000000000' AS info FROM dual() SQL UNION ALL SELECT 'user2' AS name, 'email' AS type, 'yy.yyyy@gmail.com' AS info FROM dual();
+

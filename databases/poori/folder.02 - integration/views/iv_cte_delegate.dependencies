@@ -1,0 +1,6 @@
+﻿/databases/poori/folder.02 - integration/02 - integration.vql
+/databases/poori/folder.01 - connectivity/01 - connectivity.vql
+/databases/poori/folder.01 - connectivity/folder.02 - base views/02 - base views.vql
+/databases/poori/folder.01 - connectivity/folder.01 - data sources/01 - data sources.vql
+/databases/poori/folder.01 - connectivity/folder.01 - data sources/datasources/jdbc/ds_epicorerp.vql
+/databases/poori/folder.01 - connectivity/folder.02 - base views/views/bv_epicorerp_erp_entityrel.vql

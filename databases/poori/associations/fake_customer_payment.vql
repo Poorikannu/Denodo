@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE ASSOCIATION fake_customer_payment REFERENTIAL CONSTRAINT 
+    ENDPOINT payment fake_customer PRINCIPAL (0,1)
+    ENDPOINT customer fake_payment (0,*)
+    ADD MAPPING customer_id=customer_id;
+

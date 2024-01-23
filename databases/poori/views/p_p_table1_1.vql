@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW p_p_table1_1 AS SELECT p_table1_1.id AS id, p_table1_1.number AS number, p_table1_1.name AS name, p_table1_1.row_rest AS row_rest, r FROM p_table1_1 WHERE row_rest = r USING PARAMETERS ( r : long '2000');
+

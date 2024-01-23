@@ -1,0 +1,6 @@
+﻿CREATE OR REPLACE INTERFACE VIEW i_current_timestamp_demos (
+        id:long (sourcetypedecimals = '0', sourcetyperadix = '10', sourcetypesize = '10', sourcetypeid = '-5'),
+        msg:text (sourcetyperadix = '10', sourcetypesize = '255', sourcetypeid = '12'),
+        created_at:timestamp (sourcetypedecimals = '3', sourcetyperadix = '10', sourcetypesize = '11', sourcetypeid = '93')
+    );
+

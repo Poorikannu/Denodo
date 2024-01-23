@@ -1,0 +1,144 @@
+﻿CREATE OR REPLACE WRAPPER JSON bv_sync
+    DATASOURCENAME=ds_sync
+    TUPLEROOT '/JSONFile'
+    OUTPUTSCHEMA ("JSONFile" = 'JSONFile' : REGISTER OF (
+        result = 'result' : 'java.lang.String',
+        data = 'data' : REGISTER OF (
+            responses = 'responses' : ARRAY OF (
+                responses = 'responses' : REGISTER OF (
+                    "serverName" = 'serverName' : 'java.lang.String',
+                    "serverUrl" = 'serverUrl' : 'java.lang.String',
+                    "httpStatusCode" = 'httpStatusCode' : 'java.lang.Integer',
+                    "jsonResponse" = 'jsonResponse' : REGISTER OF (
+                        result = 'result' : 'java.lang.String',
+                        data = 'data' : REGISTER OF (
+                            "view" = 'view' : REGISTER OF (
+                                inserted = 'inserted' : ARRAY OF (
+                                    inserted = 'inserted' : REGISTER OF (
+                                        field_0 = 'field_0' : 'java.lang.String'
+                                    )
+                                ),
+                                removed = 'removed' : ARRAY OF (
+                                    removed = 'removed' : REGISTER OF (
+                                        field_0 = 'field_0' : 'java.lang.String'
+                                    )
+                                ),
+                                modified = 'modified' : ARRAY OF (
+                                    modified = 'modified' : REGISTER OF (
+                                        field_0 = 'field_0' : 'java.lang.String'
+                                    )
+                                )
+                            ),
+                            "ws" = 'ws' : REGISTER OF (
+                                inserted = 'inserted' : ARRAY OF (
+                                    inserted = 'inserted' : REGISTER OF (
+                                        field_0 = 'field_0' : 'java.lang.String'
+                                    )
+                                ),
+                                removed = 'removed' : ARRAY OF (
+                                    removed = 'removed' : REGISTER OF (
+                                        field_0 = 'field_0' : 'java.lang.String'
+                                    )
+                                ),
+                                modified = 'modified' : ARRAY OF (
+                                    modified = 'modified' : REGISTER OF (
+                                        field_0 = 'field_0' : 'java.lang.String'
+                                    )
+                                )
+                            )
+                        ),
+                        message = 'message' : 'java.lang.String'
+                    )
+                )
+            )
+        ),
+        message = 'message' : 'java.lang.String'
+    )
+    );
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data_view_inserted_inserted" AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data_view_inserted" AS ARRAY OF "ds_sync_data_responses_responses_jsonResponse_data_view_inserted_inserted";
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data_view_removed_removed" AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data_view_removed" AS ARRAY OF "ds_sync_data_responses_responses_jsonResponse_data_view_removed_removed";
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data_view_modified_modified" AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data_view_modified" AS ARRAY OF "ds_sync_data_responses_responses_jsonResponse_data_view_modified_modified";
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data_view" AS REGISTER OF (inserted:"ds_sync_data_responses_responses_jsonResponse_data_view_inserted", removed:"ds_sync_data_responses_responses_jsonResponse_data_view_removed", modified:"ds_sync_data_responses_responses_jsonResponse_data_view_modified");
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data_ws_inserted_inserted" AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data_ws_inserted" AS ARRAY OF "ds_sync_data_responses_responses_jsonResponse_data_ws_inserted_inserted";
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data_ws_removed_removed" AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data_ws_removed" AS ARRAY OF "ds_sync_data_responses_responses_jsonResponse_data_ws_removed_removed";
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data_ws_modified_modified" AS REGISTER OF (field_0:text);
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data_ws_modified" AS ARRAY OF "ds_sync_data_responses_responses_jsonResponse_data_ws_modified_modified";
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data_ws" AS REGISTER OF (inserted:"ds_sync_data_responses_responses_jsonResponse_data_ws_inserted", removed:"ds_sync_data_responses_responses_jsonResponse_data_ws_removed", modified:"ds_sync_data_responses_responses_jsonResponse_data_ws_modified");
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse_data" AS REGISTER OF ("view":"ds_sync_data_responses_responses_jsonResponse_data_view", "ws":"ds_sync_data_responses_responses_jsonResponse_data_ws");
+
+CREATE OR REPLACE TYPE "ds_sync_data_responses_responses_jsonResponse" AS REGISTER OF (result:text, data:"ds_sync_data_responses_responses_jsonResponse_data", message:text);
+
+CREATE OR REPLACE TYPE ds_sync_data_responses_responses AS REGISTER OF ("serverName":text, "serverUrl":text, "httpStatusCode":int, "jsonResponse":"ds_sync_data_responses_responses_jsonResponse");
+
+CREATE OR REPLACE TYPE ds_sync_data_responses AS ARRAY OF ds_sync_data_responses_responses;
+
+CREATE OR REPLACE TYPE ds_sync_data AS REGISTER OF (responses:ds_sync_data_responses);
+
+CREATE OR REPLACE TABLE bv_sync I18N za (
+        result:text,
+        data:ds_sync_data,
+        message:text
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_sync(
+        I18N za
+        CONSTRAINTS (
+             ADD result NOS ZERO ()
+             ADD data NOS ZERO ()
+             ADD data.responses NOS ZERO ()
+             ADD data.responses NOS ZERO ()
+             ADD data.responses."serverName" NOS ZERO ()
+             ADD data.responses."serverUrl" NOS ZERO ()
+             ADD data.responses."httpStatusCode" NOS ZERO ()
+             ADD data.responses."jsonResponse" NOS ZERO ()
+             ADD data.responses."jsonResponse".result NOS ZERO ()
+             ADD data.responses."jsonResponse".data NOS ZERO ()
+             ADD data.responses."jsonResponse".data."view" NOS ZERO ()
+             ADD data.responses."jsonResponse".data."view".inserted NOS ZERO ()
+             ADD data.responses."jsonResponse".data."view".inserted NOS ZERO ()
+             ADD data.responses."jsonResponse".data."view".inserted.field_0 NOS ZERO ()
+             ADD data.responses."jsonResponse".data."view".removed NOS ZERO ()
+             ADD data.responses."jsonResponse".data."view".removed NOS ZERO ()
+             ADD data.responses."jsonResponse".data."view".removed.field_0 NOS ZERO ()
+             ADD data.responses."jsonResponse".data."view".modified NOS ZERO ()
+             ADD data.responses."jsonResponse".data."view".modified NOS ZERO ()
+             ADD data.responses."jsonResponse".data."view".modified.field_0 NOS ZERO ()
+             ADD data.responses."jsonResponse".data."ws" NOS ZERO ()
+             ADD data.responses."jsonResponse".data."ws".inserted NOS ZERO ()
+             ADD data.responses."jsonResponse".data."ws".inserted NOS ZERO ()
+             ADD data.responses."jsonResponse".data."ws".inserted.field_0 NOS ZERO ()
+             ADD data.responses."jsonResponse".data."ws".removed NOS ZERO ()
+             ADD data.responses."jsonResponse".data."ws".removed NOS ZERO ()
+             ADD data.responses."jsonResponse".data."ws".removed.field_0 NOS ZERO ()
+             ADD data.responses."jsonResponse".data."ws".modified NOS ZERO ()
+             ADD data.responses."jsonResponse".data."ws".modified NOS ZERO ()
+             ADD data.responses."jsonResponse".data."ws".modified.field_0 NOS ZERO ()
+             ADD data.responses."jsonResponse".message NOS ZERO ()
+             ADD message NOS ZERO ()
+        )
+        OUTPUTLIST (data, message, result
+        )
+        WRAPPER (json bv_sync)
+    );
+

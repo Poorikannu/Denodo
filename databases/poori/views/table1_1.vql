@@ -1,0 +1,39 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC table1_1
+    DATASOURCENAME=sqlserver
+    CATALOGNAME='${databases.poori.views.jdbc.table1_1.CATALOGNAME}' 
+    SCHEMANAME='${databases.poori.views.jdbc.table1_1.SCHEMANAME}' 
+    RELATIONNAME='Table1' 
+    OUTPUTSCHEMA (
+        id = 'id' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int')  NOT NULL SORTABLE,
+        number = 'number' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int')  SORTABLE,
+        name = 'name' :'java.lang.String' (OPT) (sourcetypesize='10', sourcetypeid='-9', sourcetypename='nvarchar')  SORTABLE
+    )
+    SOURCECONFIGURATION (
+        delegatesqlsentenceassubquery = false,
+        datainorderfieldslist = ()
+    )
+    CONSTRAINT 'PK__Table1__3213E83F65FA29FB' PRIMARY KEY ( 'id' )
+    INDEX 'PK__Table1__3213E83F65FA29FB' CLUSTER UNIQUE PRIMARY ( 'id' );
+
+CREATE OR REPLACE TABLE table1_1 I18N au_cst (
+        id:int (notnull, sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        number:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        name:text (sourcetypeid = '-9', sourcetypesize = '10')
+    )
+    CONSTRAINT 'PK__Table1__3213E83F65FA29FB' PRIMARY KEY ( 'id' )
+    CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD table1_1(
+        I18N au_cst
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD number (any) OPT ANY
+             ADD name (any) OPT ANY
+        )
+        OUTPUTLIST (id, name, number
+        )
+        WRAPPER (jdbc table1_1)
+    );
+

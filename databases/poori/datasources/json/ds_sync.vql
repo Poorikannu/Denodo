@@ -1,0 +1,12 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE JSON ds_sync
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' POST '${databases.poori.datasources.json.ds_sync.ROUTE.HTTP.URL}'
+    POSTBODY '\{{
+    "allServers": "true" 
+    , "type": "all" 
+    , "priority": "server_with_local_changes" 
+\}}'
+    MIME 'application/json'
+    AUTHENTICATION OFF
+    PROXY OFF;
+

@@ -1,0 +1,2 @@
+﻿CREATE OR REPLACE VIEW vic_01 AS SELECT 1 FROM dual();
+

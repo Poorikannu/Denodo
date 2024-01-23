@@ -1,0 +1,28 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC test_date
+    DATASOURCENAME=snowflake
+    CATALOGNAME='${databases.poori.views.jdbc.test_date.CATALOGNAME}' 
+    SCHEMANAME='${databases.poori.views.jdbc.test_date.SCHEMANAME}' ESCAPE
+    RELATIONNAME='TEST_DATE' 
+    OUTPUTSCHEMA (
+        check_timestamp = 'CHECK_TIMESTAMP' :'java.time.LocalDateTime' (OPT) (sourcetypedecimals='9', sourcetypesize='0', description='', sourcetypeid='93', sourcetypename='TIMESTAMPNTZ')  SORTABLE,
+        check_date = 'CHECK_DATE' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetypesize='0', description='', sourcetypeid='91', sourcetypename='DATE')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE test_date I18N us_pst (
+        check_timestamp:timestamp (sourcetypeid = '93', sourcetypedecimals = '9', sourcetypesize = '0', description = ''),
+        check_date:localdate (sourcetypeid = '91', sourcetypedecimals = '0', sourcetypesize = '0', description = '')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD test_date(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD check_timestamp (any) OPT ANY
+             ADD check_date (any) OPT ANY
+        )
+        OUTPUTLIST (check_date, check_timestamp
+        )
+        WRAPPER (jdbc test_date)
+    );
+

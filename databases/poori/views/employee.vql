@@ -1,0 +1,31 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC employee
+    DATASOURCENAME=sqlserver
+    CATALOGNAME='${databases.poori.views.jdbc.employee.CATALOGNAME}' 
+    SCHEMANAME='${databases.poori.views.jdbc.employee.SCHEMANAME}' 
+    RELATIONNAME='employee' 
+    OUTPUTSCHEMA (
+        id = 'id' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int')  SORTABLE,
+        first_name = 'first_name' :'java.lang.String' (OPT) (sourcetypesize='20', sourcetypeid='12', sourcetypename='varchar')  SORTABLE,
+        last_name = 'last_name' :'java.lang.String' (OPT) (sourcetypesize='20', sourcetypeid='12', sourcetypename='varchar')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE employee I18N us_pst (
+        id:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        first_name:text (sourcetypeid = '12', sourcetypesize = '20'),
+        last_name:text (sourcetypeid = '12', sourcetypesize = '20')
+    )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD employee(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD first_name (any) OPT ANY
+             ADD last_name (any) OPT ANY
+        )
+        OUTPUTLIST (first_name, id, last_name
+        )
+        WRAPPER (jdbc employee)
+    );
+

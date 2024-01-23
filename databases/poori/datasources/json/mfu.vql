@@ -1,0 +1,6 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE JSON mfu
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.poori.datasources.json.mfu.ROUTE.HTTP.URL}'
+    AUTHENTICATION OFF
+    PROXY OFF;
+

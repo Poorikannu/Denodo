@@ -1,0 +1,19 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE JSON oauth
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.poori.datasources.json.oauth.ROUTE.HTTP.URL}'
+    AUTHENTICATION OAUTH20 ( 
+      ACCESSTOKEN = '${databases.poori.datasources.json.oauth.ROUTE.HTTP.ACCESSTOKEN}' ${databases.poori.datasources.json.oauth.ROUTE.HTTP.ACCESSTOKEN.ENCRYPTED}
+      REQUESTSIGNINGMETHOD = ${databases.poori.datasources.json.oauth.ROUTE.HTTP.REQUESTSIGNINGMETHOD}
+      AUTHENTICATION_GRANT = ${databases.poori.datasources.json.oauth.ROUTE.AUTHENTICATION.GRANT}
+      TOKENENDPOINTURL = '${databases.poori.datasources.json.oauth.ROUTE.HTTP.TOKENENDPOINTURL}'
+      CLIENTIDENTIFIER = '${databases.poori.datasources.json.oauth.ROUTE.HTTP.CLIENTIDENTIFIER}'
+      CLIENTSECRET = '${databases.poori.datasources.json.oauth.ROUTE.HTTP.CLIENTSECRET}' ${databases.poori.datasources.json.oauth.ROUTE.HTTP.CLIENTSECRET.ENCRYPTED}
+      REFRESHTOKEN = '${databases.poori.datasources.json.oauth.ROUTE.HTTP.REFRESHTOKEN}' ${databases.poori.datasources.json.oauth.ROUTE.HTTP.REFRESHTOKEN.ENCRYPTED}
+      ACCESSTOKENEXPIRESIN = ${databases.poori.datasources.json.oauth.ROUTE.HTTP.ACCESSTOKENEXPIRESIN}
+      AUTHORIZATIONSERVERURL = '${databases.poori.datasources.json.oauth.ROUTE.HTTP.AUTHORIZATIONSERVERURL}'
+      REDIRECTIONENDPOINTURL = ${databases.poori.datasources.json.oauth.ROUTE.HTTP.REDIRECTIONENDPOINTURL}
+      SCOPES = ${databases.poori.datasources.json.oauth.ROUTE.HTTP.SCOPES}
+      SETSTATEPARAMETER = ${databases.poori.datasources.json.oauth.ROUTE.HTTP.SETSTATEPARAMETER}
+    )
+    PROXY OFF;
+
