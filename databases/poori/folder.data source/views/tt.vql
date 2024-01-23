@@ -1,0 +1,26 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC tt
+    FOLDER = '/data source'
+    DATASOURCENAME=ds_oracle
+    SCHEMANAME='${databases.poori.folder.data source.views.jdbc.tt.SCHEMANAME}' ESCAPE
+    RELATIONNAME='TT' 
+    OUTPUTSCHEMA (
+        hmm = 'HMM' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='1000', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE tt I18N us_pst (
+        hmm:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '1000')
+    )
+    FOLDER = '/data source'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD tt(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD hmm (any) OPT ANY
+        )
+        OUTPUTLIST (hmm
+        )
+        WRAPPER (jdbc tt)
+    );
+
